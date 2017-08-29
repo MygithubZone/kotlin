@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <ImageView
+        android:id="@+id/iv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_info_outline_black_42dp" />
+
+    <TextView
+        android:id="@+id/tv_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="没有数据哦"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:textColor="@color/text_color_primary"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/btn_empty_retry"
+        android:layout_width="160dp"
+        android:layout_height="37dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="#fffe4c40"
+        android:text="刷新试试"
+        android:textColor="#ffffffff"
+        android:textSize="15sp"
+        android:visibility="gone" />
+</LinearLayout>
