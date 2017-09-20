@@ -1,7 +1,11 @@
 package com.raythinks.base
 
 import android.app.Application
+import android.content.Context
+import android.support.multidex.MultiDex
 import com.chenenyu.router.Router
+import me.yokeyword.fragmentation.Fragmentation
+import kotlin.properties.Delegates
 
 /**
  * 功能：基类Application<br>
@@ -9,11 +13,31 @@ import com.chenenyu.router.Router
  * 时间： 2017/8/22 0022<br>.
  * 版本：1.2.0
  */
-class BaseApp :Application(){
+open class BaseApp : Application() {
+    companion object {
+        var instance: BaseApp by Delegates.notNull()
+    }
+
+    init {
+        instance = this
+    }
+
     override fun onCreate() {
         super.onCreate()
-        initRouter();
+
+        // Fragmentation is recommended to initialize in the Application
+        Fragmentation.builder()
+                // show stack view. Mode: BUBBLE, SHAKE, NONE
+                .stackViewMode(Fragmentation.BUBBLE)
+                .debug(BuildConfig.DEBUG)
+                .install();
+//        initRouter();
     }
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
+
     /**
      * 初始化路由器
      */
@@ -23,5 +47,6 @@ class BaseApp :Application(){
         Router.setDebuggable(BuildConfig.DEBUG)
         // 初始化
         Router.initialize(this);
+
     }
 }

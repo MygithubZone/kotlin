@@ -1,9 +1,8 @@
-package com.raythinks.kotlin.base
+package com.raythinks.base
 
 import android.arch.lifecycle.*
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.raythinks.kotlin.model.User
+import me.yokeyword.fragmentation.SupportActivity
 import java.lang.reflect.ParameterizedType
 
 
@@ -13,10 +12,10 @@ import java.lang.reflect.ParameterizedType
  * Created by Herri on 2017/8/20.
  */
 
-open class BaseActivity<VM : ViewModel> : AppCompatActivity(), LifecycleOwner {
-
+abstract class BaseActivity<VM : ViewModel> : SupportActivity(), LifecycleOwner {
+    lateinit var mContext: SupportActivity
     var lifecycle = LifecycleRegistry(this)//生命周期注册对象
-    var viewModel: VM = ViewModelProviders.of(this).get(getVM())//ViewModel对象
+    lateinit var viewModel: VM
     override fun getLifecycle(): Lifecycle {
         return lifecycle
     }
@@ -33,5 +32,17 @@ open class BaseActivity<VM : ViewModel> : AppCompatActivity(), LifecycleOwner {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mContext = this
+        viewModel = ViewModelProviders.of(this).get(getVM())//ViewModel对象
+        setContentView(getLayoutId())
+        initView()
+        initData()
     }
+
+    abstract fun initView()
+
+    abstract fun initData()
+
+    abstract fun getLayoutId(): Int
+
 }

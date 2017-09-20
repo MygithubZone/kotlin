@@ -1,8 +1,8 @@
-package com.raythinks.kotlin.viewmodel
+package com.raythinks.shiwen.viewmodel
 
 import android.arch.lifecycle.LiveData
-import com.raythinks.kotlin.base.BaseViewModel
-import com.raythinks.kotlin.model.User
+import android.arch.lifecycle.MutableLiveData
+import com.raythinks.base.BaseViewModel
 
 
 /**
@@ -13,5 +13,7 @@ import com.raythinks.kotlin.model.User
  */
 
 class MainViewModel : BaseViewModel() {
-    var users: LiveData<List<User>>? = null
+    init {
+
+    }
 }

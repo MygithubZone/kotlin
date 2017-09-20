@@ -1,4 +1,4 @@
-package com.raythinks.kotlin.base
+package com.raythinks.base
 
 import android.arch.lifecycle.ViewModel
 
@@ -7,4 +7,7 @@ import android.arch.lifecycle.ViewModel
  */
 abstract class BaseViewModel : ViewModel() {
 
+companion object {
+
+}
 }

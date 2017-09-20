@@ -1,6 +1,20 @@
 <resources>
-    <string name="app_name">ExampleKotlin</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">app</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="action_search">搜索</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="str_type_refranes">名句</string>
+    <string name="str_type_poesia">诗文</string>
+    <string name="str_type_author">作者</string>
+    <string name="str_type_libros">古籍</string>
+    <string-array name="arrayt_type">
+        <item>@string/str_type_refranes</item>
+        <item>@string/str_type_poesia</item>
+        <item>@string/str_type_author</item>
+        <item>@string/str_type_libros</item>
+    </string-array>
 </resources>
