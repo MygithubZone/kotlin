@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_list.*
  * 时间： 2017/9/20 0020<br>.
  * 版本：1.2.0
  */
-class RefranesVMFragment : BaseVMFragment<RefranesViewModel>(), OnRefreshListener, OnLoadmoreListener {
+class RefranesFragment : BaseVMFragment<RefranesViewModel>(), OnRefreshListener, OnLoadmoreListener {
     lateinit var adapter: RefranesAdapter
     override fun onLoadmore(refreshlayout: RefreshLayout?) {
     }

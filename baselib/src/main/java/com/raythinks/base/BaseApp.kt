@@ -14,17 +14,17 @@ import kotlin.properties.Delegates
  * 版本：1.2.0
  */
 open class BaseApp : Application() {
+
     companion object {
-        var instance: BaseApp by Delegates.notNull()
+        var mContext: Context by Delegates.notNull()
     }
 
     init {
-        instance = this
+        mContext = this
     }
 
     override fun onCreate() {
         super.onCreate()
-
         // Fragmentation is recommended to initialize in the Application
         Fragmentation.builder()
                 // show stack view. Mode: BUBBLE, SHAKE, NONE

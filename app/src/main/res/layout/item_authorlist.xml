@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -38,15 +40,17 @@
         <TextView
             android:id="@+id/tv_brief"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="268dp"
+            android:layout_marginBottom="24dp"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:lineSpacingExtra="8sp"
             android:text="        李白（701年－762年），字太白，号青莲居士，唐朝浪漫主义诗人，被后人誉为“诗仙”。祖籍陇西成纪(待考)，出生于西域碎叶城，4岁再随父迁至剑南道绵州。李白存世诗文千余篇，有《李太白集》传世。762年病逝，享年61岁。其墓在今安徽当涂，四川江油、湖北安陆有纪念馆。"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_author_name" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_author_name"
+            tools:layout_editor_absoluteY="258dp" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

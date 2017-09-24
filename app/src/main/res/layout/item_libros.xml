@@ -30,6 +30,7 @@
             android:id="@+id/tv_libros_brief"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
@@ -38,6 +39,7 @@
             android:text="《冰鉴》一部纵横中外的人才学教科书，一部关于识人、相人的经典文献，是曾国藩总结自身识人、用人心得而成的一部传世奇书，是曾国藩体察入微、洞悉人心的心法要诀，它因具有极强的实用性、启迪性和借鉴性而受到各界人士的重视和喜爱。《冰鉴》为读者打造一条走近曾国藩的智慧之道，感受他独到的识人、用人策略。 "
             android:textColor="@color/black_mid"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_libros_title" />

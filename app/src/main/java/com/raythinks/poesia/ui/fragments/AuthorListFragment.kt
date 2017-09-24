@@ -13,7 +13,8 @@ import kotlinx.android.synthetic.main.fragment_authorlist.*
  * 版本：1.2.0
  */
 
-class AuthorListVMFragment : BaseVMFragment<AuthorListViewModel>() {
+class AuthorListFragment : BaseVMFragment<AuthorListViewModel>() {
+
     lateinit var adapter: AuthorListAdapter
     override fun initView() {
         adapter = AuthorListAdapter(viewModel)

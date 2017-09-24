@@ -1,6 +1,7 @@
 package com.raythinks.poesia.ui.viewmodel
 
-import com.raythinks.base.BaseViewModel
+import com.raythinks.poesia.base.BaseViewModel
+
 
 /**
  * 功能：作者列表<br></br>

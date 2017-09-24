@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_list.*
 /**
  * Created by zh on 2017/9/20.
  */
-class LibrosVMFragment : BaseVMFragment<LibrosViewModel>() , OnRefreshListener, OnLoadmoreListener {
+class LibrosFragment : BaseVMFragment<LibrosViewModel>() , OnRefreshListener, OnLoadmoreListener {
     lateinit var adapter: LibrosAdapter
     override fun onLoadmore(refreshlayout: RefreshLayout?) {
     }

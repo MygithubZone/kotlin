@@ -1,12 +1,12 @@
-package com.raythinks.base
+package com.raythinks.poesia.base
 
-import android.app.Activity
-import android.content.Context
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import me.yokeyword.fragmentation.SupportFragment
+import com.raythinks.base.BaseFragment
+import com.raythinks.poesia.utils.TUtils
 
 /**
  * 功能：Fragment基类<br>
@@ -14,7 +14,7 @@ import me.yokeyword.fragmentation.SupportFragment
  * 时间： 2017/9/18 0018<br>.
  * 版本：1.2.0
  */
-abstract class BaseFragment<VM : BaseViewModel> : SupportFragment() {
+abstract class BaseVMFragment<VM : BaseViewModel> : BaseFragment() {
     lateinit var viewModel: VM
     lateinit var mView: View
 
@@ -25,9 +25,11 @@ abstract class BaseFragment<VM : BaseViewModel> : SupportFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProviders.of(this).get(TUtils.getTClass(this))//ViewModel对象
         initView()
         initData()
     }
+
 
     abstract fun initView()
 

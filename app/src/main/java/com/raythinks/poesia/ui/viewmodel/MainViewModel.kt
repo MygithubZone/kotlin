@@ -2,7 +2,7 @@ package com.raythinks.shiwen.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import com.raythinks.base.BaseViewModel
+import com.raythinks.poesia.base.BaseViewModel
 
 
 /**

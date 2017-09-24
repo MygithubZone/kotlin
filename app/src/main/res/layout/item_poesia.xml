@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:layout_marginBottom="0dp">
 
@@ -30,16 +30,18 @@
             android:id="@+id/textView4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:lineSpacingExtra="10sp"
-            android:text="遑遑三十载，书剑两无成。
-山水寻吴越，风尘厌洛京。
-扁舟泛湖海，长揖谢公卿。
+            android:text="遑遑三十载，书剑两无成。\n
+山水寻吴越，风尘厌洛京。\n
+扁舟泛湖海，长揖谢公卿。\n
 且乐杯中物，谁论世上名。"
             android:textColor="@color/black_mid"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

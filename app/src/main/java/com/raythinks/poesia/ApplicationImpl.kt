@@ -1,7 +1,6 @@
 package com.raythinks.poesia
 
 import com.raythinks.base.BaseApp
-import com.raythinks.poesia.di.module.AppModule
 
 
 /**
@@ -11,11 +10,23 @@ import com.raythinks.poesia.di.module.AppModule
  * Created by zh on 2017/8/20.
  */
 class ApplicationImpl : BaseApp() {
-    override fun onCreate() {
-        super.onCreate()
-        DaggerAppComponent.builder()
-                .appModule(AppModule(applicationContext as ApplicationImpl))
-                .build()
+    companion object {
+      lateinit  var app: ApplicationImpl
+//        lateinit var appComponent: AppComponent
     }
 
+    init {
+//        appComponent = DaggerAppComponent.builder()
+//                .appModule(AppModule(applicationContext as ApplicationImpl))
+//                .build()
+        app = this;
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+    }
+
+//     fun getppComponent(): AppComponent {
+//        return appComponent
+//    }
 }

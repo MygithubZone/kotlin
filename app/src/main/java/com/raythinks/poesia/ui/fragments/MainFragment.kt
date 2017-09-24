@@ -1,13 +1,13 @@
 package com.raythinks.poesia.ui.fragments
 
-import android.arch.lifecycle.ReportFragment
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.raythinks.base.utils.TUtil
 import com.raythinks.poesia.R
+import com.raythinks.poesia.utils.TUtils
+import com.raythinks.shiwen.ui.fragment.AuthorListFragment
 import me.yokeyword.fragmentation.SupportFragment
 
 /**
@@ -16,14 +16,15 @@ import me.yokeyword.fragmentation.SupportFragment
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
- class MainFragment<Fg : SupportFragment> : SupportFragment() {
+class MainFragment<FRAG :SupportFragment> : SupportFragment() {
     protected var _mBackToFirstListener: OnBackToFirstListener? = null
 
-    lateinit var mainFrag: Fg
+    lateinit var mainFrag: FRAG
 
     interface OnBackToFirstListener {
         fun onBackToFirstFragment()
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (context is OnBackToFirstListener) {
@@ -53,8 +54,6 @@ import me.yokeyword.fragmentation.SupportFragment
                 _mBackToFirstListener!!.onBackToFirstFragment()
             }
         }
-
-
         return true
     }
 
@@ -66,6 +65,22 @@ import me.yokeyword.fragmentation.SupportFragment
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
         if (savedInstanceState == null) {
+//            var type = arguments.getInt("type", 0)
+//            when (type) {
+//                0 -> {
+//                    mainFrag=RefranesFragment()
+//                }
+//               1 -> {
+//                   mainFrag=PoesiaFragment()
+//                }
+//                2 -> {
+//                    mainFrag=AuthorListFragment()
+//                }
+//                3 -> {
+//                    mainFrag=LibrosFragment()
+//                }
+//            }
+            mainFrag=TUtils.getT(this);
             loadRootFragment(R.id.fl_first_container, mainFrag)
         }
     }

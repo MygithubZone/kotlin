@@ -13,12 +13,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.support.v7.widget.SearchView
 import com.raythinks.poesia.base.BaseVMActivity
-import com.raythinks.poesia.ui.fragments.LibrosVMFragment
+import com.raythinks.poesia.ui.fragments.LibrosFragment
 import com.raythinks.poesia.ui.fragments.MainFragment
-import com.raythinks.poesia.ui.fragments.PoesiaVMFragment
-import com.raythinks.poesia.ui.fragments.RefranesVMFragment
-import com.raythinks.shiwen.ui.fragment.AuthorListVMFragment
+import com.raythinks.poesia.ui.fragments.PoesiaFragment
+import com.raythinks.poesia.ui.fragments.RefranesFragment
+import com.raythinks.poesia.utils.TUtils
+import com.raythinks.shiwen.ui.fragment.AuthorListFragment
 import me.yokeyword.fragmentation.SupportFragment
+import java.sql.Ref
 import java.util.ArrayList
 
 /**
@@ -26,7 +28,8 @@ import java.util.ArrayList
  * 作者：
  *
  */
-class MainVMActivity : BaseVMActivity<MainViewModel>() , MainFragment.OnBackToFirstListener {
+class MainActivity : BaseVMActivity<MainViewModel>() , MainFragment.OnBackToFirstListener {
+
     override fun onBackToFirstFragment() {
     }
 
@@ -44,10 +47,10 @@ class MainVMActivity : BaseVMActivity<MainViewModel>() , MainFragment.OnBackToFi
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         mFragments = ArrayList<SupportFragment>()
-        mFragments.add(MainFragment<RefranesVMFragment>())
-        mFragments.add(MainFragment<PoesiaVMFragment>())
-        mFragments.add(MainFragment<AuthorListVMFragment>())
-        mFragments.add(MainFragment<LibrosVMFragment>())
+        mFragments.add(MainFragment<RefranesFragment>())
+        mFragments.add(MainFragment<PoesiaFragment>())
+        mFragments.add(MainFragment<AuthorListFragment>())
+        mFragments.add(MainFragment<LibrosFragment>())
         loadMultipleRootFragment(R.id.cl_content, 0, mFragments[0], mFragments[1], mFragments[2], mFragments[3])
         onNavigationItemSelected();
 

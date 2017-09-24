@@ -56,7 +56,7 @@ class RetrofitService() {
     }
 
     fun provideOkhttpClient(): okhttp3.OkHttpClient {
-        return provideOkhttpClient(okhttp3.Cache(BaseApp.instance.getExternalFilesDir(AppConfig.DEFAULT_JOSN_CACHE), AppConfig.DEFAULT_CACHE_SIZE), CacheInterceptor( BaseApp.instance))
+        return provideOkhttpClient(okhttp3.Cache(BaseApp.mContext.getExternalFilesDir(AppConfig.DEFAULT_JOSN_CACHE), AppConfig.DEFAULT_CACHE_SIZE), CacheInterceptor( BaseApp.mContext))
     }
 
     fun provideOkhttpClient(cache: Cache, cacheInterceptor: CacheInterceptor): okhttp3.OkHttpClient {

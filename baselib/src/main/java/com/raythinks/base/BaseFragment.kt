@@ -14,24 +14,5 @@ import me.yokeyword.fragmentation.SupportFragment
  * 时间： 2017/9/18 0018<br>.
  * 版本：1.2.0
  */
-abstract class BaseFragment<VM : BaseViewModel> : SupportFragment() {
-    lateinit var viewModel: VM
-    lateinit var mView: View
-
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        mView = inflater!!.inflate(getLayoutId(), container, false)
-        return mView
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initView()
-        initData()
-    }
-
-    abstract fun initView()
-
-    abstract fun initData()
-
-    abstract fun getLayoutId(): Int
+abstract class BaseFragment : SupportFragment() {
 }

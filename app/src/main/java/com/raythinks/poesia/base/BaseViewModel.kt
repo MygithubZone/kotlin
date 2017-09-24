@@ -1,4 +1,4 @@
-package com.raythinks.base
+package com.raythinks.poesia.base
 
 import android.arch.lifecycle.ViewModel
 

@@ -16,7 +16,7 @@ import java.io.IOException
  * 版本：1.2.0
  */
 object SystemUtil {
-    val PATH_DATA = BaseApp.instance.cacheDir.absolutePath + File.separator + "data"
+    val PATH_DATA = BaseApp.mContext.cacheDir.absolutePath + File.separator + "data"
 
     val PATH_CACHE = PATH_DATA + "/NetCache"
 
@@ -24,7 +24,7 @@ object SystemUtil {
      * 检查WIFI是否连接
      */
     fun isWifiConnected(): Boolean {
-        val connectivityManager = BaseApp.instance.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager = BaseApp.mContext.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val wifiInfo = connectivityManager
                 .getNetworkInfo(ConnectivityManager.TYPE_WIFI)
         return wifiInfo != null
@@ -34,7 +34,7 @@ object SystemUtil {
      * 检查手机网络(4G/3G/2G)是否连接
      */
     fun isMobileNetworkConnected(): Boolean {
-        val connectivityManager = BaseApp.instance.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager = BaseApp.mContext.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val mobileNetworkInfo = connectivityManager
                 .getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
         return mobileNetworkInfo != null
@@ -44,7 +44,7 @@ object SystemUtil {
      * 检查是否有可用网络
      */
     fun isNetworkConnected(): Boolean {
-        val connectivityManager = BaseApp.instance.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager = BaseApp.mContext.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return connectivityManager.activeNetworkInfo != null
     }
 
@@ -58,7 +58,7 @@ object SystemUtil {
     }
 
     fun dp2px(dpValue: Float): Int {
-        val scale = BaseApp.instance.resources.displayMetrics.density
+        val scale = BaseApp.mContext.resources.displayMetrics.density
         return (dpValue * scale + 0.5f).toInt()
     }
 
@@ -71,7 +71,7 @@ object SystemUtil {
     }
 
     fun px2dp(pxValue: Float): Int {
-        val scale = BaseApp.instance.resources.displayMetrics.density
+        val scale = BaseApp.mContext.resources.displayMetrics.density
         return (pxValue / scale + 0.5f).toInt()
     }
 
