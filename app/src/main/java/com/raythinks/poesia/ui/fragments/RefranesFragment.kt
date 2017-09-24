@@ -1,17 +1,12 @@
 package com.raythinks.poesia.ui.fragments
 
-import com.raythinks.base.BaseFragment
 import com.raythinks.poesia.R
-import com.raythinks.poesia.ui.viewmodel.AuthorListViewModel
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
-import android.R.attr.name
-import android.content.ClipData.Item
-import android.R.layout.simple_list_item_2
 import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.ui.adapter.RefranesAdapter
 import com.raythinks.poesia.ui.viewmodel.RefranesViewModel
 import kotlinx.android.synthetic.main.fragment_list.*
@@ -23,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_list.*
  * 时间： 2017/9/20 0020<br>.
  * 版本：1.2.0
  */
-class RefranesFragment : BaseFragment<RefranesViewModel>(), OnRefreshListener, OnLoadmoreListener {
+class RefranesVMFragment : BaseVMFragment<RefranesViewModel>(), OnRefreshListener, OnLoadmoreListener {
     lateinit var adapter: RefranesAdapter
     override fun onLoadmore(refreshlayout: RefreshLayout?) {
     }

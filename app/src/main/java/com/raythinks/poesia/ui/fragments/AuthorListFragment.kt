@@ -1,7 +1,7 @@
 package com.raythinks.shiwen.ui.fragment
 
-import com.raythinks.base.BaseFragment
 import com.raythinks.poesia.R
+import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.ui.adapter.AuthorListAdapter
 import com.raythinks.poesia.ui.viewmodel.AuthorListViewModel
 import kotlinx.android.synthetic.main.fragment_authorlist.*
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_authorlist.*
  * 版本：1.2.0
  */
 
-class AuthorListFragment : BaseFragment<AuthorListViewModel>() {
+class AuthorListVMFragment : BaseVMFragment<AuthorListViewModel>() {
     lateinit var adapter: AuthorListAdapter
     override fun initView() {
         adapter = AuthorListAdapter(viewModel)

@@ -7,17 +7,17 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
-import com.raythinks.base.BaseActivity
 import com.raythinks.poesia.R
 import com.raythinks.shiwen.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.support.v7.widget.SearchView
-import com.raythinks.poesia.ui.fragments.LibrosFragment
+import com.raythinks.poesia.base.BaseVMActivity
+import com.raythinks.poesia.ui.fragments.LibrosVMFragment
 import com.raythinks.poesia.ui.fragments.MainFragment
-import com.raythinks.poesia.ui.fragments.PoesiaFragment
-import com.raythinks.poesia.ui.fragments.RefranesFragment
-import com.raythinks.shiwen.ui.fragment.AuthorListFragment
+import com.raythinks.poesia.ui.fragments.PoesiaVMFragment
+import com.raythinks.poesia.ui.fragments.RefranesVMFragment
+import com.raythinks.shiwen.ui.fragment.AuthorListVMFragment
 import me.yokeyword.fragmentation.SupportFragment
 import java.util.ArrayList
 
@@ -26,7 +26,7 @@ import java.util.ArrayList
  * 作者：
  *
  */
-class MainActivity : BaseActivity<MainViewModel>() , MainFragment.OnBackToFirstListener {
+class MainVMActivity : BaseVMActivity<MainViewModel>() , MainFragment.OnBackToFirstListener {
     override fun onBackToFirstFragment() {
     }
 
@@ -44,10 +44,10 @@ class MainActivity : BaseActivity<MainViewModel>() , MainFragment.OnBackToFirstL
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         mFragments = ArrayList<SupportFragment>()
-        mFragments.add(MainFragment<RefranesFragment>())
-        mFragments.add(MainFragment<PoesiaFragment>())
-        mFragments.add(MainFragment<AuthorListFragment>())
-        mFragments.add(MainFragment<LibrosFragment>())
+        mFragments.add(MainFragment<RefranesVMFragment>())
+        mFragments.add(MainFragment<PoesiaVMFragment>())
+        mFragments.add(MainFragment<AuthorListVMFragment>())
+        mFragments.add(MainFragment<LibrosVMFragment>())
         loadMultipleRootFragment(R.id.cl_content, 0, mFragments[0], mFragments[1], mFragments[2], mFragments[3])
         onNavigationItemSelected();
 

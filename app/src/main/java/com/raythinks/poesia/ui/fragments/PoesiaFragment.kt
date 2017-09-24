@@ -2,11 +2,9 @@ package com.raythinks.poesia.ui.fragments
 
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import com.raythinks.base.BaseFragment
 import com.raythinks.poesia.R
+import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.ui.adapter.PoesiaAdapter
-import com.raythinks.poesia.ui.adapter.RefranesAdapter
-import com.raythinks.poesia.ui.viewmodel.AuthorListViewModel
 import com.raythinks.poesia.ui.viewmodel.PoesiaViewModel
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener
@@ -19,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_list.*
  * 时间： 2017/9/20 0020<br>.
  * 版本：1.2.0
  */
-class PoesiaFragment : BaseFragment<PoesiaViewModel>(), OnRefreshListener, OnLoadmoreListener {
+class PoesiaVMFragment : BaseVMFragment<PoesiaViewModel>(), OnRefreshListener, OnLoadmoreListener {
     lateinit var adapter: PoesiaAdapter
     override fun onLoadmore(refreshlayout: RefreshLayout?) {
     }
