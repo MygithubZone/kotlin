@@ -1,39 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:orientation="vertical">
 
-    <com.huxq17.swipecardsview.SwipeCardsView
-        android:id="@+id/scv_author"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="40dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:background="#ffffff"
-        android:gravity="center"
-        card:alphaOffsetStep="40"
-        card:layout_constraintBottom_toTopOf="@+id/tv_curentpage"
-        card:layout_constraintEnd_toEndOf="parent"
-        card:layout_constraintStart_toStartOf="parent"
-        card:layout_constraintTop_toTopOf="parent"
-        card:scaleOffsetStep="0.08"
-        card:yOffsetStep="50dp" />
+        android:layout_height="40dp"
+        android:background="@color/colorPrimary"
+        android:elevation="2dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tv_curentpage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        card:layout_constraintBottom_toBottomOf="parent"
-        card:layout_constraintEnd_toEndOf="parent"
-        card:layout_constraintStart_toStartOf="parent"
-        tools:text="1/256" />
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="48dp"
+            android:text="@string/str_author_borntime"
+            android:textColor="@color/white70"
+            android:gravity="center"
+            android:textSize="14sp" />
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tbs_author_borntimes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            card:tabGravity="fill"
+            card:tabIndicatorColor="@color/colorPrimary"
+            card:tabIndicatorHeight="0dp"
+            card:tabMode="scrollable"
+            android:layout_marginRight="16dp"
+            card:tabSelectedTextColor="@color/white"
+            card:tabTextColor="@color/white70" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
+
+        <com.huxq17.swipecardsview.SwipeCardsView
+            android:id="@+id/scv_author"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            card:alphaOffsetStep="20"
+            card:scaleOffsetStep="0.08"
+            card:yOffsetStep="24dp" />
+
+        <TextView
+            android:id="@+id/tv_curentpage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="1/256"
+            android:textColor="@color/black_mid"
+            android:textSize="14sp" />
+
+    </FrameLayout>
+</LinearLayout>

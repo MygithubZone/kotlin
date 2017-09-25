@@ -1,42 +1,36 @@
 package com.raythinks.poesia.ui.activitys
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuItem
+import com.chenenyu.router.annotation.Route
 import com.jakewharton.rxbinding2.support.design.widget.RxNavigationView
 import com.raythinks.poesia.R
-import com.raythinks.shiwen.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
-import android.support.v7.widget.SearchView
 import com.raythinks.poesia.base.BaseVMActivity
 import com.raythinks.poesia.ui.adapter.MainAdapter
 import com.raythinks.poesia.ui.anim.ZoomOutPagerAnim
-import com.raythinks.poesia.ui.fragments.LibrosFragment
 import com.raythinks.poesia.ui.fragments.MainFragment
-import com.raythinks.poesia.ui.fragments.PoesiaFragment
-import com.raythinks.poesia.ui.fragments.RefranesFragment
-import com.raythinks.poesia.utils.TUtils
-import com.raythinks.shiwen.ui.fragment.AuthorListFragment
+import com.raythinks.shiwen.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import me.yokeyword.fragmentation.SupportFragment
-import java.sql.Ref
-import java.util.ArrayList
 
 /**
  * 功能：主界面
  * 作者：zh
  *
  */
+@Route("poesia://activity/mainActivity")
 class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirstListener, ViewPager.OnPageChangeListener {
 
     override fun onBackToFirstFragment() {
     }
 
+    lateinit var searchView: SearchView
     lateinit var typePoesiaId: Array<Int>;
     lateinit var typePoesia: Array<String>;
     override fun initView() {

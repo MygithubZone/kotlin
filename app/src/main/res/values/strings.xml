@@ -11,10 +11,66 @@
     <string name="str_type_poesia">诗文</string>
     <string name="str_type_author">作者</string>
     <string name="str_type_libros">古籍</string>
+    <string name="str_author_borntime">朝代</string>
+    <string name="str_author_borntime_bx">不限</string>
+    <string name="str_author_borntime_xq">先秦</string>
+    <string name="str_author_borntime_lh">两汉</string>
+    <string name="str_author_borntime_wj">魏晋</string>
+    <string name="str_author_borntime_nbc">南北朝</string>
+    <string name="str_author_borntime_sd">隋代</string>
+    <string name="str_author_borntime_td">唐代</string>
+    <string name="str_author_borntime_sd1">宋代</string>
+    <string name="str_author_borntime_jc">金朝</string>
+    <string name="str_author_borntime_yd">元代</string>
+    <string name="str_author_borntime_md">明代</string>
+    <string name="str_author_borntime_qd">清代</string>
+    <string name="str_refranes_type">类型</string>
+    <string name="str_refranes_theme">主题</string>
+    <string name="str_poesia_type_lx">类型</string>
+    <string name="str_poesia_type_cd">朝代</string>
+    <string name="str_poesia_type_xs">形式</string>
+    <string name="str_libros_type_jb">经部</string>
+    <string name="str_libros_type_sb">史部</string>
+    <string name="str_libros_type_zb">子部</string>
+    <string name="str_libros_type_jb1">集部</string>
     <string-array name="arrayt_type">
         <item>@string/str_type_refranes</item>
         <item>@string/str_type_poesia</item>
         <item>@string/str_type_author</item>
         <item>@string/str_type_libros</item>
+    </string-array>
+    <string-array name="arrayt_libros_type">
+        <item>@string/str_libros_type_jb</item>
+        <item>@string/str_libros_type_sb</item>
+        <item>@string/str_libros_type_zb</item>
+        <item>@string/str_libros_type_jb1</item>
+    </string-array>
+    <string-array name="array_libros_type">
+        <item>@string/str_author_borntime_bx</item>
+        <item>@string/str_author_borntime_xq</item>
+        <item>@string/str_author_borntime_lh</item>
+        <item>@string/str_author_borntime_wj</item>
+        <item>@string/str_author_borntime_nbc</item>
+        <item>@string/str_author_borntime_sd</item>
+        <item>@string/str_author_borntime_td</item>
+        <item>@string/str_author_borntime_sd1</item>
+        <item>@string/str_author_borntime_jc</item>
+        <item>@string/str_author_borntime_yd</item>
+        <item>@string/str_author_borntime_md</item>
+        <item>@string/str_author_borntime_qd</item>
+    </string-array>
+    <string-array name="array_author_borntimes">
+        <item>@string/str_author_borntime_bx</item>
+        <item>@string/str_author_borntime_xq</item>
+        <item>@string/str_author_borntime_lh</item>
+        <item>@string/str_author_borntime_wj</item>
+        <item>@string/str_author_borntime_nbc</item>
+        <item>@string/str_author_borntime_sd</item>
+        <item>@string/str_author_borntime_td</item>
+        <item>@string/str_author_borntime_sd1</item>
+        <item>@string/str_author_borntime_jc</item>
+        <item>@string/str_author_borntime_yd</item>
+        <item>@string/str_author_borntime_md</item>
+        <item>@string/str_author_borntime_qd</item>
     </string-array>
 </resources>

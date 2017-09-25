@@ -36,5 +36,5 @@ class PoesiaFragment : BaseVMFragment<PoesiaViewModel>(), OnRefreshListener, OnL
     override fun initData() {
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_list
+    override fun getLayoutId(): Int = R.layout.fragment_poesia
 }

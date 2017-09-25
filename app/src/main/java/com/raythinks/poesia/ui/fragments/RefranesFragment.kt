@@ -37,5 +37,5 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), OnRefreshListener,
     override fun initData() {
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_list
+    override fun getLayoutId(): Int = R.layout.fragment_refranes
 }

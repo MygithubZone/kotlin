@@ -1,10 +1,15 @@
 package com.raythinks.poesia.utils
 
+import android.content.Context
 import android.os.Bundle
+import android.support.design.widget.TabLayout
+import android.view.LayoutInflater
+import com.raythinks.poesia.R
 import com.raythinks.poesia.ui.fragments.MainFragment
+import kotlinx.android.synthetic.main.fragment_authorlist.*
+import kotlinx.android.synthetic.main.tab_textview_style.view.*
 import me.yokeyword.fragmentation.SupportFragment
 import java.lang.reflect.ParameterizedType
-
 
 
 /**
@@ -17,13 +22,14 @@ object TUtils {
     /**
      * 泛型转化
      */
-    fun <T> getTClass(vm:Any,index:Int=0): Class<T> {
+    fun <T> getTClass(vm: Any, index: Int = 0): Class<T> {
         val entityClass = (vm.javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[index] as Class<T>
-      return  entityClass
+        return entityClass
     }
-    fun <T> getT(vm:Any,index:Int=0): T{
-        val entityClass = getTClass<T>(vm,index) as Class<T>
-        return  entityClass.newInstance()
+
+    fun <T> getT(vm: Any, index: Int = 0): T {
+        val entityClass = getTClass<T>(vm, index) as Class<T>
+        return entityClass.newInstance()
     }
 
     fun toMainFragment(type: Int): SupportFragment {
@@ -32,5 +38,16 @@ object TUtils {
         var mainFragment: MainFragment = MainFragment()
         mainFragment.arguments = bundle
         return mainFragment
+    }
+
+    /**
+     * 设置tab
+     */
+    fun setTab(context: Context, strs: Array<String>, tab: TabLayout) {
+        for (str in strs) {
+            val tabView = LayoutInflater.from(context).inflate(R.layout.tab_textview_style, null)
+            tabView.tv_tab_item.setText(str)
+            tab.addTab(tab.newTab().setCustomView(tabView))
+        }
     }
 }
