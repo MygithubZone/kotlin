@@ -16,10 +16,10 @@ import me.yokeyword.fragmentation.SupportFragment
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class MainFragment<FRAG :SupportFragment> : SupportFragment() {
+class MainFragment : SupportFragment() {
     protected var _mBackToFirstListener: OnBackToFirstListener? = null
 
-    lateinit var mainFrag: FRAG
+    lateinit var mainFrag: SupportFragment
 
     interface OnBackToFirstListener {
         fun onBackToFirstFragment()
@@ -65,22 +65,21 @@ class MainFragment<FRAG :SupportFragment> : SupportFragment() {
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
         if (savedInstanceState == null) {
-//            var type = arguments.getInt("type", 0)
-//            when (type) {
-//                0 -> {
-//                    mainFrag=RefranesFragment()
-//                }
-//               1 -> {
-//                   mainFrag=PoesiaFragment()
-//                }
-//                2 -> {
-//                    mainFrag=AuthorListFragment()
-//                }
-//                3 -> {
-//                    mainFrag=LibrosFragment()
-//                }
-//            }
-            mainFrag=TUtils.getT(this);
+            var type = arguments.getInt("type", 0)
+            when (type) {
+                0 -> {
+                    mainFrag = RefranesFragment()
+                }
+                1 -> {
+                    mainFrag = PoesiaFragment()
+                }
+                2 -> {
+                    mainFrag = AuthorListFragment()
+                }
+                3 -> {
+                    mainFrag = LibrosFragment()
+                }
+            }
             loadRootFragment(R.id.fl_first_container, mainFrag)
         }
     }

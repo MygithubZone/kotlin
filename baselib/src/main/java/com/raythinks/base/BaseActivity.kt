@@ -3,7 +3,6 @@ package com.raythinks.base
 import android.arch.lifecycle.*
 import android.os.Bundle
 import me.yokeyword.fragmentation.SupportActivity
-import java.lang.reflect.ParameterizedType
 
 
 /**

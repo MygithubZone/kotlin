@@ -2,12 +2,16 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.raythinks.poesia.ui.activitys.MainActivity"
-    tools:showIn="@layout/app_bar_main"
-    android:id="@+id/cl_content"
-    >
-
+    tools:showIn="@layout/app_bar_main">
+    <!--可滑动的布局内容-->
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/vp_maincontent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground" />
 </android.support.constraint.ConstraintLayout>

@@ -34,9 +34,9 @@ dependencies {
     api 'com.android.support.constraint:constraint-layout:1.0.2'
     api "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
     //lifecycle
-    api "android.arch.lifecycle:runtime:1.0.0-alpha5"
-    api "android.arch.lifecycle:extensions:1.0.0-alpha5"
-    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha5"
+    api "android.arch.lifecycle:runtime:1.0.0-alpha9"
+    api "android.arch.lifecycle:extensions:1.0.0-alpha9"
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha9"
     //rx
     api 'io.reactivex:rxjava:1.1.0'
     api 'io.reactivex:rxandroid:1.1.0'

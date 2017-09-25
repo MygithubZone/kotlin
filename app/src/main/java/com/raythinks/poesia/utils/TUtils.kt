@@ -4,7 +4,6 @@ import android.os.Bundle
 import com.raythinks.poesia.ui.fragments.MainFragment
 import me.yokeyword.fragmentation.SupportFragment
 import java.lang.reflect.ParameterizedType
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 
 
@@ -27,11 +26,11 @@ object TUtils {
         return  entityClass.newInstance()
     }
 
-//    fun toMainFragment(type: Int): SupportFragment {
-//        var bundle: Bundle = Bundle()
-//        bundle.putInt("type", type);
-//        var mainFragment: MainFragment = MainFragment()
-//        mainFragment.arguments = bundle
-//        return mainFragment
-//    }
+    fun toMainFragment(type: Int): SupportFragment {
+        var bundle: Bundle = Bundle()
+        bundle.putInt("type", type);
+        var mainFragment: MainFragment = MainFragment()
+        mainFragment.arguments = bundle
+        return mainFragment
+    }
 }

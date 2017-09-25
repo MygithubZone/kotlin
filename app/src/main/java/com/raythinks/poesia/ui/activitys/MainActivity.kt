@@ -3,6 +3,7 @@ package com.raythinks.poesia.ui.activitys
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
+import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,52 +14,48 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import android.support.v7.widget.SearchView
 import com.raythinks.poesia.base.BaseVMActivity
+import com.raythinks.poesia.ui.adapter.MainAdapter
+import com.raythinks.poesia.ui.anim.ZoomOutPagerAnim
 import com.raythinks.poesia.ui.fragments.LibrosFragment
 import com.raythinks.poesia.ui.fragments.MainFragment
 import com.raythinks.poesia.ui.fragments.PoesiaFragment
 import com.raythinks.poesia.ui.fragments.RefranesFragment
 import com.raythinks.poesia.utils.TUtils
 import com.raythinks.shiwen.ui.fragment.AuthorListFragment
+import kotlinx.android.synthetic.main.content_main.*
 import me.yokeyword.fragmentation.SupportFragment
 import java.sql.Ref
 import java.util.ArrayList
 
 /**
  * 功能：主界面
- * 作者：
+ * 作者：zh
  *
  */
-class MainActivity : BaseVMActivity<MainViewModel>() , MainFragment.OnBackToFirstListener {
+class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirstListener, ViewPager.OnPageChangeListener {
 
     override fun onBackToFirstFragment() {
     }
 
+    lateinit var typePoesiaId: Array<Int>;
     lateinit var typePoesia: Array<String>;
-    lateinit var mFragments: ArrayList<SupportFragment>
     override fun initView() {
         setSupportActionBar(toolbar)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
+        typePoesia = resources.getStringArray(R.array.arrayt_type)
+        typePoesiaId = arrayOf(R.id.nav_refranes, R.id.nav_poesia, R.id.nav_author, R.id.nav_libros)
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
-        mFragments = ArrayList<SupportFragment>()
-        mFragments.add(MainFragment<RefranesFragment>())
-        mFragments.add(MainFragment<PoesiaFragment>())
-        mFragments.add(MainFragment<AuthorListFragment>())
-        mFragments.add(MainFragment<LibrosFragment>())
-        loadMultipleRootFragment(R.id.cl_content, 0, mFragments[0], mFragments[1], mFragments[2], mFragments[3])
+        var mainDapter = MainAdapter(mContext, supportFragmentManager, typePoesia)
+        vp_maincontent.adapter = mainDapter
+        vp_maincontent.setPageTransformer(true, ZoomOutPagerAnim())
+        vp_maincontent.addOnPageChangeListener(this)
         onNavigationItemSelected();
-
     }
 
     override fun initData() {
-        typePoesia = resources.getStringArray(R.array.arrayt_type)
-        setTitle(typePoesia[0])
+        selectCurrentItem(0)
     }
 
     override fun getLayoutId(): Int = R.layout.activity_main
@@ -100,20 +97,16 @@ class MainActivity : BaseVMActivity<MainViewModel>() , MainFragment.OnBackToFirs
             when (it.itemId) {
                 R.id.nav_refranes -> {//名句
                     // Handle the camera action
-                    setTitle(typePoesia[0])
-                    showHideFragment(mFragments[0])
+                    selectCurrentItem(0)
                 }
                 R.id.nav_poesia -> {//诗文
-                    setTitle(typePoesia[1])
-                    showHideFragment(mFragments[1])
+                    selectCurrentItem(1)
                 }
                 R.id.nav_author -> {//作者
-                    setTitle(typePoesia[2])
-                    showHideFragment(mFragments[2])
+                    selectCurrentItem(2)
                 }
                 R.id.nav_libros -> {//古籍
-                    setTitle(typePoesia[3])
-                    showHideFragment(mFragments[3])
+                    selectCurrentItem(3)
                 }
                 R.id.nav_share -> {
 
@@ -124,6 +117,23 @@ class MainActivity : BaseVMActivity<MainViewModel>() , MainFragment.OnBackToFirs
             }
             drawer_layout.closeDrawer(GravityCompat.START)
         }
+    }
+
+    fun selectCurrentItem(position: Int) {
+        setTitle(typePoesia[position])
+        vp_maincontent.setCurrentItem(position, true)
+    }
+
+    override fun onPageScrollStateChanged(state: Int) {
+    }
+
+    override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+    }
+
+    override fun onPageSelected(position: Int) {
+        setTitle(typePoesia[position])
+        nav_view.setCheckedItem(typePoesiaId[position])
 
     }
+
 }
