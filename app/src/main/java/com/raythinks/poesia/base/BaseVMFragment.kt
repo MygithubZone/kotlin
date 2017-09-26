@@ -2,10 +2,12 @@ package com.raythinks.poesia.base
 
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.raythinks.base.BaseFragment
+import com.raythinks.poesia.R
 import com.raythinks.poesia.utils.TUtils
 
 /**
@@ -28,6 +30,11 @@ abstract class BaseVMFragment<VM : BaseViewModel> : BaseFragment() {
         viewModel = ViewModelProviders.of(this).get(TUtils.getTClass(this))//ViewModel对象
         initView()
         initData()
+    }
+
+    protected fun initToolbarNav(toolbar: Toolbar) {
+        toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_72dp)
+        toolbar.setNavigationOnClickListener { v -> _mActivity.onBackPressed() }
     }
 
 

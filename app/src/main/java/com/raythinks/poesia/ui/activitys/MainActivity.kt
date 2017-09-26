@@ -43,7 +43,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         toggle.syncState()
         var mainDapter = MainAdapter(mContext, supportFragmentManager, typePoesia)
         vp_maincontent.adapter = mainDapter
-        vp_maincontent.setPageTransformer(true, ZoomOutPagerAnim())
+//        vp_maincontent.setPageTransformer(true, ZoomOutPagerAnim())
         vp_maincontent.addOnPageChangeListener(this)
         onNavigationItemSelected();
     }
@@ -69,7 +69,6 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
-
         //找到searchView
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.getActionView() as SearchView
