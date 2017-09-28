@@ -3,8 +3,12 @@ package com.raythinks.poesia.ui.fragments
 import android.support.design.widget.TabLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
+import com.raythinks.poesia.listener.OnItemClickListener
+import com.raythinks.poesia.listener.onItemListener
 import com.raythinks.poesia.ui.adapter.LibrosAdapter
 import com.raythinks.poesia.ui.viewmodel.LibrosViewModel
 import com.raythinks.poesia.utils.TUtils
@@ -16,7 +20,10 @@ import kotlinx.android.synthetic.main.fragment_libros.*
 /**
  * Created by zh on 2017/9/20.
  */
-class LibrosFragment : BaseVMFragment<LibrosViewModel>(), OnRefreshListener, OnLoadmoreListener, TabLayout.OnTabSelectedListener {
+class LibrosFragment : BaseVMFragment<LibrosViewModel>(), OnRefreshListener, OnLoadmoreListener, TabLayout.OnTabSelectedListener, OnItemClickListener {
+    override fun onItemClick(position: Int, view: View, vh: RecyclerView.ViewHolder) {
+    }
+
     override fun onTabReselected(tab: TabLayout.Tab?) {
     }
 
@@ -38,6 +45,7 @@ class LibrosFragment : BaseVMFragment<LibrosViewModel>(), OnRefreshListener, OnL
         recyclerview.setLayoutManager(LinearLayoutManager(_mActivity))
         recyclerview.setItemAnimator(DefaultItemAnimator())
         adapter = LibrosAdapter(viewModel)
+//        adapter.onItemListener = this
         recyclerview.setAdapter(adapter)
         libros_type_Strs = resources.getStringArray(R.array.arrayt_libros_type)
         TUtils.setTab(_mActivity, libros_type_Strs, tbs_libros_type)

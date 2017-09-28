@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.raythinks.poesia.R
 import com.raythinks.poesia.ui.viewmodel.LibrosViewModel
-import com.raythinks.poesia.ui.viewmodel.RefranesViewModel
 
 /**
  * 功能：<br>
@@ -15,6 +14,7 @@ import com.raythinks.poesia.ui.viewmodel.RefranesViewModel
  * 版本：1.2.0
  */
 class LibrosAdapter(var viewHodler: LibrosViewModel) : RecyclerView.Adapter<LibrosAdapter.ViewHolder>() {
+
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
     }
 

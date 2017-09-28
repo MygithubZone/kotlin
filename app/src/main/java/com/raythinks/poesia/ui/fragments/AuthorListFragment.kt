@@ -34,7 +34,7 @@ class AuthorListFragment : BaseVMFragment<AuthorListViewModel>(), TabLayout.OnTa
     lateinit var author_times_Strs: Array<String>
     lateinit var adapter: AuthorListAdapter
     override fun initView() {
-        adapter = AuthorListAdapter(viewModel)
+        adapter = AuthorListAdapter(_mActivity,viewModel)
         scv_author.setAdapter(adapter)
         author_times_Strs = resources.getStringArray(R.array.array_author_borntimes)
         TUtils.setTab(_mActivity,author_times_Strs,tbs_author_borntimes)

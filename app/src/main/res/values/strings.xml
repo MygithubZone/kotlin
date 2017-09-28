@@ -33,6 +33,7 @@
     <string name="str_libros_type_sb">史部</string>
     <string name="str_libros_type_zb">子部</string>
     <string name="str_libros_type_jb1">集部</string>
+    <string name="str_collection">收藏</string>
     <string-array name="arrayt_type">
         <item>@string/str_type_refranes</item>
         <item>@string/str_type_poesia</item>
