@@ -31,7 +31,7 @@ open class BaseApp : Application() {
                 .stackViewMode(Fragmentation.BUBBLE)
                 .debug(BuildConfig.DEBUG)
                 .install();
-        initRouter();
+//        initRouter();
     }
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)

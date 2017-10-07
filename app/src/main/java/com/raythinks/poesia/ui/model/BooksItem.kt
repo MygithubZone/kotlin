@@ -1,0 +1,18 @@
+package com.raythinks.poesia.ui.model
+data class BooksItem (val nameStr: String = "",
+val axing: Int = 0,
+val author: String = "",
+val cxing: Int = 0,
+val exing: Int = 0,
+val pic: String = "",
+val creTime: String = "",
+val type: String? = null,
+val fenlei: String? = null,
+val bxing: Int = 0,
+val ipStr: String? = null,
+val chaodai: String? = null,
+val nameStrKey: String? = null,
+val dxing: Int = 0,
+val id: Int = 0,
+val cont: String = "",
+val classStr: String? = null)

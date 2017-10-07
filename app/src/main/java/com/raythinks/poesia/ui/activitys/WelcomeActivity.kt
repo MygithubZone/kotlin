@@ -27,7 +27,7 @@ class WelcomeActivity : BaseVMActivity<WelcomeViewModel>() {
 ////                    .anim(enter, exit)  // 添加跳转动画
 //                    .go(this);
             startActivity(Intent(this,MainActivity::class.java))
-        }, 3000)
+        }, 10)
     }
 
     override fun getLayoutId(): Int = R.layout.activity_welcome

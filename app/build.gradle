@@ -41,6 +41,8 @@ dependencies {
     //下拉刷新https://github.com/scwang90/SmartRefreshLayout
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3'//没有使用特殊Header，可以不加这行
+    implementation 'com.github.paraya3636:SharedElementDialog:0.4'
+    implementation 'com.github.sharish:ShimmerRecyclerView:v1.1'
     //dagger2 Dagger2 的依赖
     //dagger2
 //    implementation 'com.google.dagger:dagger:2.9'

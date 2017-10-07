@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.cuieney.videolife.kotlin.common.okhttp.CacheInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.security.cert.X509Certificate
 
@@ -23,9 +24,14 @@ class RetrofitService() {
                 .baseUrl(baseUrl)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build()
         return retrofit.create(clz)
+    }
+
+    fun <T> getApiService(baseUrl: String, clz: Class<T>): T {
+
+        return getApiService(baseUrl, provideOkhttpClient(), clz)
     }
 
     /**
@@ -56,7 +62,7 @@ class RetrofitService() {
     }
 
     fun provideOkhttpClient(): okhttp3.OkHttpClient {
-        return provideOkhttpClient(okhttp3.Cache(BaseApp.mContext.getExternalFilesDir(AppConfig.DEFAULT_JOSN_CACHE), AppConfig.DEFAULT_CACHE_SIZE), CacheInterceptor( BaseApp.mContext))
+        return provideOkhttpClient(okhttp3.Cache(BaseApp.mContext.getExternalFilesDir(AppConfig.DEFAULT_JOSN_CACHE), AppConfig.DEFAULT_CACHE_SIZE), CacheInterceptor(BaseApp.mContext))
     }
 
     fun provideOkhttpClient(cache: Cache, cacheInterceptor: CacheInterceptor): okhttp3.OkHttpClient {

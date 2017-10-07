@@ -34,6 +34,33 @@
     <string name="str_libros_type_zb">子部</string>
     <string name="str_libros_type_jb1">集部</string>
     <string name="str_collection">收藏</string>
+
+    <string name="str_refranes_theme_bx">不限</string>
+    <string name="str_refranes_theme_sq">抒情</string>
+    <string name="str_refranes_theme_sq1">四季</string>
+    <string name="str_refranes_theme_ss">山水</string>
+    <string name="str_refranes_theme_tq">天气</string>
+    <string name="str_refranes_theme_rw">人物</string>
+    <string name="str_refranes_theme_rs">人生</string>
+    <string name="str_refranes_theme_sh">生活</string>
+    <string name="str_refranes_theme_jr">节日</string>
+    <string name="str_refranes_theme_dw">动物</string>
+    <string name="str_refranes_theme_zw">植物</string>
+    <string name="str_refranes_theme_sw">食物</string>
+    <string-array name="arrayt_refranes_theme">
+        <item>@string/str_refranes_theme_bx</item>
+        <item>@string/str_refranes_theme_sq</item>
+        <item>@string/str_refranes_theme_sq1</item>
+        <item>@string/str_refranes_theme_ss</item>
+        <item>@string/str_refranes_theme_tq</item>
+        <item>@string/str_refranes_theme_rw</item>
+        <item>@string/str_refranes_theme_rs</item>
+        <item>@string/str_refranes_theme_sh</item>
+        <item>@string/str_refranes_theme_jr</item>
+        <item>@string/str_refranes_theme_dw</item>
+        <item>@string/str_refranes_theme_zw</item>
+        <item>@string/str_refranes_theme_sw</item>
+    </string-array>
     <string-array name="arrayt_type">
         <item>@string/str_type_refranes</item>
         <item>@string/str_type_poesia</item>

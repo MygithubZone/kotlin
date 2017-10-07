@@ -44,17 +44,19 @@ dependencies {
     api 'com.jakewharton.rxbinding2:rxbinding-design-kotlin:2.0.0'
     api 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7-kotlin:2.0.0'
     api 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:2.0.0'
-
     //fragment manager // appcompat-v7 is required
     api 'me.yokeyword:fragmentation:1.1.6'
+    //图片框架
+    api 'com.github.bumptech.glide:glide:4.2.0'
+    kapt 'com.github.bumptech.glide:compiler:4.1.1'
     //分包处理
     implementation 'com.android.support:multidex:1.0.1'
     //network
     api 'com.squareup.retrofit2:retrofit:2.3.0'
-    api 'com.squareup.retrofit2:converter-gson:2.0.2'
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'
     api 'com.squareup.okhttp3:okhttp:3.9.0'
-    api 'com.squareup.okhttp3:logging-interceptor:3.0.1'
-
+    api 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+    api 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'

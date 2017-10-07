@@ -45,6 +45,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         vp_maincontent.adapter = mainDapter
 //        vp_maincontent.setPageTransformer(true, ZoomOutPagerAnim())
         vp_maincontent.addOnPageChangeListener(this)
+        vp_maincontent.offscreenPageLimit=4
         onNavigationItemSelected();
     }
 

@@ -1,5 +1,6 @@
 package com.raythinks.poesia.ui.fragments
 
+import android.arch.lifecycle.Observer
 import android.support.design.widget.TabLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.listener.onItemListener
 import com.raythinks.poesia.ui.adapter.LibrosAdapter
 import com.raythinks.poesia.ui.viewmodel.LibrosViewModel
+import com.raythinks.poesia.utils.AnimUtils
 import com.raythinks.poesia.utils.TUtils
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener
@@ -42,6 +44,7 @@ class LibrosFragment : BaseVMFragment<LibrosViewModel>(), OnRefreshListener, OnL
 
     lateinit var libros_type_Strs: Array<String>
     override fun initView() {
+        AnimUtils.loadAmin(_mActivity, ll_tab, R.anim.fade_scape01)
         recyclerview.setLayoutManager(LinearLayoutManager(_mActivity))
         recyclerview.setItemAnimator(DefaultItemAnimator())
         adapter = LibrosAdapter(viewModel)
@@ -51,8 +54,13 @@ class LibrosFragment : BaseVMFragment<LibrosViewModel>(), OnRefreshListener, OnL
         TUtils.setTab(_mActivity, libros_type_Strs, tbs_libros_type)
         tbs_libros_type.addOnTabSelectedListener(this)
     }
-
+    val currentP: Int = 1
     override fun initData() {
+        viewModel.updateLibrosList(currentP, "", "").observe(this, Observer {
+            it?.let {
+                adapter.updateData(currentP == 1, it)
+            }
+        })
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_libros

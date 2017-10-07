@@ -3,11 +3,15 @@ package com.raythinks.poesia.utils
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.view.Gravity
 import android.view.LayoutInflater
+import android.widget.TextView
+import android.widget.Toast
+import com.raythinks.poesia.ApplicationImpl
 import com.raythinks.poesia.R
 import com.raythinks.poesia.ui.fragments.MainFragment
-import kotlinx.android.synthetic.main.fragment_authorlist.*
 import kotlinx.android.synthetic.main.tab_textview_style.view.*
+import kotlinx.android.synthetic.main.toast_style1.view.*
 import me.yokeyword.fragmentation.SupportFragment
 import java.lang.reflect.ParameterizedType
 
@@ -19,6 +23,34 @@ import java.lang.reflect.ParameterizedType
  * 版本：1.2.0
  */
 object TUtils {
+    lateinit var toast: Toast
+
+    init {
+        initToast()
+    }
+
+    /**
+     *
+     */
+   private fun initToast() {
+        toast = Toast(ApplicationImpl.app);
+        // 获取LayoutInflater对象
+        val inflater = ApplicationImpl.app.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        // 由layout文件创建一个View对象
+        val layout = inflater.inflate(R.layout.toast_style1, null)
+        // 吐司上的文字
+        toast.view = layout
+
+    }
+
+    fun showToast(toastStr: String, duration: Int = Toast.LENGTH_SHORT, gravity: Int = Gravity.BOTTOM) {
+        toast.setGravity(gravity, 0, 100)
+        toast.setDuration(duration)
+//        toast.cancel()
+        toast.view.toast_text.text = toastStr
+        toast.show()
+    }
+
     /**
      * 泛型转化
      */
@@ -39,6 +71,7 @@ object TUtils {
         mainFragment.arguments = bundle
         return mainFragment
     }
+
     /**
      * 设置tab
      */
