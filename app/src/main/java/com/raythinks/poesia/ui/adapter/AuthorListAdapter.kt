@@ -4,17 +4,16 @@ import android.content.Context
 import android.support.v4.content.ContextCompat
 import android.text.Html
 import android.view.View
-import com.bumptech.glide.Glide
 import com.huxq17.swipecardsview.BaseCardAdapter
 import com.raythinks.poesia.R
 import com.raythinks.poesia.ui.viewmodel.AuthorListViewModel
 import kotlinx.android.synthetic.main.item_authorlist.view.*
 import com.dd.morphingbutton.MorphingButton
-import com.raythinks.poesia.ui.model.AuthorListMoel
+import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.model.AuthorsItem
-import com.raythinks.poesia.ui.model.GushiwensItem
 import com.raythinks.poesia.utils.ImageUtils
 import com.raythinks.poesia.utils.TUtils
+import com.raythinks.shiwen.ui.fragment.AuthorListFragment
 
 
 /**
@@ -23,16 +22,20 @@ import com.raythinks.poesia.utils.TUtils
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class AuthorListAdapter(context: Context, viewModel: AuthorListViewModel, data: ArrayList<AuthorsItem>? = ArrayList<AuthorsItem>()) : BaseCardAdapter<String>() {
+class AuthorListAdapter(context: Context, viewModel: AuthorListViewModel, data: ArrayList<AuthorsItem>? = ArrayList<AuthorsItem>(), onItemClickListener: OnItemClickListener) : BaseCardAdapter<String>() {
     var pics: Array<Int>;
     var circle: MorphingButton.Params
     var square: MorphingButton.Params
-    var data: ArrayList<AuthorsItem>?
+    var mData: ArrayList<AuthorsItem>?
     var mContext: Context
+    var mOnItemClickListener: OnItemClickListener
+    var mViewModel: AuthorListViewModel
 
     init {
+        mViewModel = viewModel
+        mOnItemClickListener = onItemClickListener
         mContext = context
-        this.data = data;
+        this.mData = data;
         pics = arrayOf(R.mipmap.libai, R.mipmap.baijuyi, R.mipmap.dufu)
         circle = MorphingButton.Params.create()
                 .duration(500)
@@ -52,7 +55,7 @@ class AuthorListAdapter(context: Context, viewModel: AuthorListViewModel, data: 
                 .text(context.resources.getString(R.string.str_collection));
     }
 
-    override fun getCount() = data!!.size ?: 0
+    override fun getCount() = mData!!.size ?: 0
 
 
     override fun onBindData(position: Int, cardview: View) {
@@ -65,9 +68,11 @@ class AuthorListAdapter(context: Context, viewModel: AuthorListViewModel, data: 
         cardview.mhb_collection.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         cardview.mhb_collection.setPadding(0, 0, 0, 0);
         cardview.mhb_collection.morph(square)
-        ImageUtils.loadPoesiaPic(mContext, data!![position].pic, cardview.civ_author_header)
-        cardview.tv_author_name.text = data!![position].nameStr
-        cardview.tv_author_brief.text = Html.fromHtml(data!![position].cont)
+        ImageUtils.loadPoesiaPic(mContext, mData!![position].pic, cardview.civ_author_header)
+        cardview.tv_author_name.text = mData!![position].nameStr
+        cardview.tv_author_brief.text = Html.fromHtml(mData!![position].cont)
+        if (mOnItemClickListener != null)
+            cardview.cv_author.setOnClickListener { mOnItemClickListener.onItemClick(position, cardview) }
     }
 
     override fun getCardLayoutId(): Int = R.layout.item_authorlist

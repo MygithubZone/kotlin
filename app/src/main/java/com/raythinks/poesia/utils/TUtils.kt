@@ -3,6 +3,8 @@ package com.raythinks.poesia.utils
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TabLayout
+import android.support.v4.app.FragmentActivity
+import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.TextView
@@ -32,7 +34,7 @@ object TUtils {
     /**
      *
      */
-   private fun initToast() {
+    private fun initToast() {
         toast = Toast(ApplicationImpl.app);
         // 获取LayoutInflater对象
         val inflater = ApplicationImpl.app.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -41,6 +43,11 @@ object TUtils {
         // 吐司上的文字
         toast.view = layout
 
+    }
+
+    fun initToolbarNav(toolbar: Toolbar, _mActivity: FragmentActivity) {
+        toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_72dp)
+        toolbar.setNavigationOnClickListener { v -> _mActivity.onBackPressed() }
     }
 
     fun showToast(toastStr: String, duration: Int = Toast.LENGTH_SHORT, gravity: Int = Gravity.BOTTOM) {
@@ -75,11 +82,19 @@ object TUtils {
     /**
      * 设置tab
      */
-    fun setTab(context: Context, strs: Array<String>, tab: TabLayout) {
-        for (str in strs) {
+    fun setTab(context: Context, strs: Array<String>, tab: TabLayout, textSize: Float = 14f) {
+        for (i in strs.indices) {
             val tabView = LayoutInflater.from(context).inflate(R.layout.tab_textview_style, null)
-            tabView.tv_tab_item.setText(str)
-            tab.addTab(tab.newTab().setCustomView(tabView))
+            tabView.tv_tab_item.textSize = textSize
+            tabView.tv_tab_item.setText(strs[i])
+            var tabItem = tab.getTabAt(i)
+            if (tabItem == null) {
+                tabItem = tab.newTab()
+                tabItem.setCustomView(tabView)
+                tab.addTab(tabItem)
+            } else {
+                tabItem.setCustomView(tabView)
+            }
         }
     }
 

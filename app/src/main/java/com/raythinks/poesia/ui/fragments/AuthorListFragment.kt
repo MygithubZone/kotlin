@@ -1,12 +1,15 @@
 package com.raythinks.shiwen.ui.fragment
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.support.design.widget.TabLayout
 import android.view.View
 import com.huxq17.swipecardsview.SwipeCardsView
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
+import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.adapter.AuthorListAdapter
+import com.raythinks.poesia.ui.activitys.AuthorDetialActivity
 import com.raythinks.poesia.ui.viewmodel.AuthorListViewModel
 import com.raythinks.poesia.utils.AnimUtils
 import com.raythinks.poesia.utils.TUtils
@@ -20,7 +23,13 @@ import kotlinx.android.synthetic.main.fragment_authorlist.*
  * 版本：1.2.0
  */
 
-class AuthorListFragment : BaseVMFragment<AuthorListViewModel>(), TabLayout.OnTabSelectedListener, SwipeCardsView.CardsSlideListener {
+class AuthorListFragment : BaseVMFragment<AuthorListViewModel>(), TabLayout.OnTabSelectedListener, SwipeCardsView.CardsSlideListener, OnItemClickListener {
+    override fun onItemClick(position: Int, itemView: View) {//跳转到详情
+        var intent=Intent(_mActivity, AuthorDetialActivity::class.java)
+        intent.putExtra("author", adapter.mData!![position])
+        startActivity(intent)
+    }
+
     override fun onCardVanish(index: Int, type: SwipeCardsView.SlideType?) {
         when (type) {
             SwipeCardsView.SlideType.LEFT -> TUtils.showToast("左边" + index)
@@ -29,6 +38,7 @@ class AuthorListFragment : BaseVMFragment<AuthorListViewModel>(), TabLayout.OnTa
     }
 
     override fun onItemClick(cardImageView: View?, index: Int) {
+
     }
 
     override fun onShow(index: Int) {
@@ -47,7 +57,7 @@ class AuthorListFragment : BaseVMFragment<AuthorListViewModel>(), TabLayout.OnTa
     lateinit var adapter: AuthorListAdapter
     override fun initView() {
         AnimUtils.loadAmin(_mActivity, ll_tab, R.anim.fade_scape01)
-        adapter = AuthorListAdapter(_mActivity, viewModel)
+        adapter = AuthorListAdapter(context = _mActivity, viewModel = viewModel, onItemClickListener = this)
         scv_author.setAdapter(adapter)
         author_times_Strs = resources.getStringArray(R.array.array_author_borntimes)
         TUtils.setTab(_mActivity, author_times_Strs, tbs_author_borntimes)
@@ -59,7 +69,7 @@ class AuthorListFragment : BaseVMFragment<AuthorListViewModel>(), TabLayout.OnTa
     override fun initData() {
         viewModel.updateAuthorList(currentP, "").observe(this, Observer {
             it?.let {
-                adapter = AuthorListAdapter(_mActivity, viewModel, it.authors)
+                adapter = AuthorListAdapter(context = _mActivity, viewModel = viewModel, data = it.authors, onItemClickListener = this)
                 scv_author.setAdapter(adapter)
                 tv_curentpage.text = "${it.currentPage}/${it.sumPage}"
             }

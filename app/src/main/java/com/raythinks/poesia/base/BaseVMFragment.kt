@@ -1,7 +1,10 @@
 package com.raythinks.poesia.base
 
+import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.View
@@ -25,17 +28,18 @@ abstract class BaseVMFragment<VM : BaseViewModel> : BaseFragment() {
         return mView
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        _mActivity = context as FragmentActivity
+    }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(TUtils.getTClass(this))//ViewModel对象
+        viewModel = ViewModelProviders.of(_mActivity).get(TUtils.getTClass(this))//ViewModel对象
         initView()
         initData()
     }
 
-    protected fun initToolbarNav(toolbar: Toolbar) {
-        toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_72dp)
-        toolbar.setNavigationOnClickListener { v -> _mActivity.onBackPressed() }
-    }
+
 
 
     abstract fun initView()

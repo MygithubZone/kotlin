@@ -101,4 +101,12 @@
         <item>@string/str_author_borntime_md</item>
         <item>@string/str_author_borntime_qd</item>
     </string-array>
+    <string name="str_author_detail_tab_jj">简介</string>
+    <string name="str_author_detail_tab_xq">详情</string>
+    <string name="str_author_detail_tab_sj">诗集</string>
+    <string-array name="array_author_detail_tab">
+        <item>@string/str_author_detail_tab_jj</item>
+        <item>@string/str_author_detail_tab_xq</item>
+        <item>@string/str_author_detail_tab_sj</item>
+    </string-array>
 </resources>

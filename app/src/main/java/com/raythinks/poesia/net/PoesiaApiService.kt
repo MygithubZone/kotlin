@@ -20,6 +20,8 @@ interface PoesiaApiService {
     fun getLibrosList(@Query("p") p: Int, @Query("type") type: String= "", @Query("pwd") pwd: String = "",@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<LibrosListModel>
     @GET("/api/author/Default.aspx")
     fun getAuthorList(@Query("p") p: Int, @Query("c") c: String= "", @Query("pwd") pwd: String = "",@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<AuthorListMoel>
+    @GET("/api/author/author.aspx")
+    fun getAuthorMore(@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<AuthorMoreInfoMoel>
 
     companion object Factory {
         fun create() = RetrofitService().getApiService("http://app.gushiwen.org", PoesiaApiService::class.java)

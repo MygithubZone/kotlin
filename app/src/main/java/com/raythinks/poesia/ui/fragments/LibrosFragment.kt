@@ -9,7 +9,6 @@ import android.view.View
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.listener.OnItemClickListener
-import com.raythinks.poesia.listener.onItemListener
 import com.raythinks.poesia.ui.adapter.LibrosAdapter
 import com.raythinks.poesia.ui.viewmodel.LibrosViewModel
 import com.raythinks.poesia.utils.AnimUtils
@@ -23,7 +22,8 @@ import kotlinx.android.synthetic.main.fragment_libros.*
  * Created by zh on 2017/9/20.
  */
 class LibrosFragment : BaseVMFragment<LibrosViewModel>(), OnRefreshListener, OnLoadmoreListener, TabLayout.OnTabSelectedListener, OnItemClickListener {
-    override fun onItemClick(position: Int, view: View, vh: RecyclerView.ViewHolder) {
+    override fun onItemClick(position: Int, itemView: View) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {

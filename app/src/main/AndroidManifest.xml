@@ -18,6 +18,10 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".ui.activitys.AuthorDetialActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ui.activitys.WelcomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
