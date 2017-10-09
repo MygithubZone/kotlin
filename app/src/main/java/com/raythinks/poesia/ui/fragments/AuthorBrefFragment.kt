@@ -3,7 +3,10 @@ package com.raythinks.poesia.ui.fragments
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.arch.lifecycle.Observer
+import android.content.Context
+import android.support.v4.content.ContextCompat
 import android.text.Html
+import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import com.mrzk.transitioncontroller.controller.animationUtils.TransitionController
 import com.mrzk.transitioncontroller.controller.animationUtils.ViewAnimationCompatUtils
@@ -26,23 +29,27 @@ class AuthorBrefFragment : BaseVMFragment<AuthorDetialViewModel>() {
                 ImageUtils.loadPoesiaPic(_mActivity, it!!.tb_author.pic, civ_author_header)
             }
         })
+        cv_author.visibility= View.GONE
         TransitionController.getInstance().setEnterListener(object : TransitionCustomListener {
             override fun onTransitionStart(animator: Animator) {}
 
             override fun onTransitionEnd(animator: Animator) {
-//                val mAnimator = ViewAnimationCompatUtils.createRectReveal(cv_author, 0f, cv_author.getHeight().toFloat(), ViewAnimationCompatUtils.RECT_TOP)
-//                mAnimator.duration = 500
-//                mAnimator.interpolator = AccelerateDecelerateInterpolator()
-//                mAnimator.addListener(object : AnimatorListenerAdapter() {
-//                    override fun onAnimationEnd(animation: Animator) {
-//                        super.onAnimationEnd(animation)
-//                    }
-//
-//                    override fun onAnimationStart(animation: Animator) {
-//                        super.onAnimationStart(animation)
-//                    }
-//                })
-//                mAnimator.start()
+                cv_author.visibility= View.VISIBLE
+                civ_author_header.setBackgroundColor(ContextCompat.getColor(_mActivity,android.R.color.transparent))
+                val mAnimator = ViewAnimationCompatUtils.createRectReveal(cv_author, 0f, cv_author.getHeight().toFloat(), ViewAnimationCompatUtils.RECT_TOP)
+                mAnimator.duration = 500
+                mAnimator.interpolator = AccelerateDecelerateInterpolator()
+                mAnimator.addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        super.onAnimationEnd(animation)
+                    }
+
+                    override fun onAnimationStart(animation: Animator) {
+
+                        super.onAnimationStart(animation)
+                    }
+                })
+                mAnimator.start()
             }
 
             override fun onTransitionCancel(animator: Animator) {}

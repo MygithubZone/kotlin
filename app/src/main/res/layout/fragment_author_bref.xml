@@ -91,7 +91,7 @@
         android:layout_gravity="center_horizontal"
         android:foreground="?android:attr/selectableItemBackground"
         app:border_color="@color/white"
-        android:background="@color/white"
+        android:background="@color/colorBackground"
         app:border_width="2dp"
         app:srcCompat="@mipmap/libai"></com.raythinks.poesia.ui.widget.CircleImageView>
 
