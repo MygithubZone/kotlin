@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.design.widget.TabLayout
 import android.view.View
 import com.huxq17.swipecardsview.SwipeCardsView
+import com.mrzk.transitioncontroller.controller.animationUtils.TransitionController
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.listener.OnItemClickListener
@@ -14,6 +15,7 @@ import com.raythinks.poesia.ui.viewmodel.AuthorListViewModel
 import com.raythinks.poesia.utils.AnimUtils
 import com.raythinks.poesia.utils.TUtils
 import kotlinx.android.synthetic.main.fragment_authorlist.*
+import kotlinx.android.synthetic.main.item_authorlist.view.*
 
 
 /**
@@ -25,9 +27,9 @@ import kotlinx.android.synthetic.main.fragment_authorlist.*
 
 class AuthorListFragment : BaseVMFragment<AuthorListViewModel>(), TabLayout.OnTabSelectedListener, SwipeCardsView.CardsSlideListener, OnItemClickListener {
     override fun onItemClick(position: Int, itemView: View) {//跳转到详情
-        var intent=Intent(_mActivity, AuthorDetialActivity::class.java)
+        var intent = Intent(_mActivity, AuthorDetialActivity::class.java)
         intent.putExtra("author", adapter.mData!![position])
-        startActivity(intent)
+        TransitionController.getInstance().startActivity(_mActivity, intent, itemView.civ_author_header, R.id.civ_author_header)
     }
 
     override fun onCardVanish(index: Int, type: SwipeCardsView.SlideType?) {

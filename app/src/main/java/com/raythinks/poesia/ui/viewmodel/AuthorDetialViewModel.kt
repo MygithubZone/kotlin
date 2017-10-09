@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.raythinks.poesia.base.BaseViewModel
 import com.raythinks.poesia.ui.model.AuthorListMoel
 import com.raythinks.poesia.ui.model.AuthorMoreInfoMoel
+import com.raythinks.poesia.ui.model.AuthorsItem
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -20,8 +21,7 @@ class AuthorDetialViewModel : BaseViewModel() {
     fun updateAuthorMore(id: String): LiveData<AuthorMoreInfoMoel> {
         BaseViewModel.apiService.getAuthorMore(id).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({
-                    result ->
+                .subscribe({ result ->
                     result?.let {
                         authorMoreModel.value = result
                         return@subscribe
@@ -31,6 +31,11 @@ class AuthorDetialViewModel : BaseViewModel() {
                     error.printStackTrace()
                 })
         return authorMoreModel
+    }
+
+    fun setAuthorMore(author: AuthorsItem) {
+        var model: AuthorMoreInfoMoel = AuthorMoreInfoMoel(author, null)
+        authorMoreModel.value = model
     }
 
     fun getAuthorMore() = authorMoreModel

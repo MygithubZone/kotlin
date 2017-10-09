@@ -7,6 +7,7 @@ import com.jaeger.library.StatusBarUtil
 import com.raythinks.base.BaseActivity
 import com.raythinks.poesia.utils.TUtils
 import com.raythinks.poesia.R
+import qiu.niorgai.StatusBarCompat
 
 /**
  * Activity基类：
@@ -23,11 +24,13 @@ abstract class BaseVMActivity<VM : ViewModel> : BaseActivity() {
         viewModel = ViewModelProviders.of(this).get(TUtils.getTClass(this))//ViewModel对象
         setContentView(getLayoutId())
 //        StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.colorPrimaryDark))
+        if (isSetStatusBar())
+            StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimaryDark), 0)
         initView()
         initData()
     }
 
-
+     open fun isSetStatusBar():Boolean=true
     abstract fun initView()
 
     abstract fun initData()

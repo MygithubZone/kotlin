@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:card="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
@@ -29,11 +28,11 @@
         android:background="@color/colorPrimary"
         app:elevation="2dp"
         app:tabMode="fixed"
-        card:tabGravity="fill"
-        card:tabIndicatorColor="@color/white"
-        card:tabIndicatorHeight="1dp"
-        card:tabSelectedTextColor="@color/white"
-        card:tabTextColor="@color/white70" />
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorHeight="1dp"
+        app:tabSelectedTextColor="@color/white70"
+        app:tabTextColor="@color/white70" />
 
     <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/vp_author_detail"

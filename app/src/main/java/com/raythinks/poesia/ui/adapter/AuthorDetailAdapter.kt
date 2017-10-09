@@ -34,8 +34,5 @@ class AuthorDetailAdapter(mContext: Context, fm: FragmentManager) : FragmentPage
         return null
     }
 
-    override fun getPageTitle(position: Int): CharSequence {
-        return titleText[position]
-    }
     override fun getCount() = titleText.size
 }

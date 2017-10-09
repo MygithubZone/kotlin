@@ -47,7 +47,7 @@ object TUtils {
 
     fun initToolbarNav(toolbar: Toolbar, _mActivity: FragmentActivity) {
         toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_72dp)
-        toolbar.setNavigationOnClickListener { v -> _mActivity.onBackPressed() }
+        toolbar.setNavigationOnClickListener { v ->_mActivity.finish() }
     }
 
     fun showToast(toastStr: String, duration: Int = Toast.LENGTH_SHORT, gravity: Int = Gravity.BOTTOM) {

@@ -24,7 +24,12 @@ class AuthorMoreInfoFragment : BaseVMFragment<AuthorDetialViewModel>() {
 
     override fun initData() {
         viewModel.getAuthorMore().observe(this, Observer {
-            adapter.updateData(it!!.tb_ziliaos.ziliaos)
+            it.let {
+                it!!.tb_ziliaos.let {
+                    adapter.updateData(it!!.ziliaos)
+                }
+            }
+
         })
     }
 

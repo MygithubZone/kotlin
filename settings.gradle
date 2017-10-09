@@ -1,1 +1,1 @@
-include   ':baselib', ':app'
+include   ':baselib', ':app' ,':transitioncontroller'

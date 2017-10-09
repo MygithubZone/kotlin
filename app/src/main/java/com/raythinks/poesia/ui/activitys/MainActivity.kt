@@ -26,7 +26,6 @@ import kotlinx.android.synthetic.main.content_main.*
  */
 @Route("poesia://activity/mainActivity")
 class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirstListener, ViewPager.OnPageChangeListener {
-
     override fun onBackToFirstFragment() {
     }
 
@@ -45,10 +44,10 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         vp_maincontent.adapter = mainDapter
 //        vp_maincontent.setPageTransformer(true, ZoomOutPagerAnim())
         vp_maincontent.addOnPageChangeListener(this)
-        vp_maincontent.offscreenPageLimit=4
+        vp_maincontent.offscreenPageLimit = 4
         onNavigationItemSelected();
     }
-
+    override fun isSetStatusBar() = false
     override fun initData() {
         selectCurrentItem(0)
     }

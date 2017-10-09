@@ -1,12 +1,21 @@
 package com.raythinks.poesia.ui.activitys
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.support.v4.view.ViewPager
+import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import com.mrzk.transitioncontroller.controller.animationUtils.TransitionController
+import com.mrzk.transitioncontroller.controller.animationUtils.ViewAnimationCompatUtils
+import com.mrzk.transitioncontroller.controller.listener.TransitionCustomListener
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMActivity
 import com.raythinks.poesia.ui.adapter.AuthorDetailAdapter
 import com.raythinks.poesia.ui.anim.ZoomOutPagerAnim
 import com.raythinks.poesia.ui.model.AuthorsItem
 import com.raythinks.poesia.ui.viewmodel.AuthorDetialViewModel
+import com.raythinks.poesia.utils.AnimUtils
 import com.raythinks.poesia.utils.TUtils
 import kotlinx.android.synthetic.main.activity_author_detail.*
 
@@ -39,10 +48,16 @@ class AuthorDetialActivity : BaseVMActivity<AuthorDetialViewModel>(), ViewPager.
         tbs_author_detail.setupWithViewPager(vp_author_detail)
         TUtils.setTab(this, array_author_detail_tab, tbs_author_detail)
     }
+
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(0,R.anim.act_exit_fade)
+    }
+
     override fun initData() {
         authorItem = intent.getParcelableExtra<AuthorsItem>("author")
-//        ImageUtils.loadPoesiaPic(this, authorItem.pic, civ_author_header)
         toolbar.setTitle(authorItem.nameStr)
+        AnimUtils.loadAmin(mContext, toolbar, R.anim.fade_scape01)
         viewModel.updateAuthorMore("${authorItem.id}")
     }
     override fun getLayoutId(): Int = R.layout.activity_author_detail
