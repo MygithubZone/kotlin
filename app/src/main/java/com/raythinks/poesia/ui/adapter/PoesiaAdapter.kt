@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.raythinks.poesia.R
 import com.raythinks.poesia.ui.model.GushiwensItem
 import com.raythinks.poesia.ui.model.MingjusItem
+import com.raythinks.poesia.ui.viewmodel.BasePoesiaViewModel
 import com.raythinks.poesia.ui.viewmodel.PoesiaViewModel
 import com.raythinks.poesia.ui.viewmodel.RefranesViewModel
 import kotlinx.android.synthetic.main.item_poesia.view.*
@@ -18,7 +19,7 @@ import kotlinx.android.synthetic.main.item_poesia.view.*
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class PoesiaAdapter(var viewHodler: PoesiaViewModel) : RecyclerView.Adapter<PoesiaAdapter.ViewHolder>() {
+class PoesiaAdapter(var viewHodler: BasePoesiaViewModel) : RecyclerView.Adapter<PoesiaAdapter.ViewHolder>() {
     var data: ArrayList<GushiwensItem>
 
     init {
@@ -35,13 +36,15 @@ class PoesiaAdapter(var viewHodler: PoesiaViewModel) : RecyclerView.Adapter<Poes
         return ViewHolder(LayoutInflater.from(parent!!.context).inflate(R.layout.item_poesia, parent, false))
     }
 
-    override fun getItemCount(): Int = data.size?: 0
+    override fun getItemCount(): Int = data.size ?: 0
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
     }
 
-    fun updateData(b: Boolean, newData: ArrayList<GushiwensItem>) {
+    fun updateData(b: Boolean, newData: ArrayList<GushiwensItem>?) {
+        if (newData == null)
+            return
         if (b) data.clear()
         val addPosition = data.size
         data.addAll(addPosition, newData)

@@ -9,7 +9,7 @@ import com.raythinks.poesia.R
 import com.raythinks.poesia.ui.fragments.AuthorBrefFragment
 import com.raythinks.poesia.ui.fragments.AuthorMoreInfoFragment
 import com.raythinks.poesia.ui.fragments.AuthorPoesiaFragment
-import com.raythinks.poesia.utils.TUtils
+import com.raythinks.poesia.ui.fragments.PoesiaFragment
 
 /**
  * 文 件 名：AuthorDetailAdapter

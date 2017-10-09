@@ -17,7 +17,7 @@ import rx.schedulers.Schedulers
  * 版本：1.2.0
  */
 
-class PoesiaViewModel : BaseViewModel() {
+class PoesiaViewModel : BasePoesiaViewModel() {
 var poesiaListModel: MutableLiveData<PoesiaListModel> = MutableLiveData<PoesiaListModel>();
 var poesiaList: MutableLiveData<ArrayList<GushiwensItem>> = MutableLiveData();
 fun updatePoesiaList(p: Int, c: String, t: String): LiveData<ArrayList<GushiwensItem>> {

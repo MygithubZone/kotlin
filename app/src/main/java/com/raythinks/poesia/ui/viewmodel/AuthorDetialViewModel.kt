@@ -6,6 +6,7 @@ import com.raythinks.poesia.base.BaseViewModel
 import com.raythinks.poesia.ui.model.AuthorListMoel
 import com.raythinks.poesia.ui.model.AuthorMoreInfoMoel
 import com.raythinks.poesia.ui.model.AuthorsItem
+import com.raythinks.poesia.ui.model.AuthorPoesiaModel
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -16,12 +17,14 @@ import rx.schedulers.Schedulers
  * 版本：1.2.0
  */
 
-class AuthorDetialViewModel : BaseViewModel() {
+class AuthorDetialViewModel : BasePoesiaViewModel() {
     var authorMoreModel: MutableLiveData<AuthorMoreInfoMoel> = MutableLiveData<AuthorMoreInfoMoel>();
+    var authorPoeisaModel: MutableLiveData<AuthorPoesiaModel> = MutableLiveData<AuthorPoesiaModel>();
     fun updateAuthorMore(id: String): LiveData<AuthorMoreInfoMoel> {
         BaseViewModel.apiService.getAuthorMore(id).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ result ->
+                .subscribe({
+                    result ->
                     result?.let {
                         authorMoreModel.value = result
                         return@subscribe
@@ -36,6 +39,22 @@ class AuthorDetialViewModel : BaseViewModel() {
     fun setAuthorMore(author: AuthorsItem) {
         var model: AuthorMoreInfoMoel = AuthorMoreInfoMoel(author, null)
         authorMoreModel.value = model
+    }
+
+    fun updateAuthorPoeisa(p: Int): LiveData<AuthorPoesiaModel> {
+        BaseViewModel.apiService.getAuthorPoesia(p, "${authorMoreModel.value!!.tb_author.id}").observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    result ->
+                    result?.let {
+                        authorPoeisaModel.value = result
+                        return@subscribe
+                    }
+
+                }, { error ->
+                    error.printStackTrace()
+                })
+        return authorPoeisaModel
     }
 
     fun getAuthorMore() = authorMoreModel
