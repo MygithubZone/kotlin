@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.raythinks.poesia.R
+import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.model.GushiwensItem
-import com.raythinks.poesia.ui.model.MingjusItem
 import com.raythinks.poesia.ui.viewmodel.BasePoesiaViewModel
-import com.raythinks.poesia.ui.viewmodel.PoesiaViewModel
-import com.raythinks.poesia.ui.viewmodel.RefranesViewModel
 import kotlinx.android.synthetic.main.item_poesia.view.*
 
 /**
@@ -19,9 +17,8 @@ import kotlinx.android.synthetic.main.item_poesia.view.*
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class PoesiaAdapter(var viewHodler: BasePoesiaViewModel) : RecyclerView.Adapter<PoesiaAdapter.ViewHolder>() {
+class PoesiaAdapter(var viewHodler: BasePoesiaViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<PoesiaAdapter.ViewHolder>() {
     var data: ArrayList<GushiwensItem>
-
     init {
         data = ArrayList()
     }
@@ -30,8 +27,10 @@ class PoesiaAdapter(var viewHodler: BasePoesiaViewModel) : RecyclerView.Adapter<
         holder!!.itemView.tv_poesia_title.text = data[position].nameStr
         holder!!.itemView.tv_poesia_author.text = "${data[position].chaodai}.${data[position].author}"
         holder!!.itemView.tv_poesia_content.text = Html.fromHtml(data[position].cont)
+        holder.itemView.setOnClickListener {
+            onItemClickListener.onItemClick(position, holder.itemView)
+        }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PoesiaAdapter.ViewHolder {
         return ViewHolder(LayoutInflater.from(parent!!.context).inflate(R.layout.item_poesia, parent, false))
     }

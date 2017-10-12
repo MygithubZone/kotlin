@@ -27,7 +27,7 @@ interface PoesiaApiService {
     @GET("/api/author/author.aspx")
     fun getAuthorMore(@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<AuthorMoreInfoMoel>
 
-    @GET("/api/author/author.aspx")
+    @GET("/api/author/authorsw.aspx")
     fun getAuthorPoesia(@Query("p") p: Int, @Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<AuthorPoesiaModel>
 
     companion object Factory {

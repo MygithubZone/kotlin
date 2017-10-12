@@ -29,12 +29,11 @@ class AuthorBrefFragment : BaseVMFragment<AuthorDetialViewModel>() {
                 ImageUtils.loadPoesiaPic(_mActivity, it!!.tb_author.pic, civ_author_header)
             }
         })
-        cv_author.visibility= View.GONE
+        ll_author.visibility=View.INVISIBLE
         TransitionController.getInstance().setEnterListener(object : TransitionCustomListener {
             override fun onTransitionStart(animator: Animator) {}
 
             override fun onTransitionEnd(animator: Animator) {
-                cv_author.visibility= View.VISIBLE
                 civ_author_header.setBackgroundColor(ContextCompat.getColor(_mActivity,android.R.color.transparent))
                 val mAnimator = ViewAnimationCompatUtils.createRectReveal(cv_author, 0f, cv_author.getHeight().toFloat(), ViewAnimationCompatUtils.RECT_TOP)
                 mAnimator.duration = 500
@@ -42,6 +41,7 @@ class AuthorBrefFragment : BaseVMFragment<AuthorDetialViewModel>() {
                 mAnimator.addListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
                         super.onAnimationEnd(animation)
+                        ll_author.visibility=View.VISIBLE
                     }
 
                     override fun onAnimationStart(animation: Animator) {

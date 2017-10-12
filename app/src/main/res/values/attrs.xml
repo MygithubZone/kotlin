@@ -5,4 +5,17 @@
         <attr name="border_width" format="dimension" />
         <attr name="border_color" format="color" />
     </declare-styleable>
+<!--小圆点-->
+    <declare-styleable name="linearpointsview">
+        <attr name="count" format="integer" />
+        <attr name="select_color" format="color" />
+        <attr name="unselect_color" format="color" />
+        <attr name="pointsize" format="dimension" />
+        <attr name="pointstrokewidth" format="dimension" />
+        <attr name="anim_move_duration" format="integer" />
+        <attr name="anim_reset_duration" format="integer" />
+        <attr name="anim_shake_duration" format="integer" />
+        <attr name="islooper" format="boolean" />
+        <attr name="blur_radio" format="integer" />
+    </declare-styleable>
 </resources>

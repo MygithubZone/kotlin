@@ -38,6 +38,7 @@ class AuthorDetialActivity : BaseVMActivity<AuthorDetialViewModel>(), ViewPager.
     lateinit var array_author_detail_tab: Array<String>
     lateinit var authorItem: AuthorsItem
     override fun initView() {
+        authorItem = intent.getParcelableExtra<AuthorsItem>("author")
         TUtils.initToolbarNav(toolbar, this)
         array_author_detail_tab = resources.getStringArray(R.array.array_author_detail_tab)
         var authorAdapter = AuthorDetailAdapter(mContext, supportFragmentManager)
@@ -51,14 +52,14 @@ class AuthorDetialActivity : BaseVMActivity<AuthorDetialViewModel>(), ViewPager.
 
     override fun finish() {
         super.finish()
-        overridePendingTransition(0,R.anim.act_exit_fade)
+        overridePendingTransition(0, R.anim.act_exit_fade)
     }
 
     override fun initData() {
-        authorItem = intent.getParcelableExtra<AuthorsItem>("author")
         toolbar.setTitle(authorItem.nameStr)
         AnimUtils.loadAmin(mContext, toolbar, R.anim.fade_scape01)
         viewModel.updateAuthorMore("${authorItem.id}")
     }
+
     override fun getLayoutId(): Int = R.layout.activity_author_detail
 }

@@ -23,8 +23,7 @@ class AuthorDetialViewModel : BasePoesiaViewModel() {
     fun updateAuthorMore(id: String): LiveData<AuthorMoreInfoMoel> {
         BaseViewModel.apiService.getAuthorMore(id).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({
-                    result ->
+                .subscribe({ result ->
                     result?.let {
                         authorMoreModel.value = result
                         return@subscribe
@@ -36,16 +35,12 @@ class AuthorDetialViewModel : BasePoesiaViewModel() {
         return authorMoreModel
     }
 
-    fun setAuthorMore(author: AuthorsItem) {
-        var model: AuthorMoreInfoMoel = AuthorMoreInfoMoel(author, null)
-        authorMoreModel.value = model
-    }
-
-    fun updateAuthorPoeisa(p: Int): LiveData<AuthorPoesiaModel> {
-        BaseViewModel.apiService.getAuthorPoesia(p, "${authorMoreModel.value!!.tb_author.id}").observeOn(AndroidSchedulers.mainThread())
+    var authorId = 0
+    fun updateAuthorPoeisa(p: Int, id: Int = authorId): LiveData<AuthorPoesiaModel> {
+        authorId = id
+        BaseViewModel.apiService.getAuthorPoesia(p, "${id}").observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({
-                    result ->
+                .subscribe({ result ->
                     result?.let {
                         authorPoeisaModel.value = result
                         return@subscribe
@@ -57,5 +52,6 @@ class AuthorDetialViewModel : BasePoesiaViewModel() {
         return authorPoeisaModel
     }
 
+    fun getAuthorPoeisa() = authorPoeisaModel
     fun getAuthorMore() = authorMoreModel
 }
