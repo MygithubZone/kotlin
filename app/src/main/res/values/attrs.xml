@@ -18,4 +18,10 @@
         <attr name="islooper" format="boolean" />
         <attr name="blur_radio" format="integer" />
     </declare-styleable>
+    <!--选择文本-->
+    <declare-styleable name="SelectableTextView">
+        <attr name="textJustify" format="boolean"/>
+        <attr name="forbiddenActionMenu" format="boolean"/>
+        <attr name="textHeightColor" format="color"/>
+    </declare-styleable>
 </resources>

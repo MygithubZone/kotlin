@@ -1,14 +1,18 @@
 package com.raythinks.poesia.ui.adapter
 
 import android.support.v7.widget.RecyclerView
+import android.text.Editable
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.raythinks.poesia.R
+import com.raythinks.poesia.listener.CopyActionCallBack
 import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.model.GushiwensItem
 import com.raythinks.poesia.ui.viewmodel.BasePoesiaViewModel
+import com.raythinks.poesia.ui.widget.SelectableTextView
+import com.raythinks.poesia.ui.widget.SelectableTextView.*
 import kotlinx.android.synthetic.main.item_poesia.view.*
 
 /**
@@ -19,6 +23,7 @@ import kotlinx.android.synthetic.main.item_poesia.view.*
  */
 class PoesiaAdapter(var viewHodler: BasePoesiaViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<PoesiaAdapter.ViewHolder>() {
     var data: ArrayList<GushiwensItem>
+
     init {
         data = ArrayList()
     }
@@ -26,11 +31,23 @@ class PoesiaAdapter(var viewHodler: BasePoesiaViewModel, var onItemClickListener
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder!!.itemView.tv_poesia_title.text = data[position].nameStr
         holder!!.itemView.tv_poesia_author.text = "${data[position].chaodai}.${data[position].author}"
-        holder!!.itemView.tv_poesia_content.text = Html.fromHtml(data[position].cont)
+        holder!!.itemView.tv_poesia_content.text = Html.fromHtml(data[position].cont) as Editable
+        holder!!.itemView.tv_poesia_tag.text = data[position].tag
+        holder!!.itemView.tv_poesia_content.clearFocus()
+        holder!!.itemView.tv_poesia_content.setCustomActionMenuCallBack(CopyActionCallBack())
         holder.itemView.setOnClickListener {
             onItemClickListener.onItemClick(position, holder.itemView)
         }
+        holder!!.itemView.tv_poesia_content.setOnClickListener {
+            onItemClickListener.onItemClick(position, holder.itemView)
+        }
+        if (data[position].yizhuIspass) {
+            holder!!.itemView.ll_yizhu.visibility = View.VISIBLE
+        } else {
+            holder!!.itemView.ll_yizhu.visibility = View.GONE
+        }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PoesiaAdapter.ViewHolder {
         return ViewHolder(LayoutInflater.from(parent!!.context).inflate(R.layout.item_poesia, parent, false))
     }

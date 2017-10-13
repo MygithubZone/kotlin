@@ -4,8 +4,11 @@ import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.raythinks.poesia.R
+import com.raythinks.poesia.ui.fragments.AuthorBrefFragment
 import com.raythinks.poesia.ui.fragments.PoesiaBrefFragment
+import com.raythinks.poesia.ui.fragments.PoesiaShangfFragment
+import com.raythinks.poesia.ui.fragments.PoesiaTranslateFragment
+import com.raythinks.poesia.ui.viewmodel.PoesiaDetialViewModel
 
 /**
  * 文 件 名：AuthorDetailAdapter
@@ -15,20 +18,16 @@ import com.raythinks.poesia.ui.fragments.PoesiaBrefFragment
  */
 
 class PoesiaDetailAdapter(mContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
-    var titleText: Array<String> //菜单栏Text
-
-    init {
-        titleText = mContext.resources.getStringArray(R.array.array_author_detail_tab)
-    }
 
     override fun getItem(position: Int): Fragment? {
         when (position) {
             0 -> return@getItem PoesiaBrefFragment()
-            1 -> return@getItem PoesiaBrefFragment()
-            2 -> return@getItem PoesiaBrefFragment()
+            1 -> return@getItem PoesiaTranslateFragment()
+            2 -> return@getItem PoesiaShangfFragment()
+            2 -> return@getItem AuthorBrefFragment<PoesiaDetialViewModel>()
         }
         return null
     }
 
-    override fun getCount() = titleText.size
+    override fun getCount() = 4
 }

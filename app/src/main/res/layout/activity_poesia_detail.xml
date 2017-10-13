@@ -16,11 +16,12 @@
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:fitsSystemWindows="true"
             app:collapsedTitleGravity="left|center_vertical"
             app:contentScrim="@color/colorPrimary"
-            app:expandedTitleGravity="bottom"
+            app:expandedTitleGravity="bottom|center_horizontal"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:statusBarScrim="@android:color/transparent"
             app:titleEnabled="true">

@@ -48,6 +48,7 @@ class AuthorDetialActivity : BaseVMActivity<AuthorDetialViewModel>(), ViewPager.
         vp_author_detail.offscreenPageLimit = 3
         tbs_author_detail.setupWithViewPager(vp_author_detail)
         TUtils.setTab(this, array_author_detail_tab, tbs_author_detail)
+
     }
 
     override fun finish() {

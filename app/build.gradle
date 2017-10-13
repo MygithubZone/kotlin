@@ -57,8 +57,8 @@ dependencies {
     })
 //    https://github.com/ImmortalZ/TransitionHelper
     compile 'me.immortalz:transitionhelper:1.0.6'
-//    https://github.com/chenupt/SpringIndicator
-    compile 'com.github.chenupt.android:springindicator:1.0.2@aar'
+//    https://github.com/opacapp/multiline-collapsingtoolbar
+//    compile 'net.opacapp:multiline-collapsingtoolbar:1.5.0'
 //    http://www.jianshu.com/p/98f2ec280945
     compile "com.andkulikov:transitionseverywhere:1.7.6"
     compile 'com.alexvasilkov:gesture-views:2.3.2'

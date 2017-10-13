@@ -3,10 +3,7 @@ package com.raythinks.poesia.ui.viewmodel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.raythinks.poesia.base.BaseViewModel
-import com.raythinks.poesia.ui.model.GushiwensItem
-import com.raythinks.poesia.ui.model.MingjusItem
-import com.raythinks.poesia.ui.model.PoesiaListModel
-import com.raythinks.poesia.ui.model.RefranesListModel
+import com.raythinks.poesia.ui.model.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -18,5 +15,6 @@ import rx.schedulers.Schedulers
  */
 
 open class BasePoesiaViewModel : BaseViewModel() {
-
+    var authorItem: MutableLiveData<AuthorsItem> = MutableLiveData<AuthorsItem>();
+    fun getAuthor() = authorItem
 }

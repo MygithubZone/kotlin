@@ -10,6 +10,7 @@ import com.raythinks.poesia.ui.fragments.AuthorBrefFragment
 import com.raythinks.poesia.ui.fragments.AuthorMoreInfoFragment
 import com.raythinks.poesia.ui.fragments.AuthorPoesiaFragment
 import com.raythinks.poesia.ui.fragments.PoesiaFragment
+import com.raythinks.poesia.ui.viewmodel.AuthorDetialViewModel
 
 /**
  * 文 件 名：AuthorDetailAdapter
@@ -27,7 +28,7 @@ class AuthorDetailAdapter(mContext: Context, fm: FragmentManager) : FragmentPage
 
     override fun getItem(position: Int): Fragment? {
         when (position) {
-            0 -> return@getItem AuthorBrefFragment()
+            0 -> return@getItem AuthorBrefFragment<AuthorDetialViewModel>()
             1 -> return@getItem AuthorMoreInfoFragment()
             2 -> return@getItem AuthorPoesiaFragment()
         }

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import android.widget.Toast
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.listener.OnItemClickListener
@@ -27,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_poesia.*
 class PoesiaFragment : BaseVMFragment<PoesiaViewModel>(), OnRefreshListener, OnLoadmoreListener, OnItemClickListener {
     override fun onItemClick(position: Int, itemView: View) {
         var intent = Intent(_mActivity, PoesiaDetialActivity::class.java)
+        intent.putExtra("poesiaItem", adapter.data[position])
         startActivity(intent)
     }
 
