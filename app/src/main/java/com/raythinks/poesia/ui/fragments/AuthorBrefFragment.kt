@@ -19,9 +19,9 @@ import com.raythinks.poesia.utils.ImageUtils
 import kotlinx.android.synthetic.main.fragment_author_bref.*
 
 /**
- * Created by 赵海 on 2017/10/7.
+ * Created by zh on 2017/10/7.
  */
-class AuthorBrefFragment<VM : BasePoesiaViewModel> : BaseVMFragment<VM>() {
+class AuthorBrefFragment : BaseVMFragment<AuthorDetialViewModel>() {
     override fun initData() {
         viewModel.getAuthor().observe(this, Observer {
             it.let {

@@ -26,7 +26,7 @@ class PoesiaDetialActivity : BaseVMActivity<PoesiaDetialViewModel>(), ViewPager.
 
     override fun onPageSelected(position: Int) {
         blpv_selecttab.selectIndex(position)
-        tv_poesia_subtitle.text = titleArray[0]
+        tv_poesia_subtitle.text = titleArray[position]
     }
 
     override fun initView() {
@@ -42,8 +42,8 @@ class PoesiaDetialActivity : BaseVMActivity<PoesiaDetialViewModel>(), ViewPager.
         toolbar_layout.setTitle(gushiWenItem.nameStr)
         titleArray.add("${gushiWenItem.chaodai}.${gushiWenItem.author}")
         titleArray.add("翻译及注释")
-        titleArray.add("个人赏析")
-        titleArray.add("诗文作者")
+        titleArray.add("背景及赏析")
+        titleArray.add("${gushiWenItem.author}简介")
         tv_poesia_subtitle.text = titleArray[0]
         vp_posia_detail.addOnPageChangeListener(this)
         viewModel.updatePoesiaDetial("${gushiWenItem.id}")

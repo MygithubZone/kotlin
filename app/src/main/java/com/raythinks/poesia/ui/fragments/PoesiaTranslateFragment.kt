@@ -25,14 +25,15 @@ class PoesiaTranslateFragment : BaseVMFragment<PoesiaDetialViewModel>() {
     }
 
     override fun initData() {
-        viewModel.getPoesiaDetail().observe(this, Observer {
+        viewModel.getFanYi().observe(this, Observer {
             it.let {
-                it!!.tb_fanyis.let {
+                it!!.let {
                     adapter.updateData(it!!.fanyis)
                 }
             }
 
         })
     }
-    override fun getLayoutId()= R.layout.fragment_list
+
+    override fun getLayoutId() = R.layout.fragment_list
 }

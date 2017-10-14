@@ -4,10 +4,7 @@ import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.raythinks.poesia.ui.fragments.AuthorBrefFragment
-import com.raythinks.poesia.ui.fragments.PoesiaBrefFragment
-import com.raythinks.poesia.ui.fragments.PoesiaShangfFragment
-import com.raythinks.poesia.ui.fragments.PoesiaTranslateFragment
+import com.raythinks.poesia.ui.fragments.*
 import com.raythinks.poesia.ui.viewmodel.PoesiaDetialViewModel
 
 /**
@@ -24,7 +21,7 @@ class PoesiaDetailAdapter(mContext: Context, fm: FragmentManager) : FragmentPage
             0 -> return@getItem PoesiaBrefFragment()
             1 -> return@getItem PoesiaTranslateFragment()
             2 -> return@getItem PoesiaShangfFragment()
-            2 -> return@getItem AuthorBrefFragment<PoesiaDetialViewModel>()
+            3 -> return@getItem PoesiaAuthorFragment()
         }
         return null
     }

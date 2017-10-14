@@ -26,11 +26,9 @@ class PoesiaShangfFragment : BaseVMFragment<PoesiaDetialViewModel>() {
     }
 
     override fun initData() {
-        viewModel.getPoesiaDetail().observe(this, Observer {
+        viewModel.getShangXi().observe(this, Observer {
             it.let {
-                it!!.tb_shangxis.let {
-                    adapter.updateData(it!!.shangxis)
-                }
+                adapter.updateData(it!!.shangxis)
             }
 
         })

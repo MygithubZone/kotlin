@@ -17,4 +17,6 @@ import rx.schedulers.Schedulers
 open class BasePoesiaViewModel : BaseViewModel() {
     var authorItem: MutableLiveData<AuthorsItem> = MutableLiveData<AuthorsItem>();
     fun getAuthor() = authorItem
+    var gushiwenItem: MutableLiveData<GushiwensItem> = MutableLiveData<GushiwensItem>();
+    fun getGuShiWen() = gushiwenItem
 }

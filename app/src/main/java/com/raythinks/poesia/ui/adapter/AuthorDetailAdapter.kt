@@ -28,7 +28,7 @@ class AuthorDetailAdapter(mContext: Context, fm: FragmentManager) : FragmentPage
 
     override fun getItem(position: Int): Fragment? {
         when (position) {
-            0 -> return@getItem AuthorBrefFragment<AuthorDetialViewModel>()
+            0 -> return@getItem AuthorBrefFragment()
             1 -> return@getItem AuthorMoreInfoFragment()
             2 -> return@getItem AuthorPoesiaFragment()
         }

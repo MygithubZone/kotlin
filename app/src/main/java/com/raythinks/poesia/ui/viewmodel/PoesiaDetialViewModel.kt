@@ -4,6 +4,8 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.raythinks.poesia.base.BaseViewModel
 import com.raythinks.poesia.ui.model.PoesiaDetailModel
+import com.raythinks.poesia.ui.model.TbFanyis
+import com.raythinks.poesia.ui.model.TbShangxis
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -14,17 +16,20 @@ import rx.schedulers.Schedulers
  * 版本：1.2.0
  */
 class PoesiaDetialViewModel : BasePoesiaViewModel() {
-    var poesiaDetialModel: MutableLiveData<PoesiaDetailModel> = MutableLiveData<PoesiaDetailModel>();
-    fun updatePoesiaDetial(id: String): LiveData<PoesiaDetailModel> {
+    var shangxinModel: MutableLiveData<TbShangxis> = MutableLiveData<TbShangxis>();
+    var fanyiModel: MutableLiveData<TbFanyis> = MutableLiveData<TbFanyis>();
+    fun updatePoesiaDetial(id: String) {
         BaseViewModel.apiService.getPoesiaDetail(id).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ result ->
                     result?.let {
                         //不爲空
-                        poesiaDetialModel.value = result
                         result.tb_author.let {
                             authorItem.value = it
                         }
+                        result.tb_gushiwen.let { gushiwenItem.value = it }
+                        result.tb_fanyis.let { fanyiModel.value = it }
+                        result.tb_shangxis.let { shangxinModel.value = it }
                         return@subscribe
                     }
 
@@ -32,8 +37,8 @@ class PoesiaDetialViewModel : BasePoesiaViewModel() {
                     error.printStackTrace()
 
                 })
-        return poesiaDetialModel
     }
 
-    fun getPoesiaDetail() = poesiaDetialModel
+    fun getFanYi() = fanyiModel
+    fun getShangXi() = shangxinModel
 }
