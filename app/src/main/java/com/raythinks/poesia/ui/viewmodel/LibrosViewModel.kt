@@ -18,8 +18,7 @@ import rx.schedulers.Schedulers
  * 版本：1.2.0
  */
 
-class LibrosViewModel : BaseViewModel() {
-    var librosListModel: MutableLiveData<LibrosListModel> = MutableLiveData<LibrosListModel>();
+open class LibrosViewModel : BaseViewModel() {
     var librosList: MutableLiveData<ArrayList<BooksItem>> = MutableLiveData();
     fun updateLibrosList(p: Int, c: String, t: String): LiveData<ArrayList<BooksItem>> {
         apiService.getLibrosList(p, c, t).observeOn(AndroidSchedulers.mainThread())

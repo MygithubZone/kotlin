@@ -27,6 +27,10 @@
         <activity
             android:name=".ui.activitys.PoesiaDetialActivity"
             android:screenOrientation="portrait"></activity>
+        <!--古文详情-->
+        <activity
+            android:name=".ui.activitys.LibrosDetialActivity"
+            android:screenOrientation="portrait"></activity>
         <!--欢迎界面-->
         <activity
             android:name=".ui.activitys.WelcomeActivity"

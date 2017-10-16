@@ -20,9 +20,10 @@ interface PoesiaApiService {
 
     @GET("/api/shiwen/view.aspx")
     fun getPoesiaDetail(@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<PoesiaDetailModel>
-
     @GET("/api/guwen/Default.aspx")
     fun getLibrosList(@Query("p") p: Int, @Query("type") type: String = "", @Query("pwd") pwd: String = "", @Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<LibrosListModel>
+    @GET("/api/guwen/book.aspx")
+    fun getLibrosDetial(@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<GuWenDetialModel>
 
     @GET("/api/author/Default.aspx")
     fun getAuthorList(@Query("p") p: Int, @Query("c") c: String = "", @Query("pwd") pwd: String = "", @Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<AuthorListMoel>

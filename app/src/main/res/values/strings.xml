@@ -104,9 +104,16 @@
     <string name="str_author_detail_tab_jj">简介</string>
     <string name="str_author_detail_tab_xq">详情</string>
     <string name="str_author_detail_tab_sj">诗集</string>
+    <string name="str_libros_detail_tab_gy">概要</string>
+    <string name="str_libors_detail_tab_ml">目录</string>
     <string-array name="array_author_detail_tab">
         <item>@string/str_author_detail_tab_jj</item>
         <item>@string/str_author_detail_tab_xq</item>
         <item>@string/str_author_detail_tab_sj</item>
     </string-array>
+    <string-array name="array_libros_detail_tab">
+        <item>@string/str_libros_detail_tab_gy</item>
+        <item>@string/str_libors_detail_tab_ml</item>
+    </string-array>
+
 </resources>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.raythinks.poesia.R
+import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.model.BooksItem
 import com.raythinks.poesia.ui.model.GushiwensItem
 import com.raythinks.poesia.ui.viewmodel.LibrosViewModel
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.item_libros.view.*
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class LibrosAdapter(var viewHodler: LibrosViewModel) : RecyclerView.Adapter<LibrosAdapter.ViewHolder>() {
+class LibrosAdapter(var viewHodler: LibrosViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<LibrosAdapter.ViewHolder>() {
     var data: ArrayList<BooksItem>
 
     init {
@@ -27,6 +28,7 @@ class LibrosAdapter(var viewHodler: LibrosViewModel) : RecyclerView.Adapter<Libr
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder!!.itemView.tv_libros_title.text = data[position].nameStr
         holder!!.itemView.tv_libros_brief.text = Html.fromHtml(data[position].cont)
+        holder!!.itemView.setOnClickListener { onItemClickListener.onItemClick(position, holder.itemView) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): LibrosAdapter.ViewHolder {
