@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_tab"
+        android:id="@+id/ll_author_tab"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/colorPrimary"
@@ -24,7 +24,7 @@
             android:textSize="14sp" />
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tbs_borntimes"
+            android:id="@+id/tbs_author_borntimes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             card:tabGravity="fill"
@@ -36,28 +36,22 @@
             card:tabTextColor="@color/white70" />
     </LinearLayout>
 
-    <FrameLayout
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBackground">
+        app:srlEnableHeaderTranslationContent="false"
+        app:srlEnableLoadmore="false">
 
-        <com.huxq17.swipecardsview.SwipeCardsView
-            android:id="@+id/scv_author"
+        <com.scwang.smartrefresh.header.MaterialHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            card:alphaOffsetStep="20"
-            card:scaleOffsetStep="0.08"
-            card:yOffsetStep="24dp" />
-
-        <TextView
-            android:id="@+id/tv_curentpage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:text="1/256"
-            android:textColor="@color/black_mid"
-            android:textSize="14sp" />
-
-    </FrameLayout>
+            android:overScrollMode="never" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

@@ -55,6 +55,7 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile 'com.truizlop.sectionedrecyclerview:library:1.2.0'
 //    https://github.com/ImmortalZ/TransitionHelper
     compile 'me.immortalz:transitionhelper:1.0.6'
 //    https://github.com/opacapp/multiline-collapsingtoolbar

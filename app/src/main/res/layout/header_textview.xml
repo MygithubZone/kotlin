@@ -8,5 +8,5 @@
     android:paddingEnd="16dp"
     android:paddingStart="16dp"
     android:text="上篇"
-    android:textColor="@color/black_min"
-    android:textSize="14sp" />
+    android:textColor="@color/black_mid"
+    android:textSize="16sp" />

@@ -4,17 +4,12 @@ import android.arch.lifecycle.Observer
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
-import com.raythinks.poesia.ui.adapter.LibrosAdapter
 import com.raythinks.poesia.ui.adapter.LibrosMoreAdapter
 import com.raythinks.poesia.ui.viewmodel.LibrosDetailViewModel
-import com.raythinks.poesia.ui.viewmodel.LibrosViewModel
-import com.raythinks.poesia.utils.AnimUtils
-import com.raythinks.poesia.utils.TUtils
-import com.timehop.stickyheadersrecyclerview.StickyRecyclerHeadersDecoration
-import kotlinx.android.synthetic.main.fragment_list.*
+import com.truizlop.sectionedrecyclerview.SectionedSpanSizeLookup
+import kotlinx.android.synthetic.main.fragment_libors_more.*
 
 /**
  * Created by zh on 2017/9/20.
@@ -22,23 +17,26 @@ import kotlinx.android.synthetic.main.fragment_list.*
 class LibrosMoreFragment : BaseVMFragment<LibrosDetailViewModel>() {
 
     lateinit var adapter: LibrosMoreAdapter
+    lateinit var gridManager: GridLayoutManager
     override fun initView() {
-        recyclerview.setLayoutManager(GridLayoutManager(_mActivity,3))
-        recyclerview.setItemAnimator(DefaultItemAnimator())
+        gridManager = GridLayoutManager(_mActivity, 3)
         adapter = LibrosMoreAdapter(viewModel)
-        recyclerview.setAdapter(adapter)
-        recyclerview.setBackgroundColor(ContextCompat.getColor(_mActivity,R.color.white))
-        recyclerview.addItemDecoration(StickyRecyclerHeadersDecoration(adapter));
+        gridManager.spanSizeLookup = SectionedSpanSizeLookup(adapter, gridManager);
+        recyclerview.setLayoutManager(gridManager)
+        recyclerview.adapter = adapter
+        recyclerview.setItemAnimator(DefaultItemAnimator())
+        recyclerview.setBackgroundColor(ContextCompat.getColor(_mActivity, R.color.white))
     }
+
     override fun initData() {
         viewModel.getBookViews().observe(this, Observer {
             it?.let {
-                it.bookviews.let {
+                it?.bookviews.let {
                     adapter.updateData(it)
                 }
             }
         })
     }
 
-    override fun getLayoutId(): Int = R.layout.fragment_list
+    override fun getLayoutId(): Int = R.layout.fragment_libors_more
 }
