@@ -22,7 +22,8 @@ import com.raythinks.poesia.utils.TUtils
 abstract class BaseVMFragment<VM : BaseViewModel> : BaseFragment() {
     lateinit var viewModel: VM
     lateinit var mView: View
-
+    open var isInitData: Boolean = false
+    var isInitRefresh: Boolean = false
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mView = inflater!!.inflate(getLayoutId(), container, false)
         return mView
@@ -32,14 +33,14 @@ abstract class BaseVMFragment<VM : BaseViewModel> : BaseFragment() {
         super.onAttach(context)
         _mActivity = context as FragmentActivity
     }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(_mActivity).get(TUtils.getTClass(this))//ViewModel对象
         initView()
         initData()
+        isInitData = true
     }
-
-
 
 
     abstract fun initView()

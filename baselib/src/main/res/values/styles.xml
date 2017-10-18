@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="progressBarloading">
+        　　
+        <item name="android:indeterminateDrawable">@drawable/loading_progress</item>
+
+        <item name="android:minWidth">16dp</item>
+        　　
+        <item name="android:maxWidth">16dp</item>
+        　　
+        <item name="android:minHeight">16dp</item>
+        　　
+        <item name="android:maxHeight">16dp</item>
+    </style>
 </resources>

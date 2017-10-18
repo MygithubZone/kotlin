@@ -1,17 +1,18 @@
 package com.raythinks.poesia.ui.fragments
 
 import android.arch.lifecycle.Observer
-import com.raythinks.poesia.R
-import com.scwang.smartrefresh.layout.api.RefreshLayout
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.widget.Toast
+import com.raythinks.base.statusview.StatusLayout
+import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
+import com.raythinks.poesia.net.ApiRefranesList
 import com.raythinks.poesia.ui.adapter.RefranesAdapter
 import com.raythinks.poesia.ui.viewmodel.RefranesViewModel
 import com.raythinks.poesia.utils.AnimUtils
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import kotlinx.android.synthetic.main.fragment_refranes.*
 
 
@@ -23,11 +24,16 @@ import kotlinx.android.synthetic.main.fragment_refranes.*
  */
 class RefranesFragment : BaseVMFragment<RefranesViewModel>(), OnRefreshListener, OnLoadmoreListener {
     lateinit var adapter: RefranesAdapter
-    var currentP = 1;
+    var currentP: Int = 1
     override fun onLoadmore(refreshlayout: RefreshLayout?) {
+        isInitRefresh = false
+        viewModel.updateRefranesList(currentP + 1)
     }
 
     override fun onRefresh(refreshlayout: RefreshLayout?) {
+        currentP = 1
+        isInitRefresh = true
+        viewModel.updateRefranesList(currentP)
     }
 
     override fun initView() {
@@ -44,10 +50,25 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), OnRefreshListener,
         }
     }
 
+
     override fun initData() {
-        viewModel.updateRefranesList(currentP, "", "").observe(this, Observer {
-            it?.let {
-                adapter.updateData(currentP == 1, it)
+        isInitData = false
+        stl.showLoading()
+        viewModel.updateRefranesList(currentP).observe(this, Observer {
+                stl.showContent()
+            adapter.updateData(isInitRefresh, it!!)
+            if (!isInitRefresh) {
+                currentP = currentP + 1
+            }
+            isInitData = true
+        })
+        viewModel.onFinishError().observe(this, Observer {
+            when (it?.fromApi) {
+                ApiRefranesList -> {
+                    isInitData = true
+                    stl.showError()
+                    return@Observer
+                }
             }
         })
     }

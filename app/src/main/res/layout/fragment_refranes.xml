@@ -51,33 +51,28 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/refreshLayout"
+    <com.raythinks.base.statusview.StatusLayout
+        android:id="@+id/stl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlEnableHeaderTranslationContent="false"
-        app:srlEnableLoadmore="false">
+        android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.header.MaterialHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/recyclerview"
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never"
-            app:shimmer_demo_child_count="10"
-            app:shimmer_demo_grid_child_count="1"
-            app:shimmer_demo_layout="@layout/item_refranes"
-            app:shimmer_demo_layout_manager_type="linear_vertical"
-            app:shimmer_demo_angle="20"
-            />
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/recyclerview"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:overScrollMode="never" />-->
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            app:srlEnableHeaderTranslationContent="false"
+            app:srlEnableLoadmore="false">
+
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </com.raythinks.base.statusview.StatusLayout>
 </LinearLayout>

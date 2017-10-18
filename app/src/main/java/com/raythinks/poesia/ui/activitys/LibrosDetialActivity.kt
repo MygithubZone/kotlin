@@ -2,6 +2,7 @@ package com.raythinks.poesia.ui.activitys
 
 import android.os.Bundle
 import android.support.v4.view.ViewPager
+import android.widget.TextView
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMActivity
 import com.raythinks.poesia.ui.adapter.AuthorDetailAdapter
