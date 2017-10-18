@@ -4,9 +4,12 @@ import android.arch.lifecycle.Observer
 import android.text.Editable
 import android.text.Html
 import android.view.View
+import com.kogitune.activity_transition.ActivityTransition
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.listener.CopyActionCallBack
+import com.raythinks.poesia.ui.activitys.AuthorDetialActivity
+import com.raythinks.poesia.ui.activitys.PoesiaDetialActivity
 import com.raythinks.poesia.ui.viewmodel.PoesiaDetialViewModel
 import kotlinx.android.synthetic.main.fragment_poesia_bref.*
 
@@ -41,6 +44,8 @@ class PoesiaBrefFragment : BaseVMFragment<PoesiaDetialViewModel>() {
                 }
             }
         })
+        ActivityTransition.with(activity.intent).to(tv_poesia_content).start((_mActivity as PoesiaDetialActivity).savedInstanceState);
+
     }
 
     override fun getLayoutId() = R.layout.fragment_poesia_bref

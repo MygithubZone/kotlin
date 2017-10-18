@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.item_poesia.view.*
  */
 class PoesiaAdapter(var viewHodler: BasePoesiaViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<PoesiaAdapter.ViewHolder>() {
     var data: ArrayList<GushiwensItem>
-
     init {
         data = ArrayList()
     }

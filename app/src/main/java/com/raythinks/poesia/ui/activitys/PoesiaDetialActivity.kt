@@ -1,5 +1,6 @@
 package com.raythinks.poesia.ui.activitys
 
+import android.os.Bundle
 import android.support.v4.view.ViewPager
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMActivity
@@ -17,6 +18,11 @@ import kotlinx.android.synthetic.main.activity_poesia_detail.*
  * 版本：1.2.0
  */
 class PoesiaDetialActivity : BaseVMActivity<PoesiaDetialViewModel>(), ViewPager.OnPageChangeListener {
+    var savedInstanceState: Bundle? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.savedInstanceState = savedInstanceState
+    }
     var titleArray = ArrayList<String>()
     override fun onPageScrollStateChanged(state: Int) {
     }
@@ -24,6 +30,10 @@ class PoesiaDetialActivity : BaseVMActivity<PoesiaDetialViewModel>(), ViewPager.
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
     }
 
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(0, R.anim.act_exit_fade)
+    }
     override fun onPageSelected(position: Int) {
         blpv_selecttab.selectIndex(position)
         tv_poesia_subtitle.text = titleArray[position]

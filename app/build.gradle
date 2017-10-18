@@ -62,6 +62,7 @@ dependencies {
 //    compile 'net.opacapp:multiline-collapsingtoolbar:1.5.0'
 //    http://www.jianshu.com/p/98f2ec280945
     compile "com.andkulikov:transitionseverywhere:1.7.6"
+    compile 'com.kogitune:pre-lollipop-activity-transition:1.0.0'
     implementation 'com.timehop.stickyheadersrecyclerview:library:0.4.3@aar'
     compile 'com.alexvasilkov:gesture-views:2.3.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"

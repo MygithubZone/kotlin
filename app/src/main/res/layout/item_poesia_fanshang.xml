@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:layout_margin="16dp"
+    android:layout_margin="8dp"
     android:layout_marginBottom="0dp"
     android:background="@drawable/draw_corner_white_bg"
     android:foreground="?android:attr/selectableItemBackground"

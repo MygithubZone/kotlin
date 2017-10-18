@@ -1,5 +1,6 @@
 package com.raythinks.poesia.ui.activitys
 
+import android.os.Bundle
 import android.support.v4.view.ViewPager
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMActivity
@@ -19,6 +20,12 @@ import kotlinx.android.synthetic.main.activity_libros_detail.*
  * 版本：1.2.0
  */
 class LibrosDetialActivity : BaseVMActivity<LibrosDetailViewModel>(), ViewPager.OnPageChangeListener {
+    var savedInstanceState: Bundle? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.savedInstanceState = savedInstanceState
+    }
+
     override fun onPageScrollStateChanged(state: Int) {
     }
 

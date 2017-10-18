@@ -20,16 +20,16 @@ import kotlinx.android.synthetic.main.item_author.view.*
  */
 class AuthorAdapter(var viewHodler: AuthorListViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<AuthorAdapter.ViewHolder>() {
     var data: ArrayList<AuthorsItem>
-
+     var mOnItemClickListener: OnItemClickListener
     init {
         data = ArrayList()
+        mOnItemClickListener=onItemClickListener
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         ImageUtils.loadPoesiaPic(holder!!.itemView.context, data!![position].pic, holder!!.itemView.civ_author_header)
-        holder!!.itemView.tv_author_name.text = "${data!![position].nameStr}(${data!![position].chaodai})"
-//        holder!!.itemView.tv_author_brief.text = Html.fromHtml(data!![position].cont)
-        holder!!.itemView.setOnClickListener { onItemClickListener.onItemClick(position, holder.itemView) }
+        holder!!.itemView.tv_author_brief.text = Html.fromHtml(data!![position].cont)
+        holder!!.itemView.setOnClickListener { mOnItemClickListener.onItemClick(position, holder.itemView) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AuthorAdapter.ViewHolder {

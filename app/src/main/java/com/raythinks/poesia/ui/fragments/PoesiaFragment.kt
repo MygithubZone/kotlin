@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.kogitune.activity_transition.ActivityTransitionLauncher
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.listener.OnItemClickListener
@@ -16,6 +17,8 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
 import kotlinx.android.synthetic.main.fragment_poesia.*
+import kotlinx.android.synthetic.main.item_author.view.*
+import kotlinx.android.synthetic.main.item_poesia.view.*
 
 /**
  * 功能：<br>
@@ -27,7 +30,7 @@ class PoesiaFragment : BaseVMFragment<PoesiaViewModel>(), OnRefreshListener, OnL
     override fun onItemClick(position: Int, itemView: View) {
         var intent = Intent(_mActivity, PoesiaDetialActivity::class.java)
         intent.putExtra("poesiaItem", adapter.data[position])
-        startActivity(intent)
+        ActivityTransitionLauncher.with(_mActivity).from(itemView.tv_poesia_content).launch(intent);
     }
 
     lateinit var adapter: PoesiaAdapter

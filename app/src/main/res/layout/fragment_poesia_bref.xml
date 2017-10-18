@@ -2,13 +2,17 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
     android:orientation="vertical">
+
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-      >
+        android:background="@color/white"
+        android:elevation="2dp"
+        android:layout_margin="8dp">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -16,6 +20,7 @@
             android:layout_margin="16dp"
             android:background="@android:color/transparent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -33,46 +38,44 @@
                     android:lineSpacingExtra="4sp"
                     android:text="译"
                     android:textColor="@color/color_yizhu_selector"
-                    android:textSize="10sp"
-                      />
+                    android:textSize="10sp" />
 
                 <TextView
                     android:id="@+id/tv_zhu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:layout_marginLeft="6dp"
                     android:background="@drawable/draw_yizhu"
                     android:gravity="center"
                     android:lineSpacingExtra="4sp"
                     android:text="注"
                     android:textColor="@color/color_yizhu_selector"
-                    android:textSize="10sp"
-                    android:layout_marginLeft="6dp"
-                    />
+                    android:textSize="10sp" />
+
                 <TextView
                     android:id="@+id/tv_shang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:layout_marginLeft="6dp"
                     android:background="@drawable/draw_yizhu"
                     android:gravity="center"
                     android:lineSpacingExtra="4sp"
                     android:text="赏"
                     android:textColor="@color/color_yizhu_selector"
-                    android:textSize="10sp"
-                    android:layout_marginLeft="6dp"
-                  />
+                    android:textSize="10sp" />
             </LinearLayout>
 
 
             <com.raythinks.poesia.ui.widget.SelectableTextView
-                android:layout_marginTop="16dp"
                 android:id="@+id/tv_poesia_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
                 android:background="@null"
                 android:gravity="center_vertical|left"
-                android:layout_gravity="center"
                 android:inputType="none"
                 android:lineSpacingExtra="10sp"
                 android:text="遑遑三十载，书剑两无成。山水寻吴越，风尘厌洛京。扁舟泛湖海，长揖谢公卿。且乐杯中物，谁论世上名。遑遑三十载，书剑两无成。山水寻吴越，风尘厌洛京。扁舟泛湖海，长揖谢公卿。且乐杯中物，谁论世上名。遑遑三十载，书剑两无成。山水寻吴越，风尘厌洛京。扁舟泛湖海，长揖谢公卿。且乐杯中物，谁论世上名。"

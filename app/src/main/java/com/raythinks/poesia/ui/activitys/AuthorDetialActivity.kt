@@ -3,6 +3,7 @@ package com.raythinks.poesia.ui.activitys
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -26,6 +27,12 @@ import kotlinx.android.synthetic.main.activity_author_detail.*
  * 版本：1.2.0
  */
 class AuthorDetialActivity : BaseVMActivity<AuthorDetialViewModel>(), ViewPager.OnPageChangeListener {
+    var savedInstanceState: Bundle? = null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        this.savedInstanceState = savedInstanceState
+    }
+
     override fun onPageScrollStateChanged(state: Int) {
     }
 
