@@ -51,7 +51,7 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <com.raythinks.base.statusview.StatusLayout
+    <com.raythinks.poesia.ui.widget.StatusLayout
         android:id="@+id/stl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srlEnableHeaderTranslationContent="false"
-            app:srlEnableLoadmore="false">
+            app:srlEnableLoadmore="true">
 
             <com.scwang.smartrefresh.header.MaterialHeader
                 android:layout_width="match_parent"
@@ -73,6 +73,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:overScrollMode="never" />
+            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-    </com.raythinks.base.statusview.StatusLayout>
+    </com.raythinks.poesia.ui.widget.StatusLayout>
 </LinearLayout>

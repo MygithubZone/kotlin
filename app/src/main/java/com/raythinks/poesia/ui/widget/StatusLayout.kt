@@ -1,17 +1,17 @@
-package com.raythinks.base.statusview
+package com.raythinks.poesia.ui.widget
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.support.v4.app.Fragment
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.raythinks.base.R
-import java.lang.IllegalStateException
+import com.raythinks.poesia.R
+import com.raythinks.poesia.base.ERROR_MEG_DATANULL
+import com.raythinks.poesia.base.ERROR_MEG_NET
+import kotlinx.android.synthetic.main.empty_view.view.*
+import kotlinx.android.synthetic.main.error_view.view.*
 
 /**
  * Created by Administrator on 2016/10/19.
@@ -19,11 +19,26 @@ import java.lang.IllegalStateException
 
 class StatusLayout : FrameLayout {
     private var mContext: Context
-    private lateinit var mErrorView: View// 返回数据错误
-    private lateinit var mLoadingView: View// 正在加载界面
+    lateinit var mErrorView: View// 返回数据错误
+    lateinit var mLoadingView: View// 正在加载界面
+    lateinit var mEmptyView: View// 返回数据是0个
     private var mContentView: View? = null// 正常的内容页面
-    private lateinit var mEmptyView: View// 返回数据是0个
     private var layoutParams: FrameLayout.LayoutParams? = null
+    fun showEmpty(msg: String = ERROR_MEG_DATANULL, initdata: () -> Unit) {
+        mEmptyView.tv_empty.text = msg
+        mEmptyView.btn_empty_retry.setOnClickListener {
+            initdata()
+        }
+        showEmpty()
+    }
+
+    fun showError(msg: String? = ERROR_MEG_NET, initdata: () -> Unit) {
+        mErrorView.tv_error.text = msg
+        mErrorView.btn_error_retry.setOnClickListener {
+            initdata()
+        }
+        showError()
+    }
 
     constructor(context: Context) : super(context) {
         this.mContext = context
@@ -37,7 +52,7 @@ class StatusLayout : FrameLayout {
         this.mContext = context
     }
 
-    fun setStatusView(): StatusLayout {
+    private fun setStatusView(): StatusLayout {
         if (childCount != 1) {
             throw Exception("this view only contains one")
         }

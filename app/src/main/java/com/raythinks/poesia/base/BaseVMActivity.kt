@@ -7,6 +7,7 @@ import com.jaeger.library.StatusBarUtil
 import com.raythinks.base.BaseActivity
 import com.raythinks.poesia.utils.TUtils
 import com.raythinks.poesia.R
+import com.scwang.smartrefresh.layout.SmartRefreshLayout
 import qiu.niorgai.StatusBarCompat
 
 /**
@@ -15,9 +16,15 @@ import qiu.niorgai.StatusBarCompat
  * Created by Herri on 2017/8/20.
  */
 
+fun SmartRefreshLayout.finishRefershOrLoadMore(isRefresh: Boolean) {
+    if (isRefresh) {
+        if (this.isRefreshing) this.finishRefresh()
+    } else {
+        if (this.isLoading) this.finishLoadmore()
+    }
+}
 abstract class BaseVMActivity<VM : ViewModel> : BaseActivity() {
     lateinit var viewModel: VM
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +37,7 @@ abstract class BaseVMActivity<VM : ViewModel> : BaseActivity() {
         initData()
     }
 
-     open fun isSetStatusBar():Boolean=true
+    open fun isSetStatusBar(): Boolean = true
     abstract fun initView()
 
     abstract fun initData()

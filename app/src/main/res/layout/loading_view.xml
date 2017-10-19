@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="正在加载..."
-        android:textColor="@color/text_color_primary"
+        android:textColor="@color/black_mid"
         android:textSize="14sp" />
 
 </LinearLayout>
