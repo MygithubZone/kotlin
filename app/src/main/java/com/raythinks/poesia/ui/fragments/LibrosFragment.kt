@@ -108,7 +108,6 @@ class LibrosFragment : BaseVMFragment<LibrosViewModel>(), TabLayout.OnTabSelecte
         }
         initMenu()
     }
-
     var type = ""
     var mBottomSheetDialog: BottomSheetDialog? = null
     var menuAdapter: LibrosTypeAdapter? = null

@@ -20,7 +20,7 @@ import rx.schedulers.Schedulers
 
 class RefranesViewModel : BaseViewModel() {
     var refranesList: MutableLiveData<RefranesListModel> = MutableLiveData();
-    fun updateRefranesList(p: Int, c: String = "", t: String = ""): LiveData<RefranesListModel> {
+    fun updateRefranesList(p: Int, c: String, t: String): LiveData<RefranesListModel> {
         apiService.getRefranesList(p, c, t).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ result ->
