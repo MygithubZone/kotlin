@@ -11,8 +11,6 @@ import com.raythinks.poesia.listener.CopyActionCallBack
 import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.model.GushiwensItem
 import com.raythinks.poesia.ui.viewmodel.BasePoesiaViewModel
-import com.raythinks.poesia.ui.widget.SelectableTextView
-import com.raythinks.poesia.ui.widget.SelectableTextView.*
 import kotlinx.android.synthetic.main.item_poesia.view.*
 
 /**
@@ -23,6 +21,7 @@ import kotlinx.android.synthetic.main.item_poesia.view.*
  */
 class PoesiaAdapter(var viewHodler: BasePoesiaViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<PoesiaAdapter.ViewHolder>() {
     var data: ArrayList<GushiwensItem>
+
     init {
         data = ArrayList()
     }
@@ -57,15 +56,25 @@ class PoesiaAdapter(var viewHodler: BasePoesiaViewModel, var onItemClickListener
 
     }
 
-    fun updateData(b: Boolean, newData: ArrayList<GushiwensItem>?) {
-        if (newData == null)
-            return
-        if (b) data.clear()
-        val addPosition = data.size
-        data.addAll(addPosition, newData)
-        if (addPosition != 0)
-            notifyItemInserted(addPosition)
-        else
-            notifyDataSetChanged()
+    fun updateData(b: Boolean, newData: ArrayList<GushiwensItem>) {
+        if (data.size == 0) {
+            data.addAll(newData)
+            notifyItemRangeInserted(0, data.size)
+        } else {
+            if (b) {
+                data.clear()
+                data.addAll(newData)
+                notifyDataSetChanged()
+            } else {
+                var oldSize = data.size
+                data.addAll(oldSize, newData)
+                notifyItemRangeInserted(oldSize, data.size - oldSize)
+            }
+        }
+    }
+
+    fun clearData() {
+        data.clear()
+        notifyDataSetChanged()
     }
 }

@@ -49,7 +49,7 @@ class AuthorPoesiaFragment : BaseVMFragment<AuthorDetialViewModel>(), OnRefreshL
     override fun initData() {
         viewModel.updateAuthorPoeisa(1, _mActivity.intent.getParcelableExtra<AuthorsItem>("author").id).observe(this, Observer {
             it?.let {
-                adapter.updateData(currentP == 1, it.tb_gushiwens)
+                adapter.updateData(currentP == 1, it!!.tb_gushiwens!!)
             }
         })
     }

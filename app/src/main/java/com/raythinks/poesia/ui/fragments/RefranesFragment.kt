@@ -11,22 +11,22 @@ import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.Toast
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.base.ERROR_MEG_DATANULL
 import com.raythinks.poesia.base.finishRefershOrLoadMore
 import com.raythinks.poesia.listener.OnSelectionItemClickListener
 import com.raythinks.poesia.net.ApiRefranesList
-import com.raythinks.poesia.ui.adapter.LibrosTypeAdapter
 import com.raythinks.poesia.ui.adapter.RefranesAdapter
-import com.raythinks.poesia.ui.adapter.RefranesTypeAdapter
+import com.raythinks.poesia.ui.adapter.MenuTypeAdapter
 import com.raythinks.poesia.ui.viewmodel.RefranesViewModel
 import com.raythinks.poesia.utils.AnimUtils
+import com.raythinks.poesia.utils.DialogUtils
 import com.raythinks.poesia.utils.TUtils
 import com.truizlop.sectionedrecyclerview.SectionedSpanSizeLookup
 import kotlinx.android.synthetic.main.dialog_libros_bottommenu.view.*
 import kotlinx.android.synthetic.main.fragment_refranes.*
+import java.util.ArrayList
 
 
 /**
@@ -35,11 +35,11 @@ import kotlinx.android.synthetic.main.fragment_refranes.*
  * 时间： 2017/9/20 0020<br>.
  * 版本：1.2.0
  */
-class RefranesFragment : BaseVMFragment<RefranesViewModel>(), OnSelectionItemClickListener {
-    override fun onItemClick(selection: Int, position: Int, itemView: View) {
-        var temp = menuAdapter!!.itemArray[selection][position]
+class RefranesFragment : BaseVMFragment<RefranesViewModel>(), MenuTypeAdapter.OnMenuItemClickListener {
+    override fun onItemClick(ad: MenuTypeAdapter, selection: Int, position: Int, itemView: View) {
+        var temp = ad!!.itemArray[selection][position]
         if (!TextUtils.equals(type, temp) || !TextUtils.equals(theme, temp)) {
-            if (menuAdapter!!.isTheme) {
+            if (ad!!.selectType == 1) {
                 if ("不限".equals(temp)) {
                     theme = ""
                     tv_refranes_theme.text = "主题"
@@ -49,6 +49,7 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), OnSelectionItemCli
                 }
                 type = ""
                 tv_refranes_type.text = "分类"
+                setTypeMenu()
             } else {
                 if ("不限".equals(temp)) {
                     type = ""
@@ -62,7 +63,12 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), OnSelectionItemCli
             adapter.clearData()
             viewModel.updateRefranesList(1, theme, type)
         }
-        mBottomSheetDialog?.dismiss()
+        if (ad!!.selectType == 1) {
+            mThemeSheetDialog?.dismiss()
+        } else {
+            mTypeSheetDialog?.dismiss()
+        }
+
     }
 
     lateinit var adapter: RefranesAdapter
@@ -73,20 +79,16 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), OnSelectionItemCli
         adapter = RefranesAdapter(viewModel)
         recyclerview.setAdapter(adapter)
         tv_refranes_theme.setOnClickListener {
-            var tempTheme = theme
-            if (TextUtils.isEmpty(tempTheme)) {
-                tempTheme = "主题"
-            }
-            menuAdapter?.updateData(tempTheme, type, true)
-            mBottomSheetDialog?.show()
+            setThemeMenu()
+            mThemeSheetDialog?.show()
         }
         tv_refranes_type.setOnClickListener {
             if (TextUtils.isEmpty(theme)) {
                 TUtils.showToast(toastStr = "请先选择主题", gravity = Gravity.CENTER)
                 return@setOnClickListener
             }
-            menuAdapter?.updateData(theme, type, false)
-            mBottomSheetDialog?.show()
+            setTypeMenu()
+            mTypeSheetDialog?.show()
         }
         refreshLayout.setOnRefreshListener {
             isInitRefresh = true
@@ -99,6 +101,18 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), OnSelectionItemCli
         }
         initMenu()
 
+    }
+
+    private fun setTypeMenu() {
+        typeAdapter?.updateData(theme, 0, typeArray[themeArray.indexOf(theme) - 1])
+    }
+
+    private fun setThemeMenu() {
+        var tempTheme = theme
+        if (TextUtils.isEmpty(tempTheme)) {
+            tempTheme = "主题"
+        }
+        themeAdapter?.updateData(tempTheme, 1, themeArray)
     }
 
     var theme = ""
@@ -138,31 +152,35 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), OnSelectionItemCli
         })
     }
 
-    var mBottomSheetDialog: BottomSheetDialog? = null
-    var menuAdapter: RefranesTypeAdapter? = null
+    var mThemeSheetDialog: BottomSheetDialog? = null
+    var mTypeSheetDialog: BottomSheetDialog? = null
+    var themeAdapter: MenuTypeAdapter? = null
+    var typeAdapter: MenuTypeAdapter? = null
     fun initMenu() {
-        mBottomSheetDialog = BottomSheetDialog(_mActivity)
-        val view = layoutInflater.inflate(R.layout.dialog_libros_bottommenu, null)
-        menuAdapter = RefranesTypeAdapter(_mActivity, this)
-        view.recyclerview_libros_menu.adapter = menuAdapter
-        var gridManager = GridLayoutManager(_mActivity, 3)
-        gridManager.spanSizeLookup = SectionedSpanSizeLookup(menuAdapter, gridManager);
-        view.recyclerview_libros_menu.setLayoutManager(gridManager)
-        mBottomSheetDialog?.setContentView(view)
-        var bgView = mBottomSheetDialog?.window?.findViewById<FrameLayout>(R.id.design_bottom_sheet)
-        bgView?.setBackgroundResource(android.R.color.transparent);
-        var parent = view.getParent() as View
-        var behavior = BottomSheetBehavior.from(parent);
-        view.measure(0, 0);
-        behavior.setPeekHeight(view.getMeasuredHeight());
-        var params = parent.getLayoutParams() as CoordinatorLayout.LayoutParams
-        params.gravity = Gravity.TOP
-        parent.setLayoutParams(params);
-        view.iv_dialog_paddingtop.setOnClickListener { mBottomSheetDialog?.dismiss() }
-        mBottomSheetDialog?.setOnDismissListener {
-
-        }
+        themeAdapter = MenuTypeAdapter(this)
+        typeAdapter = MenuTypeAdapter(this)
+        setThemeMenu()
+        typeAdapter?.updateData(theme, 0, typeArray[0])
+        mThemeSheetDialog = DialogUtils.initMenuDialog(_mActivity, themeAdapter!!)
+        mTypeSheetDialog = DialogUtils.initMenuDialog(_mActivity, typeAdapter!!)
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_refranes
+    var typeArray = ArrayList<Array<String>>()
+    var themeArray: Array<String>
+
+    init {
+        themeArray = arrayOf("不限", "抒情", "四季", "山水", "天气", "人物", "人生", "生活", "节日", "动物", "植物", "食物")
+        typeArray.add(arrayOf("不限", "爱情", "友情", "离别", "思念", "思乡", "伤感", "孤独", "闺怨", "悼亡", "怀古", "爱国", "感恩"))
+        typeArray.add(arrayOf("不限", "春天", "夏天", "秋天", "冬天"))
+        typeArray.add(arrayOf("不限", "庐山", "泰山", "江河", "长江", "黄河", "西湖", "瀑布"))
+        typeArray.add(arrayOf("不限", "写风", "写云", "写雨", "写雪", "彩虹", "太阳", "月亮", "星星"))
+        typeArray.add(arrayOf("不限", "女子", "父亲", "母亲", "老师", "儿童"))
+        typeArray.add(arrayOf("不限", "励志", "哲理", "青春", "时光", "梦想", "读书", "战争"))
+        typeArray.add(arrayOf("不限", "乡村", "田园", "边塞", "写桥"))
+        typeArray.add(arrayOf("不限", "春节", "元宵节", "寒食节", "清明节", "端午节", "七夕节", "中秋节", "重阳节"))
+        typeArray.add(arrayOf("不限", "写鸟", "写马", "写猫"))
+        typeArray.add(arrayOf("不限", "梅花", "梨花", "桃花", "荷花", "菊花", "柳树", "叶子", "竹子"))
+        typeArray.add(arrayOf("不限", "写酒", "写茶", "荔枝"))
+    }
 }

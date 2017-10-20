@@ -25,8 +25,8 @@ import rx.schedulers.Schedulers
 class PoesiaViewModel : BasePoesiaViewModel() {
     var poesiaListModel: MutableLiveData<PoesiaListModel> = MutableLiveData<PoesiaListModel>();
     var poesiaList: MutableLiveData<ArrayList<GushiwensItem>> = MutableLiveData();
-    fun updatePoesiaList(p: Int, c: String, t: String): LiveData<PoesiaListModel> {
-        BaseViewModel.apiService.getPoesiaList(p, c, t).observeOn(AndroidSchedulers.mainThread())
+    fun updatePoesiaList(p: Int, t: String, c: String, x: String): LiveData<PoesiaListModel> {
+        BaseViewModel.apiService.getPoesiaList(p, c, t, x).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ result ->
                     //不爲空
