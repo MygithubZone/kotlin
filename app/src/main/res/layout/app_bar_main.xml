@@ -18,10 +18,25 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_main" />
 
+    <TextView
+        android:layout_width="72dp"
+        android:layout_height="75dp"
+        android:layout_margin="16dp"
+        android:background="@color/black_mid"
+        android:text="1256"
+        android:textColor="@color/white"
+        app:layout_anchor="@+id/include"
+        android:layout_gravity="right|bottom"
+        android:gravity="center"
+        app:layout_anchorGravity="right|center"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior"></TextView>
 </android.support.design.widget.CoordinatorLayout>

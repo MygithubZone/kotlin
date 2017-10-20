@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srlEnableHeaderTranslationContent="false"
-            app:srlEnableLoadmore="true">
+            app:srlEnableLoadmore="false">
 
             <com.scwang.smartrefresh.header.MaterialHeader
                 android:layout_width="match_parent"
@@ -73,10 +73,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:overScrollMode="never" />
-            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
         </com.scwang.smartrefresh.layout.SmartRefreshLayout>
     </com.raythinks.poesia.ui.widget.StatusLayout>
 </LinearLayout>

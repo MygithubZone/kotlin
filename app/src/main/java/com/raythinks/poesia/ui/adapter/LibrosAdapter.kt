@@ -42,12 +42,24 @@ class LibrosAdapter(var viewHodler: LibrosViewModel, var onItemClickListener: On
     }
 
     fun updateData(b: Boolean, newData: ArrayList<BooksItem>) {
-        if (b) data.clear()
-        val addPosition = data.size
-        data.addAll(addPosition, newData)
-        if (addPosition != 0)
-            notifyItemInserted(addPosition)
-        else
-            notifyDataSetChanged()
+        if (data.size == 0) {
+            data.addAll(newData)
+            notifyItemRangeInserted(0, data.size)
+        } else {
+            if (b) {
+                data.clear()
+                data.addAll(newData)
+                notifyDataSetChanged()
+            } else {
+                var oldSize = data.size
+                data.addAll(oldSize, newData)
+                notifyItemRangeInserted(oldSize, data.size - oldSize)
+            }
+        }
+    }
+
+    fun clearData() {
+        data.clear()
+        notifyDataSetChanged()
     }
 }

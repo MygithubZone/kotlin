@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/ll_tab"
@@ -30,36 +30,43 @@
             app:tabTextColor="@color/white70" />
 
         <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_libros_more"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:foreground="?android:attr/selectableItemBackground"
             app:srcCompat="@drawable/ic_arrow_drop_down_black_18dp" />
     </LinearLayout>
 
-
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/refreshLayout"
+    <com.raythinks.poesia.ui.widget.StatusLayout
+        android:id="@+id/stl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlEnableHeaderTranslationContent="false"
-        app:srlEnableLoadmore="true">
+        android:layout_height="match_parent">
 
-        <com.scwang.smartrefresh.header.MaterialHeader
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/refreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:overScrollMode="never" />
-        <com.scwang.smartrefresh.layout.footer.BallPulseFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-           />
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+            app:srlEnableHeaderTranslationContent="false"
+            app:srlEnableLoadmore="true">
+
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
+
+            <com.scwang.smartrefresh.layout.footer.BallPulseFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </com.raythinks.poesia.ui.widget.StatusLayout>
 </LinearLayout>
+

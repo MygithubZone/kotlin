@@ -20,10 +20,11 @@ import kotlinx.android.synthetic.main.item_author.view.*
  */
 class AuthorAdapter(var viewHodler: AuthorListViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<AuthorAdapter.ViewHolder>() {
     var data: ArrayList<AuthorsItem>
-     var mOnItemClickListener: OnItemClickListener
+    var mOnItemClickListener: OnItemClickListener
+
     init {
         data = ArrayList()
-        mOnItemClickListener=onItemClickListener
+        mOnItemClickListener = onItemClickListener
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
@@ -42,13 +43,25 @@ class AuthorAdapter(var viewHodler: AuthorListViewModel, var onItemClickListener
 
     }
 
+    fun clearData() {
+        data.clear()
+        notifyDataSetChanged()
+    }
+
     fun updateData(b: Boolean, newData: ArrayList<AuthorsItem>) {
-        if (b) data.clear()
-        val addPosition = data.size
-        data.addAll(addPosition, newData)
-        if (addPosition != 0)
-            notifyItemInserted(addPosition)
-        else
-            notifyDataSetChanged()
+        if (data.size == 0) {
+            data.addAll(newData)
+            notifyItemRangeInserted(0, data.size)
+        } else {
+            if (b) {
+                data.clear()
+                data.addAll(newData)
+                notifyDataSetChanged()
+            } else {
+                var oldSize = data.size
+                data.addAll(oldSize, newData)
+                notifyItemRangeInserted(oldSize, data.size-oldSize)
+            }
+        }
     }
 }

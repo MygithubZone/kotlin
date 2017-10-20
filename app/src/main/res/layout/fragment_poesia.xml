@@ -70,14 +70,16 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="0dp" />
     </android.support.constraint.ConstraintLayout>
-
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.raythinks.poesia.ui.widget.StatusLayout
+        android:id="@+id/stl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srlEnableHeaderTranslationContent="false"
-        app:srlEnableLoadmore="true">
+        app:srlEnableLoadmore="false">
 
         <com.scwang.smartrefresh.header.MaterialHeader
             android:layout_width="match_parent"
@@ -93,4 +95,5 @@
             android:layout_height="wrap_content"
             />
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </com.raythinks.poesia.ui.widget.StatusLayout>
 </LinearLayout>

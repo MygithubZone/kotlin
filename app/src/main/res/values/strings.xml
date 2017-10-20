@@ -115,5 +115,56 @@
         <item>@string/str_libros_detail_tab_gy</item>
         <item>@string/str_libors_detail_tab_ml</item>
     </string-array>
-
+    <string-array name="arrayt_libros_type_jb">
+        <item>易类</item>
+        <item>书类</item>
+        <item>诗类</item>
+        <item>礼类</item>
+        <item>春秋类</item>
+        <item>孝经类</item>
+        <item>五经总义类</item>
+        <item>四书类</item>
+        <item>乐类</item>
+        <item>小学类</item>
+    </string-array>
+    <string-array name="arrayt_libros_type_sb">
+        <item>正史类</item>
+        <item>编年类</item>
+        <item>纪事本末类</item>
+        <item>杂史类</item>
+        <item>别史类</item>
+        <item>诏令奏议类</item>
+        <item>传记类</item>
+        <item>史钞类</item>
+        <item>载记类</item>
+        <item>时令类</item>
+        <item>地理类</item>
+        <item>职官类</item>
+        <item>政书类</item>
+        <item>目录类</item>
+        <item>史评类</item>
+    </string-array>
+    <string-array name="arrayt_libros_type_zb">
+        <item>儒家类</item>
+        <item>兵家类</item>
+        <item>法家类</item>
+        <item>农家类</item>
+        <item>医家类</item>
+        <item>天文算法类</item>
+        <item>术数类</item>
+        <item>艺术类</item>
+        <item>谱录类</item>
+        <item>杂家类</item>
+        <item>类书类</item>
+        <item>小说家类</item>
+        <item>释家类</item>
+        <item>道家类</item>
+    </string-array>
+    <string-array name="arrayt_libros_type_jb1">
+        <item>楚辞类</item>
+        <item>别集类</item>
+        <item>总集类</item>
+        <item>诗文评类</item>
+        <item>词曲类</item>
+    </string-array>
 </resources>
