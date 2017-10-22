@@ -128,12 +128,12 @@ class PoesiaFragment : BaseVMFragment<PoesiaViewModel>(), OnItemClickListener, M
         typeAdapter = MenuTypeAdapter(this)
         chaoAdapter = MenuTypeAdapter(this)
         xingAdapter = MenuTypeAdapter(this)
-        typeAdapter?.updateData("分类", 0, typeArray)
-        chaoAdapter?.updateData("朝代", 1, caoArray)
-        xingAdapter?.updateData("形式", 2, xingArray)
         mTypeSheetDialog = DialogUtils.initMenuDialog(_mActivity, typeAdapter!!)
         mChaoSheetDialog = DialogUtils.initMenuDialog(_mActivity, chaoAdapter!!)
         mXingSheetDialog = DialogUtils.initMenuDialog(_mActivity, xingAdapter!!)
+        typeAdapter?.updateData("分类", 0, typeArray)
+        chaoAdapter?.updateData("朝代", 1, caoArray)
+        xingAdapter?.updateData("形式", 2, xingArray)
 
     }
 
