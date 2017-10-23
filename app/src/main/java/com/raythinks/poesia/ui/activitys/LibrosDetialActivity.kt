@@ -55,7 +55,7 @@ class LibrosDetialActivity : BaseVMActivity<LibrosDetailViewModel>(), ViewPager.
     }
 
     override fun initData() {
-        toolbar.setTitle(intent.getStringExtra("nameStr"))
+        setTitle(intent.getStringExtra("nameStr"))
         viewModel.updateLiborsDetial("${intent.getIntExtra("id", 0)}")
     }
 

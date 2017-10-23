@@ -15,10 +15,12 @@ const val ApiPoesiaList = "/api/shiwen/type.aspx"
 const val ApiPoesiaDetail = "/api/shiwen/view.aspx"
 const val ApiLibrosList = "/api/guwen/Default.aspx"
 const val ApiLibrosDetial = "/api/guwen/book.aspx"
+const val ApiLibrosBookv = "api/guwen/bookv.aspx"
 const val ApiAuthorList = "/api/author/Default.aspx"
 const val ApiAuthorMore = "/api/author/author.aspx"
 const val ApiAuthorPoesia = "/api/author/authorsw.aspx"
 const val ApiBaseGuShiWenURL = "http://app.gushiwen.org"
+
 
 interface PoesiaApiService {
     @GET(ApiRefranesList)
@@ -44,6 +46,8 @@ interface PoesiaApiService {
 
     @GET(ApiAuthorPoesia)
     fun getAuthorPoesia(@Query("p") p: Int, @Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<AuthorPoesiaModel>
+    @GET(ApiLibrosBookv)
+    fun getLibrosBookv (@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<LibrosReadModel>
 
     companion object Factory {
         fun create() = RetrofitService().getApiService(ApiBaseGuShiWenURL, PoesiaApiService::class.java)

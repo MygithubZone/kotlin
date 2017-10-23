@@ -2,10 +2,12 @@ package com.raythinks.poesia.ui.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import com.raythinks.poesia.ui.model.BooksItem
-import com.raythinks.poesia.ui.model.GuWenDetialModel
-import com.raythinks.poesia.ui.model.LibrosListModel
-import com.raythinks.poesia.ui.model.TbBookviews
+import com.raythinks.poesia.base.ERROR_MEG_DATANULL
+import com.raythinks.poesia.base.ERROR_STATUS_DATANULL
+import com.raythinks.poesia.base.NetError
+import com.raythinks.poesia.net.ApiLibrosBookv
+import com.raythinks.poesia.net.ApiLibrosList
+import com.raythinks.poesia.ui.model.*
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -14,31 +16,32 @@ import rx.schedulers.Schedulers
  */
 
 class LibrosReadViewModel : LibrosViewModel() {
-    var booksModel: MutableLiveData<BooksItem> = MutableLiveData<BooksItem>();
-    fun getBooks() = booksModel
-    var booksViewsModel: MutableLiveData<TbBookviews> = MutableLiveData<TbBookviews>();
-    fun getBookViews() = booksViewsModel
-
-    fun updateLiborsDetial(id: String) {
-        apiService.getLibrosDetial(id).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({
-                    result ->
-                    result?.let {
-                        //不爲空
-                        result.tb_book.let {
-                            booksModel.value = it
-                        }
-                        result.tb_bookviews.let {
-                            booksViewsModel.value = it
-                        }
-                        return@subscribe
-                    }
-
-                }, { error ->
-                    error.printStackTrace()
-
-                })
+    var booksItemModel: MutableLiveData<LibrosReadModel> = MutableLiveData<LibrosReadModel>();
+    fun getBookItem() = booksItemModel
+    var booksItemShowType: MutableLiveData<Int> = MutableLiveData<Int>();
+    fun setShowType(type: Int) {
+        booksItemShowType.value = type
     }
 
+    fun getShowType() = booksItemShowType
+    fun updateLiborsItem(id: String): LiveData<LibrosReadModel> {
+        apiService.getLibrosBookv(id).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ result ->
+                    if (result != null) {
+                        //不爲空
+                        booksItemModel.value = result
+                    } else {
+                        onError.value = NetError(ERROR_STATUS_DATANULL, ERROR_MEG_DATANULL, fromApi = ApiLibrosBookv, error = null, extraData = id)
+                    }
+                    return@subscribe
+
+                },
+                        { error ->
+                            onError.value = NetError(fromApi = ApiLibrosBookv, error = error, extraData = id)
+                            error.printStackTrace()
+
+                        })
+        return booksItemModel
+    }
 }

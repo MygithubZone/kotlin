@@ -54,11 +54,6 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onBackPressedSupport() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
@@ -126,7 +121,6 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
     override fun onPageSelected(position: Int) {
         setTitle(typePoesia[position])
         nav_view.setCheckedItem(typePoesiaId[position])
-
     }
 
 }

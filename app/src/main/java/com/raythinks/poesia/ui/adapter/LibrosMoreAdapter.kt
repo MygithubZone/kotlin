@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.raythinks.poesia.R
+import com.raythinks.poesia.listener.OnSelectionItemClickListener
 import com.raythinks.poesia.ui.model.BookviewsItem
 import com.raythinks.poesia.ui.viewmodel.LibrosDetailViewModel
 import com.truizlop.sectionedrecyclerview.SimpleSectionedAdapter
@@ -19,13 +20,20 @@ import java.util.*
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class LibrosMoreAdapter(var viewHodler: LibrosDetailViewModel) : SimpleSectionedAdapter<LibrosMoreAdapter.ViewHolder>() {
+class LibrosMoreAdapter(var viewHodler: LibrosDetailViewModel, var lis: OnSelectionItemClickListener) : SimpleSectionedAdapter<LibrosMoreAdapter.ViewHolder>() {
+    var onSelectLis: OnSelectionItemClickListener
+
+    init {
+        onSelectLis = lis
+    }
+
     override fun getSectionHeaderTitle(section: Int): String {
         return headerIndexs.get(section)
     }
 
     override fun onBindItemViewHolder(holder: ViewHolder?, section: Int, position: Int) {
         holder!!.itemView.tv_libros_mulu.text = headerAarry[section]!![position].nameStr
+        holder!!.itemView.tv_libros_mulu.setOnClickListener { onSelectLis.onItemClick(section, position, holder?.itemView) }
     }
 
     override fun onCreateItemViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -42,7 +50,7 @@ class LibrosMoreAdapter(var viewHodler: LibrosDetailViewModel) : SimpleSectioned
     var headerAarry = ArrayList<ArrayList<BookviewsItem>>()
     var headerIndexs = ArrayList<String>()
     fun updateData(newData: ArrayList<BookviewsItem>?) {
-        if (newData == null){
+        if (newData == null) {
             Log.e("aaaaaa", "000000")
             return
         }

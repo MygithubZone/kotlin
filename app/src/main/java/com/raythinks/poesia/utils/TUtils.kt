@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.FragmentActivity
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.Toast
 import com.raythinks.poesia.ApplicationImpl
 import com.raythinks.poesia.R
 import com.raythinks.poesia.ui.fragments.MainFragment
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.tab_textview_style.view.*
 import kotlinx.android.synthetic.main.toast_style1.view.*
 import me.yokeyword.fragmentation.SupportFragment
@@ -45,7 +47,8 @@ object TUtils {
 
     }
 
-    fun initToolbarNav(toolbar: Toolbar, _mActivity: FragmentActivity) {
+    fun initToolbarNav(toolbar: Toolbar, _mActivity: AppCompatActivity) {
+        _mActivity.setSupportActionBar(toolbar)
         toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_72dp)
         toolbar.setNavigationOnClickListener { v -> _mActivity.finish() }
     }
