@@ -19,7 +19,8 @@ import kotlinx.android.synthetic.main.dialog_libros_bottommenu.view.*
  * Created by 赵海 on 2017/10/6.
  */
 object DialogUtils {
-    fun initMenuDialog(context: Activity, menuAdapter: MenuTypeAdapter): BottomSheetDialog {
+    fun initMenuDialog(context: Activity, theme: String, selectType: Int, array: Array<String>,lis: MenuTypeAdapter.OnMenuItemClickListener): BottomSheetDialog {
+        var menuAdapter=MenuTypeAdapter(theme,selectType,array,lis)
         var mBottomSheetDialog = BottomSheetDialog(context)
         val view = LayoutInflater.from(context).inflate(R.layout.dialog_libros_bottommenu, null)
         view.recyclerview_libros_menu.adapter = menuAdapter
@@ -36,7 +37,12 @@ object DialogUtils {
         var params = parent.getLayoutParams() as CoordinatorLayout.LayoutParams
         params.gravity = Gravity.TOP
         parent.setLayoutParams(params);
+        var bottomSheetBehavior = BottomSheetBehavior.from(parent)
         view.iv_dialog_paddingtop.setOnClickListener { mBottomSheetDialog?.dismiss() }
+        mBottomSheetDialog.setOnDismissListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+        mBottomSheetDialog.show()
         return mBottomSheetDialog
     }
 }

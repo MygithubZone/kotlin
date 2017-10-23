@@ -1,6 +1,7 @@
 package com.raythinks.poesia.ui.activitys
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
@@ -45,8 +46,10 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 //        vp_maincontent.setPageTransformer(true, ZoomOutPagerAnim())
         vp_maincontent.addOnPageChangeListener(this)
         vp_maincontent.offscreenPageLimit = 4
+        fab.setOnClickListener { }
         onNavigationItemSelected();
     }
+
     override fun isSetStatusBar() = false
     override fun initData() {
         selectCurrentItem(0)

@@ -16,7 +16,7 @@ import java.util.*
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class MenuTypeAdapter(onItemClickListener: OnMenuItemClickListener) : SimpleSectionedAdapter<MenuTypeAdapter.ViewHolder>() {
+class MenuTypeAdapter(theme: String, selectType: Int, array: Array<String>,onItemClickListener: OnMenuItemClickListener) : SimpleSectionedAdapter<MenuTypeAdapter.ViewHolder>() {
     var itemArray = ArrayList<Array<String>>()
     var mItemClickListener: OnMenuItemClickListener
     var theme = "";
@@ -29,17 +29,13 @@ class MenuTypeAdapter(onItemClickListener: OnMenuItemClickListener) : SimpleSect
 
     init {
         mItemClickListener = onItemClickListener
-
-    }
-
-    fun updateData(theme: String, selectType: Int, array: Array<String>) {
         itemArray.clear()
         itemArray.add(array)
         this.theme = theme
         this.selectType = selectType
         this.selectSum = 1
-        notifyDataSetChanged()
     }
+
 
     override fun getSectionHeaderTitle(section: Int): String {
         return theme

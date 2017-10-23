@@ -27,16 +27,17 @@
         android:id="@+id/include"
         layout="@layout/content_main" />
 
-    <TextView
-        android:layout_width="72dp"
-        android:layout_height="75dp"
-        android:layout_margin="16dp"
-        android:background="@color/black_mid"
-        android:text="1256"
-        android:textColor="@color/white"
-        app:layout_anchor="@+id/include"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:scaleType="center"
+        android:src="@mipmap/ic_query_page"
+        app:fabSize="mini"
         android:layout_gravity="right|bottom"
-        android:gravity="center"
-        app:layout_anchorGravity="right|center"
-        app:layout_behavior="android.support.design.widget.BottomSheetBehavior"></TextView>
+        app:layout_behavior="com.raythinks.poesia.ui.widget.ScrollAwareFabBehaviorDefault"
+        app:layout_scrollFlags="scroll|enterAlways|snap" />
 </android.support.design.widget.CoordinatorLayout>

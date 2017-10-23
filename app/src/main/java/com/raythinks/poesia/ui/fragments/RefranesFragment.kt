@@ -49,7 +49,6 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), MenuTypeAdapter.On
                 }
                 type = ""
                 tv_refranes_type.text = "分类"
-                setTypeMenu()
             } else {
                 if ("不限".equals(temp)) {
                     type = ""
@@ -63,12 +62,7 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), MenuTypeAdapter.On
             adapter.clearData()
             viewModel.updateRefranesList(1, theme, type)
         }
-        if (ad!!.selectType == 1) {
-            mThemeSheetDialog?.dismiss()
-        } else {
-            mTypeSheetDialog?.dismiss()
-        }
-
+        mSheetDialog?.dismiss()
     }
 
     lateinit var adapter: RefranesAdapter
@@ -79,16 +73,14 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), MenuTypeAdapter.On
         adapter = RefranesAdapter(viewModel)
         recyclerview.setAdapter(adapter)
         tv_refranes_theme.setOnClickListener {
-            setThemeMenu()
-            mThemeSheetDialog?.show()
+            mSheetDialog = DialogUtils.initMenuDialog(_mActivity, "主题", 1, themeArray, this)
         }
         tv_refranes_type.setOnClickListener {
             if (TextUtils.isEmpty(theme)) {
                 TUtils.showToast(toastStr = "请先选择主题", gravity = Gravity.CENTER)
                 return@setOnClickListener
             }
-            setTypeMenu()
-            mTypeSheetDialog?.show()
+            mSheetDialog = DialogUtils.initMenuDialog(_mActivity, theme, 0, typeArray[themeArray.indexOf(theme) - 1], this)
         }
         refreshLayout.setOnRefreshListener {
             isInitRefresh = true
@@ -99,20 +91,6 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), MenuTypeAdapter.On
             viewModel.updateRefranesList(currentP + 1, theme, type)
 
         }
-        initMenu()
-
-    }
-
-    private fun setTypeMenu() {
-        typeAdapter?.updateData(theme, 0, typeArray[themeArray.indexOf(theme) - 1])
-    }
-
-    private fun setThemeMenu() {
-        var tempTheme = theme
-        if (TextUtils.isEmpty(tempTheme)) {
-            tempTheme = "主题"
-        }
-        themeAdapter?.updateData(tempTheme, 1, themeArray)
     }
 
     var theme = ""
@@ -152,18 +130,7 @@ class RefranesFragment : BaseVMFragment<RefranesViewModel>(), MenuTypeAdapter.On
         })
     }
 
-    var mThemeSheetDialog: BottomSheetDialog? = null
-    var mTypeSheetDialog: BottomSheetDialog? = null
-    var themeAdapter: MenuTypeAdapter? = null
-    var typeAdapter: MenuTypeAdapter? = null
-    fun initMenu() {
-        themeAdapter = MenuTypeAdapter(this)
-        typeAdapter = MenuTypeAdapter(this)
-        setThemeMenu()
-        typeAdapter?.updateData(theme, 0, typeArray[0])
-        mThemeSheetDialog = DialogUtils.initMenuDialog(_mActivity, themeAdapter!!)
-        mTypeSheetDialog = DialogUtils.initMenuDialog(_mActivity, typeAdapter!!)
-    }
+    var mSheetDialog: BottomSheetDialog? = null
 
     override fun getLayoutId(): Int = R.layout.fragment_refranes
     var typeArray = ArrayList<Array<String>>()

@@ -64,7 +64,7 @@ class AuthorDetialActivity : BaseVMActivity<AuthorDetialViewModel>(), ViewPager.
     }
 
     override fun initData() {
-        toolbar.setTitle(authorItem.nameStr)
+        setTitle(authorItem.nameStr)
         AnimUtils.loadAmin(mContext, toolbar, R.anim.fade_scape01)
         viewModel.updateAuthorMore("${authorItem.id}")
     }

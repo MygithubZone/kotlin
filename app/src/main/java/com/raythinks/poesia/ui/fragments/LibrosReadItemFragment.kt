@@ -30,6 +30,7 @@ class LibrosReadItemFragment : BaseVMFragment<LibrosReadViewModel>() {
     override fun initData() {
         stl.showLoading()
         id = arguments.getString("id");
+        oldType== viewModel.getShowType().value
         viewModel.updateLiborsItem(id).observe(this, Observer {
             if (TextUtils.equals(id, "${it?.tb_bookview?.id}")) {
                 var yuan = it?.tb_bookview?.cont

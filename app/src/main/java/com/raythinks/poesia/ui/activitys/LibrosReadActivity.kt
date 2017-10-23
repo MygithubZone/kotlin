@@ -83,7 +83,11 @@ class LibrosReadActivity : BaseVMActivity<LibrosReadViewModel>(), ViewPager.OnPa
             fenlei = "(${fenlei})"
         }
         setTitle(intent.getStringExtra("title") + fenlei)
-        vp_libros_read.offscreenPageLimit=adapter.data.size
+        var offsreen = adapter.data.size
+        if (offsreen > 5) {
+            offsreen = 5
+        }
+        vp_libros_read.offscreenPageLimit = offsreen
     }
 
     override fun getLayoutId() = R.layout.activity_libros_read
@@ -96,7 +100,7 @@ class LibrosReadActivity : BaseVMActivity<LibrosReadViewModel>(), ViewPager.OnPa
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_swap -> {
-                showType=(showType+1)%3
+                showType = (showType + 1) % 3
                 viewModel.setShowType(showType)
                 setShowYY(adapter.data[currentP].nameStr)
                 return true
