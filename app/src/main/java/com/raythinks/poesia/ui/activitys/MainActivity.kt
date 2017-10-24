@@ -43,6 +43,26 @@ import kotlinx.android.synthetic.main.search_content.*
 @Route("poesia://activity/mainActivity")
 class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirstListener, ViewPager.OnPageChangeListener, MenuItem.OnActionExpandListener, SearchView.OnQueryTextListener, OnSelectionItemClickListener {
     override fun onItemClick(selection: Int, position: Int, itemView: View) {
+        var type = searchAdapter!!.headerIndexs[selection]
+        when (type) {
+            "作者" -> {
+
+                return
+            }
+            "诗文" -> {
+
+                return
+            }
+            "古籍" -> {
+                return
+            }
+            "类型" -> {
+                return
+            }
+            "名句" -> {
+                return
+            }
+        }
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -51,25 +71,24 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 
     override fun onQueryTextChange(newText: String?): Boolean {
         if (TextUtils.isEmpty(newText)) {
-
+            searchAdapter?.clearData()
         } else {
             viewModel.searchPoesia(newText!!).observe(this, Observer {
-                searchAdapter?.updateData(it!!)
+                searchAdapter?.updateData(newText, it!!)
             })
         }
-
         return false//To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
-        TUtils.showToast("onMenuItemActionExpand")
+        searchAdapter?.clearData()
         TUtils.setBottomViewVisible(fl_search, View.VISIBLE, null)
         return true
     }
 
     override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-        TUtils.showToast("onMenuItemActionCollapse")
         TUtils.setBottomViewVisible(fl_search, View.GONE, null)
+
         return true
     }
 
@@ -110,6 +129,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
             super.onBackPressedSupport()
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         //找到searchView
@@ -122,6 +142,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 
     var searchAdapter: SearchAdapter? = null
     private fun initSearch(searchView: SearchView) {
+        searchView.queryHint="诗歌古籍等关键字"
         searchView.setOnQueryTextListener(this)
         recyclerview_search_result.setLayoutManager(LinearLayoutManager(this))
         recyclerview_search_result.setItemAnimator(DefaultItemAnimator())

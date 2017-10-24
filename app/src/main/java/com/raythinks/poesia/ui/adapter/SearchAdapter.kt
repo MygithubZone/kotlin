@@ -1,6 +1,9 @@
 package com.raythinks.poesia.ui.adapter
 
+import android.graphics.Color
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
+import android.text.Html
 import android.text.TextUtils
 import android.util.Log
 import android.view.Gravity
@@ -15,6 +18,7 @@ import com.raythinks.poesia.utils.TUtils
 import com.raythinks.shiwen.viewmodel.MainViewModel
 import com.truizlop.sectionedrecyclerview.SimpleSectionedAdapter
 import kotlinx.android.synthetic.main.item_libors_mulu.view.*
+import kotlinx.android.synthetic.main.item_search_reult.view.*
 import java.util.ArrayList
 
 /**
@@ -35,13 +39,12 @@ class SearchAdapter(var viewHodler: MainViewModel, var lis: OnSelectionItemClick
     }
 
     override fun onBindItemViewHolder(holder: ViewHolder?, section: Int, position: Int) {
-        holder!!.itemView.tv_libros_mulu.gravity=Gravity.LEFT.and(Gravity.CENTER_VERTICAL)
-        holder!!.itemView.tv_libros_mulu.text = headerAarry[section]!![position]
-        holder!!.itemView.tv_libros_mulu.setOnClickListener { onSelectLis.onItemClick(section, position, holder?.itemView) }
+        holder!!.itemView.tv_search_result.text = Html.fromHtml(headerAarry[section]!![position].replace(valuekey, "<font color= '#5677fc'>${valuekey}</font>"))
+        holder!!.itemView.tv_search_result.setOnClickListener { onSelectLis.onItemClick(section, position, holder?.itemView) }
     }
 
     override fun onCreateItemViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent!!.context).inflate(R.layout.item_libors_mulu, parent, false))
+        return ViewHolder(LayoutInflater.from(parent!!.context).inflate(R.layout.item_search_reult, parent, false))
     }
 
     override fun getLayoutResource() = R.layout.header_textview
@@ -54,11 +57,19 @@ class SearchAdapter(var viewHodler: MainViewModel, var lis: OnSelectionItemClick
     var headerAarry = ArrayList<ArrayList<String>>()
     var headerIndexs = ArrayList<String>()
     var data: SearchModel? = null;
-    fun updateData(newData: SearchModel) {
+    var valuekey = ""
+    fun updateData(valuekey: String, newData: SearchModel) {
+        this.valuekey = valuekey
         this.data = newData
         headerAarry.clear()
         headerIndexs.clear()
         addData(newData)
+    }
+
+    fun clearData() {
+        headerAarry.clear()
+        headerIndexs.clear()
+        notifyDataSetChanged()
     }
 
     private fun addData(newData: SearchModel) {

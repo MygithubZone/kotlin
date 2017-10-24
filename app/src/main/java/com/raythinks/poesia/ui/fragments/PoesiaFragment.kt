@@ -67,7 +67,7 @@ class PoesiaFragment : BaseVMFragment<PoesiaViewModel>(), OnItemClickListener, M
             adapter.clearData()
             viewModel.updatePoesiaList(1, type, chao, xing)
         }
-        mSheetDialog?.show()
+        mSheetDialog?.dismiss()
     }
 
     override fun onItemClick(position: Int, itemView: View) {
