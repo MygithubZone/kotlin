@@ -1,8 +1,10 @@
 package com.raythinks.poesia.ui.activitys
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
+import android.support.v4.view.MenuItemCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.SearchView
@@ -19,6 +21,19 @@ import com.raythinks.shiwen.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import android.widget.Toast
+import android.support.v4.view.MenuItemCompat.setOnActionExpandListener
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
+import android.view.View
+import com.raythinks.poesia.listener.OnSelectionItemClickListener
+import com.raythinks.poesia.ui.adapter.LibrosAdapter
+import com.raythinks.poesia.ui.adapter.SearchAdapter
+import com.raythinks.poesia.utils.TUtils
+import kotlinx.android.synthetic.main.fragment_libros.*
+import kotlinx.android.synthetic.main.search_content.*
+
 
 /**
  * 功能：主界面
@@ -26,7 +41,38 @@ import kotlinx.android.synthetic.main.content_main.*
  *
  */
 @Route("poesia://activity/mainActivity")
-class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirstListener, ViewPager.OnPageChangeListener {
+class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirstListener, ViewPager.OnPageChangeListener, MenuItem.OnActionExpandListener, SearchView.OnQueryTextListener, OnSelectionItemClickListener {
+    override fun onItemClick(selection: Int, position: Int, itemView: View) {
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false  //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (TextUtils.isEmpty(newText)) {
+
+        } else {
+            viewModel.searchPoesia(newText!!).observe(this, Observer {
+                searchAdapter?.updateData(it!!)
+            })
+        }
+
+        return false//To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
+        TUtils.showToast("onMenuItemActionExpand")
+        TUtils.setBottomViewVisible(fl_search, View.VISIBLE, null)
+        return true
+    }
+
+    override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
+        TUtils.showToast("onMenuItemActionCollapse")
+        TUtils.setBottomViewVisible(fl_search, View.GONE, null)
+        return true
+    }
+
     override fun onBackToFirstFragment() {
     }
 
@@ -64,13 +110,23 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
             super.onBackPressedSupport()
         }
     }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         //找到searchView
         val searchItem = menu.findItem(R.id.action_search)
-        val searchView = searchItem.getActionView() as SearchView
+        searchView = searchItem.getActionView() as SearchView
+        searchItem.setOnActionExpandListener(this@MainActivity)
+        initSearch(searchView);
         return super.onCreateOptionsMenu(menu)
+    }
+
+    var searchAdapter: SearchAdapter? = null
+    private fun initSearch(searchView: SearchView) {
+        searchView.setOnQueryTextListener(this)
+        recyclerview_search_result.setLayoutManager(LinearLayoutManager(this))
+        recyclerview_search_result.setItemAnimator(DefaultItemAnimator())
+        searchAdapter = SearchAdapter(viewModel, this)
+        recyclerview_search_result.setAdapter(searchAdapter)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import com.raythinks.poesia.ApplicationImpl
@@ -107,6 +110,37 @@ object TUtils {
     fun dip2px(context: Context, dpValue: Float): Int {
         val scale = context.resources.displayMetrics.density
         return (dpValue * scale + 0.5f).toInt()
+    }
+
+    fun isEmptyList(list: List<Any>): Boolean {
+        return list == null || list.size == -0
+    }
+
+    /**
+     * 底部组件显示和隐藏
+     *
+     * @param view     底部组件
+     * @param visible  显示：View.VISIBLE和隐藏 View.GONE
+     * @param listener 动画监听
+     */
+    fun setBottomViewVisible(view: View, visible: Int, listener: Animation.AnimationListener?) {
+        if (visible == View.VISIBLE) {
+            val animFadeIn = AnimationUtils.loadAnimation(view.context,
+                    R.anim.in_from_bottom)
+            view.visibility = visible
+            if (listener != null)
+                animFadeIn.setAnimationListener(listener)
+            view.startAnimation(animFadeIn)
+
+        } else if (visible == View.GONE) {
+            val animFadeOut = AnimationUtils.loadAnimation(view.context,
+                    R.anim.out_from_bottom)
+            if (listener != null)
+                animFadeOut.setAnimationListener(listener)
+            view.startAnimation(animFadeOut)
+            view.visibility = visible
+        }
+
     }
 
     /**

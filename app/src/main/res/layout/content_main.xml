@@ -14,4 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground" />
+
+    <include layout="@layout/search_content"></include>
 </android.support.constraint.ConstraintLayout>

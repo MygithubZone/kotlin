@@ -3,6 +3,16 @@ package com.raythinks.shiwen.viewmodel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.raythinks.poesia.base.BaseViewModel
+import com.raythinks.poesia.base.ERROR_MEG_DATANULL
+import com.raythinks.poesia.base.ERROR_STATUS_DATANULL
+import com.raythinks.poesia.base.NetError
+import com.raythinks.poesia.net.ApiPoesiaList
+import com.raythinks.poesia.net.ApiSearchPoesia
+import com.raythinks.poesia.ui.model.GushiwensItem
+import com.raythinks.poesia.ui.model.PoesiaListModel
+import com.raythinks.poesia.ui.model.SearchModel
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 
 /**
@@ -13,7 +23,22 @@ import com.raythinks.poesia.base.BaseViewModel
  */
 
 class MainViewModel : BaseViewModel() {
-    init {
-
+    var searchModel: MutableLiveData<SearchModel> = MutableLiveData();
+    fun searchPoesia(valuekey: String): LiveData<SearchModel> {
+        BaseViewModel.apiService.searchPoesia(valuekey).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ result ->
+                    //不爲空
+                    if (result != null) {
+                        searchModel.value = result
+                    } else {
+                        onError.value = NetError(ERROR_STATUS_DATANULL, ERROR_MEG_DATANULL, fromApi = ApiSearchPoesia, error = null)
+                    }
+                    return@subscribe
+                }, { error ->
+                    onError.value = NetError(fromApi = ApiSearchPoesia, error = error)
+                    error.printStackTrace()
+                })
+        return searchModel
     }
 }
