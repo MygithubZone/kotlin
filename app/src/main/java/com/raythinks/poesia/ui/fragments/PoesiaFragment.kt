@@ -3,6 +3,8 @@ package com.raythinks.poesia.ui.fragments
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.support.design.widget.BottomSheetDialog
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
@@ -17,10 +19,11 @@ import com.raythinks.poesia.net.ApiPoesiaList
 import com.raythinks.poesia.ui.activitys.PoesiaDetialActivity
 import com.raythinks.poesia.ui.adapter.MenuTypeAdapter
 import com.raythinks.poesia.ui.adapter.PoesiaAdapter
-import com.raythinks.poesia.ui.viewmodel.PoesiaViewModel
+import com.raythinks.poesia.utils.ActivityRouterUtils
 import com.raythinks.poesia.utils.AnimUtils
 import com.raythinks.poesia.utils.DialogUtils
 import com.raythinks.poesia.utils.TUtils
+import com.raythinks.shiwen.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_poesia.*
 import kotlinx.android.synthetic.main.item_poesia.view.*
 
@@ -30,11 +33,18 @@ import kotlinx.android.synthetic.main.item_poesia.view.*
  * 时间： 2017/9/20 0020<br>.
  * 版本：1.2.0
  */
-class PoesiaFragment : BaseVMFragment<PoesiaViewModel>(), OnItemClickListener, MenuTypeAdapter.OnMenuItemClickListener {
+class PoesiaFragment : BaseVMFragment<MainViewModel>(), OnItemClickListener, MenuTypeAdapter.OnMenuItemClickListener {
     override fun onItemClick(ad: MenuTypeAdapter, selection: Int, position: Int, itemView: View) {
-        var temp = ad!!.itemArray[selection][position]
+        updateData(ad!!.itemArray[selection][position], ad!!.selectType)
+        mSheetDialog?.dismiss()
+    }
+
+    /**
+     * 更新诗文列表
+     */
+    fun updateData(temp: String, selectType: Int) {
         if (!TextUtils.equals(type, temp) || !TextUtils.equals(chao, temp) || !TextUtils.equals(xing, temp)) {
-            when (ad!!.selectType) {
+            when (selectType) {
                 0 -> {
                     if ("不限".equals(temp)) {
                         type = ""
@@ -67,13 +77,10 @@ class PoesiaFragment : BaseVMFragment<PoesiaViewModel>(), OnItemClickListener, M
             adapter.clearData()
             viewModel.updatePoesiaList(1, type, chao, xing)
         }
-        mSheetDialog?.dismiss()
     }
 
     override fun onItemClick(position: Int, itemView: View) {
-        var intent = Intent(_mActivity, PoesiaDetialActivity::class.java)
-        intent.putExtra("poesiaItem", adapter.data[position])
-        ActivityTransitionLauncher.with(_mActivity).from(itemView.tv_poesia_content).launch(intent);
+        ActivityRouterUtils.startPoesiaDetailActivity(_mActivity, adapter.data[position].id, adapter.data[position].nameStr, adapter.data[position].author)
     }
 
     lateinit var adapter: PoesiaAdapter
@@ -105,6 +112,9 @@ class PoesiaFragment : BaseVMFragment<PoesiaViewModel>(), OnItemClickListener, M
 
         }
         initDataMenu()
+        viewModel.updateSearchPoesia().observe(this, Observer {
+            updateData(it?.type ?: "", it?.slectType ?: 0)
+        })
     }
 
     var mSheetDialog: BottomSheetDialog? = null
@@ -135,7 +145,6 @@ class PoesiaFragment : BaseVMFragment<PoesiaViewModel>(), OnItemClickListener, M
         viewModel.onFinishError().observe(this, Observer {
             when (it?.fromApi) {
                 ApiPoesiaList -> {
-                    TUtils.showToast(it?.msg ?: "aaaa")
                     if (currentP == 1) {
                         stl.showError(it.msg, { initData() })
                     }
@@ -153,8 +162,8 @@ class PoesiaFragment : BaseVMFragment<PoesiaViewModel>(), OnItemClickListener, M
         caoArray = resources.getStringArray(R.array.array_author_borntimes)
         xingArray = arrayOf("不限", "诗词", "曲", "文言文")
         typeArray = arrayOf("不限", "写景", "咏物", "春天", "夏天", "秋天", "冬天", "写雨", "写雪", "写风", "写花",
-                "梅花", "荷花", "菊花", "柳树", "月亮", "山水", "长江", "黄河",  "写鸟",
-                "田园",  "地名", "抒情", "爱国", "离别", "送别", "思乡", "思念", "爱情", "励志", "哲理","悼亡",
+                "梅花", "荷花", "菊花", "柳树", "月亮", "山水", "长江", "黄河", "写鸟",
+                "田园", "地名", "抒情", "爱国", "离别", "送别", "思乡", "思念", "爱情", "励志", "哲理", "悼亡",
                 "写人", "老师", "母亲", "友情", "战争", "读书", "惜时", "婉约", "豪放", "诗经", "春节", "元宵节",
                 "寒食节", "清明节", "端午节", "七夕节", "中秋节", "重阳节", "忧国忧民", "咏史怀古", "宋词精选", "小学古诗",
                 "初中古诗", "高中古诗", "小学文言文", "初中文言文", "高中文言文", "古诗十九首", "唐诗三百首", "古诗三百首",

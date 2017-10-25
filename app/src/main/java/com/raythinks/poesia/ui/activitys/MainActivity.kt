@@ -28,10 +28,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.View
 import com.raythinks.poesia.listener.OnSelectionItemClickListener
-import com.raythinks.poesia.ui.adapter.LibrosAdapter
 import com.raythinks.poesia.ui.adapter.SearchAdapter
+import com.raythinks.poesia.utils.ActivityRouterUtils
 import com.raythinks.poesia.utils.TUtils
-import kotlinx.android.synthetic.main.fragment_libros.*
+import kotlinx.android.synthetic.main.empty_view.view.*
 import kotlinx.android.synthetic.main.search_content.*
 
 
@@ -47,22 +47,22 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         when (type) {
             "作者" -> {
 
-                return
             }
             "诗文" -> {
-
-                return
+                ActivityRouterUtils.startPoesiaDetailActivity(this, searchAdapter!!.data!!.gushiwens[position].id, searchAdapter!!.data!!.gushiwens[position]!!.nameStr, searchAdapter!!.data!!.gushiwens[position].author)
             }
             "古籍" -> {
-                return
+
             }
             "类型" -> {
-                return
+                vp_maincontent.setCurrentItem(0)
+                viewModel.setSearchPoesiaType(searchAdapter!!.headerAarry.get(selection).get(position))
             }
             "名句" -> {
-                return
             }
         }
+        searchView.onActionViewCollapsed()
+
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -71,10 +71,15 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 
     override fun onQueryTextChange(newText: String?): Boolean {
         if (TextUtils.isEmpty(newText)) {
+            stl_search_result.showContent()
             searchAdapter?.clearData()
         } else {
             viewModel.searchPoesia(newText!!).observe(this, Observer {
-                searchAdapter?.updateData(newText, it!!)
+
+                if (!(searchAdapter?.updateData(newText, it!!) ?: false)) {
+                    stl_search_result.showEmpty("未搜索到您要的内容哟", { initData() })
+                    stl_search_result.btn_empty_retry.visibility = View.GONE
+                }
             })
         }
         return false//To change body of created functions use File | Settings | File Templates.
@@ -142,7 +147,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 
     var searchAdapter: SearchAdapter? = null
     private fun initSearch(searchView: SearchView) {
-        searchView.queryHint="诗歌古籍等关键字"
+        searchView.queryHint = "诗歌古籍等关键字"
         searchView.setOnQueryTextListener(this)
         recyclerview_search_result.setLayoutManager(LinearLayoutManager(this))
         recyclerview_search_result.setItemAnimator(DefaultItemAnimator())
@@ -163,11 +168,11 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
     fun onNavigationItemSelected() {
         RxNavigationView.itemSelections(nav_view).subscribe {
             when (it.itemId) {
-                R.id.nav_refranes -> {//名句
+                R.id.nav_poesia -> {//诗文
                     // Handle the camera action
                     selectCurrentItem(0)
                 }
-                R.id.nav_poesia -> {//诗文
+                R.id.nav_refranes -> {//名句
                     selectCurrentItem(1)
                 }
                 R.id.nav_author -> {//作者

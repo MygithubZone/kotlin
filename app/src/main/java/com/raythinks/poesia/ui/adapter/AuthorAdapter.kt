@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import com.raythinks.poesia.R
 import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.model.AuthorsItem
-import com.raythinks.poesia.ui.viewmodel.AuthorListViewModel
 import com.raythinks.poesia.utils.ImageUtils
+import com.raythinks.shiwen.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.item_author.view.*
 
 /**
@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.item_author.view.*
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class AuthorAdapter(var viewHodler: AuthorListViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<AuthorAdapter.ViewHolder>() {
+class AuthorAdapter(var viewHodler: MainViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<AuthorAdapter.ViewHolder>() {
     var data: ArrayList<AuthorsItem>
     var mOnItemClickListener: OnItemClickListener
 

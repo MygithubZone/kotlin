@@ -6,14 +6,13 @@ import android.text.Html
 import android.view.View
 import com.huxq17.swipecardsview.BaseCardAdapter
 import com.raythinks.poesia.R
-import com.raythinks.poesia.ui.viewmodel.AuthorListViewModel
 import kotlinx.android.synthetic.main.item_authorlist.view.*
 import com.dd.morphingbutton.MorphingButton
 import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.model.AuthorsItem
 import com.raythinks.poesia.utils.ImageUtils
 import com.raythinks.poesia.utils.TUtils
-import com.raythinks.shiwen.ui.fragment.AuthorListFragment
+import com.raythinks.shiwen.viewmodel.MainViewModel
 
 
 /**
@@ -22,14 +21,14 @@ import com.raythinks.shiwen.ui.fragment.AuthorListFragment
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class AuthorListAdapter(context: Context, viewModel: AuthorListViewModel, data: ArrayList<AuthorsItem>? = ArrayList<AuthorsItem>(), onItemClickListener: OnItemClickListener) : BaseCardAdapter<String>() {
+class AuthorListAdapter(context: Context, viewModel: MainViewModel, data: ArrayList<AuthorsItem>? = ArrayList<AuthorsItem>(), onItemClickListener: OnItemClickListener) : BaseCardAdapter<String>() {
     var pics: Array<Int>;
     var circle: MorphingButton.Params
     var square: MorphingButton.Params
     var mData: ArrayList<AuthorsItem>?
     var mContext: Context
     var mOnItemClickListener: OnItemClickListener
-    var mViewModel: AuthorListViewModel
+    var mViewModel: MainViewModel
 
     init {
         mViewModel = viewModel

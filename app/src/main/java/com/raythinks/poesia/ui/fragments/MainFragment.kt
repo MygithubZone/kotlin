@@ -68,10 +68,11 @@ class MainFragment : SupportFragment() {
             var type = arguments.getInt("type", 0)
             when (type) {
                 0 -> {
-                    mainFrag = RefranesFragment()
+                    mainFrag = PoesiaFragment()
                 }
                 1 -> {
-                    mainFrag = PoesiaFragment()
+                    mainFrag = RefranesFragment()
+
                 }
                 2 -> {
                     mainFrag = AuthorListFragment()

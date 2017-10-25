@@ -1,30 +1,23 @@
 package com.raythinks.poesia.ui.fragments
 
 import android.arch.lifecycle.Observer
-import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialog
-import android.support.design.widget.CoordinatorLayout
 import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.View
-import android.widget.FrameLayout
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.base.ERROR_MEG_DATANULL
 import com.raythinks.poesia.base.finishRefershOrLoadMore
-import com.raythinks.poesia.listener.OnSelectionItemClickListener
 import com.raythinks.poesia.net.ApiRefranesList
 import com.raythinks.poesia.ui.adapter.RefranesAdapter
 import com.raythinks.poesia.ui.adapter.MenuTypeAdapter
-import com.raythinks.poesia.ui.viewmodel.RefranesViewModel
 import com.raythinks.poesia.utils.AnimUtils
 import com.raythinks.poesia.utils.DialogUtils
 import com.raythinks.poesia.utils.TUtils
-import com.truizlop.sectionedrecyclerview.SectionedSpanSizeLookup
-import kotlinx.android.synthetic.main.dialog_libros_bottommenu.view.*
+import com.raythinks.shiwen.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_refranes.*
 import java.util.ArrayList
 
@@ -35,7 +28,7 @@ import java.util.ArrayList
  * 时间： 2017/9/20 0020<br>.
  * 版本：1.2.0
  */
-class RefranesFragment : BaseVMFragment<RefranesViewModel>(), MenuTypeAdapter.OnMenuItemClickListener {
+class RefranesFragment : BaseVMFragment<MainViewModel>(), MenuTypeAdapter.OnMenuItemClickListener {
     override fun onItemClick(ad: MenuTypeAdapter, selection: Int, position: Int, itemView: View) {
         var temp = ad!!.itemArray[selection][position]
         if (!TextUtils.equals(type, temp) || !TextUtils.equals(theme, temp)) {

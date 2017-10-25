@@ -5,7 +5,6 @@ import android.content.Intent
 import android.support.design.widget.TabLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.kogitune.activity_transition.ActivityTransitionLauncher
 import com.raythinks.poesia.R
@@ -13,16 +12,13 @@ import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.base.ERROR_MEG_DATANULL
 import com.raythinks.poesia.base.finishRefershOrLoadMore
 import com.raythinks.poesia.listener.OnItemClickListener
-import com.raythinks.poesia.net.ApiAuthorList
 import com.raythinks.poesia.net.ApiLibrosList
 import com.raythinks.poesia.ui.activitys.LibrosDetialActivity
 import com.raythinks.poesia.ui.adapter.LibrosAdapter
-import com.raythinks.poesia.ui.viewmodel.LibrosViewModel
 import com.raythinks.poesia.utils.AnimUtils
 import com.raythinks.poesia.utils.TUtils
 import kotlinx.android.synthetic.main.fragment_libros.*
 import kotlinx.android.synthetic.main.item_libros.view.*
-import android.content.DialogInterface
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.CoordinatorLayout
@@ -32,6 +28,7 @@ import android.view.Gravity
 import android.widget.FrameLayout
 import com.raythinks.poesia.listener.OnSelectionItemClickListener
 import com.raythinks.poesia.ui.adapter.LibrosTypeAdapter
+import com.raythinks.shiwen.viewmodel.MainViewModel
 import com.truizlop.sectionedrecyclerview.SectionedSpanSizeLookup
 import kotlinx.android.synthetic.main.dialog_libros_bottommenu.view.*
 
@@ -39,7 +36,7 @@ import kotlinx.android.synthetic.main.dialog_libros_bottommenu.view.*
 /**
  * Created by zh on 2017/9/20.
  */
-class LibrosFragment : BaseVMFragment<LibrosViewModel>(), TabLayout.OnTabSelectedListener, OnItemClickListener, OnSelectionItemClickListener {
+class LibrosFragment : BaseVMFragment<MainViewModel>(), TabLayout.OnTabSelectedListener, OnItemClickListener, OnSelectionItemClickListener {
     override fun onItemClick(selection: Int, position: Int, itemView: View) {
         type = menuAdapter?.headerAarry!![selection][position]
         if (selection != tbs_libros_type?.selectedTabPosition) {

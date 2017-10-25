@@ -6,12 +6,18 @@
     android:orientation="vertical"
     android:visibility="gone">
 
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/recyclerview_search_result"
+    <com.raythinks.poesia.ui.widget.StatusLayout
+        android:id="@+id/stl_search_result"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:overScrollMode="never" />
+        android:background="@color/white">
+
+        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/recyclerview_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
+    </com.raythinks.poesia.ui.widget.StatusLayout>
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nsv_search_history"

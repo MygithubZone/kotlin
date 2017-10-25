@@ -6,6 +6,7 @@ import com.raythinks.poesia.ui.model.BooksItem
 import com.raythinks.poesia.ui.model.GuWenDetialModel
 import com.raythinks.poesia.ui.model.LibrosListModel
 import com.raythinks.poesia.ui.model.TbBookviews
+import com.raythinks.shiwen.viewmodel.MainViewModel
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -13,7 +14,7 @@ import rx.schedulers.Schedulers
  * Created by zh on 2017/10/15.
  */
 
-class LibrosDetailViewModel : LibrosViewModel() {
+class LibrosDetailViewModel : MainViewModel() {
     var booksModel: MutableLiveData<BooksItem> = MutableLiveData<BooksItem>();
     fun getBooks() = booksModel
     var booksViewsModel: MutableLiveData<TbBookviews> = MutableLiveData<TbBookviews>();

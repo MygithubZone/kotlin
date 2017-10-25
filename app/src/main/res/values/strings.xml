@@ -62,8 +62,8 @@
         <item>@string/str_refranes_theme_sw</item>
     </string-array>
     <string-array name="arrayt_type">
-        <item>@string/str_type_refranes</item>
         <item>@string/str_type_poesia</item>
+        <item>@string/str_type_refranes</item>
         <item>@string/str_type_author</item>
         <item>@string/str_type_libros</item>
     </string-array>

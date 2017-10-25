@@ -15,9 +15,9 @@ import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.net.ApiAuthorList
 import com.raythinks.poesia.ui.activitys.AuthorDetialActivity
 import com.raythinks.poesia.ui.adapter.AuthorAdapter
-import com.raythinks.poesia.ui.viewmodel.AuthorListViewModel
 import com.raythinks.poesia.utils.AnimUtils
 import com.raythinks.poesia.utils.TUtils
+import com.raythinks.shiwen.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_author.*
 import kotlinx.android.synthetic.main.item_author.view.*
 
@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.item_author.view.*
  * 版本：1.2.0
  */
 
-class AuthorListFragment : BaseVMFragment<AuthorListViewModel>(), TabLayout.OnTabSelectedListener, OnItemClickListener {
+class AuthorListFragment : BaseVMFragment<MainViewModel>(), TabLayout.OnTabSelectedListener, OnItemClickListener {
     override fun onItemClick(position: Int, itemView: View) {//跳转到详情
         var intent = Intent(_mActivity, AuthorDetialActivity::class.java)
         intent.putExtra("author", authorAdapter.data!![position])

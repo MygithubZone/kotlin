@@ -80,7 +80,7 @@ object TUtils {
     fun toMainFragment(type: Int): SupportFragment {
         var bundle: Bundle = Bundle()
         bundle.putInt("type", type);
-        var mainFragment: MainFragment = MainFragment()
+        var mainFragment = MainFragment()
         mainFragment.arguments = bundle
         return mainFragment
     }
@@ -141,6 +141,23 @@ object TUtils {
             view.visibility = visible
         }
 
+    }
+
+    fun setFromBottomViewVisible(view: View, visible: Int, listener: Animation.AnimationListener?) {
+        val animFadeIn = AnimationUtils.loadAnimation(view.context,
+                R.anim.in_from_bottom)
+        view.visibility = visible
+        if (listener != null)
+            animFadeIn.setAnimationListener(listener)
+    }
+
+    fun setFromTopViewAnim(view: View, visible: Int, listener: Animation.AnimationListener?) {
+        val animFadeIn = AnimationUtils.loadAnimation(view.context,
+                R.anim.in_from_top)
+        view.visibility = visible
+        if (listener != null)
+            animFadeIn.setAnimationListener(listener)
+        view.startAnimation(animFadeIn)
     }
 
     /**

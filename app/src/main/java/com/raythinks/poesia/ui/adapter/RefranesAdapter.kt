@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.raythinks.poesia.R
 import com.raythinks.poesia.ui.model.MingjusItem
-import com.raythinks.poesia.ui.viewmodel.RefranesViewModel
+import com.raythinks.shiwen.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.item_refranes.view.*
 
 /**
@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_refranes.view.*
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class RefranesAdapter(var viewHodler: RefranesViewModel) : RecyclerView.Adapter<RefranesAdapter.ViewHolder>() {
+class RefranesAdapter(var viewHodler: MainViewModel) : RecyclerView.Adapter<RefranesAdapter.ViewHolder>() {
     var data: ArrayList<MingjusItem>
 
     init {

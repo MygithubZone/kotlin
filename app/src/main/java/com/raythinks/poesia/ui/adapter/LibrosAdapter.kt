@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import com.raythinks.poesia.R
 import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.model.BooksItem
-import com.raythinks.poesia.ui.model.GushiwensItem
-import com.raythinks.poesia.ui.viewmodel.LibrosViewModel
+import com.raythinks.shiwen.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.item_libros.view.*
 
 /**
@@ -18,7 +17,7 @@ import kotlinx.android.synthetic.main.item_libros.view.*
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class LibrosAdapter(var viewHodler: LibrosViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<LibrosAdapter.ViewHolder>() {
+class LibrosAdapter(var viewHodler: MainViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<LibrosAdapter.ViewHolder>() {
     var data: ArrayList<BooksItem>
 
     init {

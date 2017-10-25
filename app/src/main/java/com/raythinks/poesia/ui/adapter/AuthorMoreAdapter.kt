@@ -6,13 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.raythinks.poesia.R
-import com.raythinks.poesia.ui.model.BooksItem
-import com.raythinks.poesia.ui.model.GushiwensItem
 import com.raythinks.poesia.ui.model.ZiliaosItem
 import com.raythinks.poesia.ui.viewmodel.AuthorDetialViewModel
-import com.raythinks.poesia.ui.viewmodel.LibrosViewModel
 import kotlinx.android.synthetic.main.item_author_ziliao.view.*
-import kotlinx.android.synthetic.main.item_libros.view.*
 
 /**
  * 功能：<br>

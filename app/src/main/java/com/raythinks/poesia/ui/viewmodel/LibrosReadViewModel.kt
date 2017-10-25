@@ -8,6 +8,7 @@ import com.raythinks.poesia.base.NetError
 import com.raythinks.poesia.net.ApiLibrosBookv
 import com.raythinks.poesia.net.ApiLibrosList
 import com.raythinks.poesia.ui.model.*
+import com.raythinks.shiwen.viewmodel.MainViewModel
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
@@ -15,7 +16,7 @@ import rx.schedulers.Schedulers
  * Created by zh on 2017/10/15.
  */
 
-class LibrosReadViewModel : LibrosViewModel() {
+class LibrosReadViewModel : MainViewModel() {
     var booksItemModel: MutableLiveData<LibrosReadModel> = MutableLiveData<LibrosReadModel>();
     fun getBookItem() = booksItemModel
     var booksItemShowType: MutableLiveData<Int> = MutableLiveData<Int>();

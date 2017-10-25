@@ -58,12 +58,13 @@ class SearchAdapter(var viewHodler: MainViewModel, var lis: OnSelectionItemClick
     var headerIndexs = ArrayList<String>()
     var data: SearchModel? = null;
     var valuekey = ""
-    fun updateData(valuekey: String, newData: SearchModel) {
+    fun updateData(valuekey: String, newData: SearchModel):Boolean {
         this.valuekey = valuekey
         this.data = newData
         headerAarry.clear()
         headerIndexs.clear()
         addData(newData)
+        return !(headerAarry.size==0)
     }
 
     fun clearData() {
