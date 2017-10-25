@@ -8,6 +8,7 @@ import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMActivity
 import com.raythinks.poesia.base.finishRefershOrLoadMore
 import com.raythinks.poesia.net.ApiPoesiaDetail
+import com.raythinks.poesia.net.ApiPoesiaDetailByJu
 import com.raythinks.poesia.net.ApiPoesiaList
 import com.raythinks.poesia.ui.adapter.PoesiaDetailAdapter
 import com.raythinks.poesia.ui.anim.ZoomOutPagerAnim
@@ -65,7 +66,14 @@ class PoesiaDetialActivity : BaseVMActivity<PoesiaDetialViewModel>(), ViewPager.
         titleArray.add("${intent.getStringExtra("author")}简介")
         tv_poesia_subtitle.text = titleArray[0]
         vp_posia_detail.addOnPageChangeListener(this)
-        viewModel.updatePoesiaDetial("${intent.getIntExtra("id", 0)}")
+        when (intent.getIntExtra("typeFrom", 1)) {
+            1 -> {
+                viewModel.updatePoesiaDetial("${intent.getIntExtra("id", 0)}")
+            }
+            2 -> {
+                viewModel.updatePoesiaDetialByJu("${intent.getIntExtra("id", 0)}")
+            }
+        }
         viewModel.getGuShiWen().observe(this, Observer {
             titleArray.set(0, "${it?.chaodai}.${intent.getStringExtra("author")}")
             if (currP == 0) {
@@ -75,6 +83,10 @@ class PoesiaDetialActivity : BaseVMActivity<PoesiaDetialViewModel>(), ViewPager.
         viewModel.onFinishError().observe(this, Observer {
             when (it?.fromApi) {
                 ApiPoesiaDetail -> {
+                    stl.showError(it.msg, { initData() })
+                    return@Observer
+                }
+                ApiPoesiaDetailByJu -> {
                     stl.showError(it.msg, { initData() })
                     return@Observer
                 }

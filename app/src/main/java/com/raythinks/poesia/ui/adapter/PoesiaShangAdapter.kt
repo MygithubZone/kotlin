@@ -51,11 +51,8 @@ class PoesiaShangAdapter(var viewHodler: PoesiaDetialViewModel) : RecyclerView.A
 
     }
 
-    fun updateData(newData: ArrayList<ShangxisItem>?) {
-        if (newData == null)
-            return
-        data.clear()
+    fun updateData(newData: ArrayList<ShangxisItem>) {
         data.addAll(0, newData)
-        notifyItemInserted(0)
+        notifyItemRangeInserted(0, data.size)
     }
 }

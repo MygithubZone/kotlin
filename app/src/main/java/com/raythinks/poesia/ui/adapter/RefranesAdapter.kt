@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.raythinks.poesia.R
+import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.model.MingjusItem
 import com.raythinks.shiwen.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.item_poesia.view.*
 import kotlinx.android.synthetic.main.item_refranes.view.*
 
 /**
@@ -15,7 +17,7 @@ import kotlinx.android.synthetic.main.item_refranes.view.*
  * 时间： 2017/9/21 0021<br>.
  * 版本：1.2.0
  */
-class RefranesAdapter(var viewHodler: MainViewModel) : RecyclerView.Adapter<RefranesAdapter.ViewHolder>() {
+class RefranesAdapter(var viewHodler: MainViewModel, var onItemClickListener: OnItemClickListener) : RecyclerView.Adapter<RefranesAdapter.ViewHolder>() {
     var data: ArrayList<MingjusItem>
 
     init {
@@ -26,6 +28,7 @@ class RefranesAdapter(var viewHodler: MainViewModel) : RecyclerView.Adapter<Refr
         data.clear()
         notifyDataSetChanged()
     }
+
     fun updateData(b: Boolean, newData: ArrayList<MingjusItem>) {
         if (data.size == 0) {
             data.addAll(newData)
@@ -46,6 +49,9 @@ class RefranesAdapter(var viewHodler: MainViewModel) : RecyclerView.Adapter<Refr
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.itemView?.tv_refranes_content?.text = data[position].nameStr
         holder?.itemView?.tv_refranes_from?.text = "${data[position].shiName}(${data[position].author})"
+        holder?.itemView?.setOnClickListener {
+            onItemClickListener.onItemClick(position, holder.itemView)
+        }
 
     }
 
@@ -53,7 +59,7 @@ class RefranesAdapter(var viewHodler: MainViewModel) : RecyclerView.Adapter<Refr
         return ViewHolder(LayoutInflater.from(parent!!.context).inflate(R.layout.item_refranes, parent, false))
     }
 
-    override fun getItemCount(): Int = data.size?: 0
+    override fun getItemCount(): Int = data.size ?: 0
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
     }

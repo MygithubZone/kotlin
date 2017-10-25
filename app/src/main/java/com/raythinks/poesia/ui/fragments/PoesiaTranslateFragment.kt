@@ -3,10 +3,12 @@ package com.raythinks.poesia.ui.fragments
 import android.arch.lifecycle.Observer
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.ui.adapter.PoesiaTranslateAdapter
 import com.raythinks.poesia.ui.viewmodel.PoesiaDetialViewModel
+import kotlinx.android.synthetic.main.empty_view.view.*
 import kotlinx.android.synthetic.main.fragment_list.*
 
 /**
@@ -26,12 +28,13 @@ class PoesiaTranslateFragment : BaseVMFragment<PoesiaDetialViewModel>() {
 
     override fun initData() {
         viewModel.getFanYi().observe(this, Observer {
-            it.let {
-                it!!.let {
-                    adapter.updateData(it!!.fanyis)
-                }
+            var fanyis = it?.fanyis
+            if (fanyis == null||fanyis.size==0) {
+                stl_list.showEmpty("该诗文还未添加翻译哟", { initData() })
+                stl_list.btn_empty_retry.visibility = View.GONE
+            } else {
+                adapter.updateData(fanyis)
             }
-
         })
     }
 

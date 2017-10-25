@@ -28,6 +28,7 @@ import android.view.Gravity
 import android.widget.FrameLayout
 import com.raythinks.poesia.listener.OnSelectionItemClickListener
 import com.raythinks.poesia.ui.adapter.LibrosTypeAdapter
+import com.raythinks.poesia.utils.ActivityRouterUtils
 import com.raythinks.shiwen.viewmodel.MainViewModel
 import com.truizlop.sectionedrecyclerview.SectionedSpanSizeLookup
 import kotlinx.android.synthetic.main.dialog_libros_bottommenu.view.*
@@ -47,10 +48,7 @@ class LibrosFragment : BaseVMFragment<MainViewModel>(), TabLayout.OnTabSelectedL
     }
 
     override fun onItemClick(position: Int, itemView: View) {
-        var intent = Intent(_mActivity, LibrosDetialActivity::class.java)
-        intent.putExtra("id", adapter.data[position].id)
-        intent.putExtra("nameStr", adapter.data[position].nameStr)
-        ActivityTransitionLauncher.with(_mActivity).from(itemView.tv_libros_brief).launch(intent);
+        ActivityRouterUtils.startLibrosDetailActivity(_mActivity, adapter.data[position].id, adapter.data[position].nameStr)
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -105,6 +103,7 @@ class LibrosFragment : BaseVMFragment<MainViewModel>(), TabLayout.OnTabSelectedL
         }
         initMenu()
     }
+
     var type = ""
     var mBottomSheetDialog: BottomSheetDialog? = null
     var menuAdapter: LibrosTypeAdapter? = null

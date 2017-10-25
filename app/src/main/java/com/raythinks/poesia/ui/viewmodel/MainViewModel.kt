@@ -14,14 +14,18 @@ import rx.schedulers.Schedulers
 
 
 /**
- * 功能：<br></br>
+ * 功能：主界面ViewModel<br></br>
  * 作者：赵海<br></br>
  * 时间： 2017/8/21 0021<br></br>.
  * 版本：1.2.0
  */
 
 open class MainViewModel : BasePoesiaViewModel() {
-    var searchModel: MutableLiveData<SearchModel> = MutableLiveData();
+    var searchModel: MutableLiveData<SearchModel> = MutableLiveData();//搜索model
+    /**
+     * 调用搜索
+     * @param valuekey  关键字
+     */
     fun searchPoesia(valuekey: String): LiveData<SearchModel> {
         BaseViewModel.apiService.searchPoesia(valuekey).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -30,7 +34,7 @@ open class MainViewModel : BasePoesiaViewModel() {
                     if (result != null) {
                         searchModel.value = result
                     } else {
-                        onError.value = NetError(ERROR_STATUS_DATANULL, ERROR_MEG_DATANULL, fromApi = ApiSearchPoesia, error = null)
+                        onError.value = NetError(ERROR_STATUS_DATANULL, "搜索数据异常哟，请重试", fromApi = ApiSearchPoesia, error = null)
                     }
                     return@subscribe
                 }, { error ->

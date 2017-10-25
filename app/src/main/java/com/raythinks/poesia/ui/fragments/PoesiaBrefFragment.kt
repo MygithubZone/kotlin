@@ -3,7 +3,9 @@ package com.raythinks.poesia.ui.fragments
 import android.arch.lifecycle.Observer
 import android.text.Editable
 import android.text.Html
+import android.text.TextUtils
 import android.view.View
+import android.widget.Toast
 import com.kogitune.activity_transition.ActivityTransition
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
@@ -21,13 +23,20 @@ import kotlinx.android.synthetic.main.fragment_poesia_bref.*
  * 版本：1.2.0
  */
 class PoesiaBrefFragment : BaseVMFragment<PoesiaDetialViewModel>() {
+    var mingju = ""
     override fun initView() {
+        mingju = _mActivity.intent.getStringExtra("mingju")
     }
 
     override fun initData() {
         viewModel.getGuShiWen().observe(this, Observer {
-            it.let {
-                tv_poesia_content.text = Html.fromHtml(it!!.cont) as Editable
+            if (it != null) {
+                if (TextUtils.isEmpty(mingju)) {
+
+                    tv_poesia_content.text = Html.fromHtml(it!!.cont)
+                } else {
+                    tv_poesia_content.text = Html.fromHtml(it!!.cont.replace(mingju, "<font color= '#C68350'>${mingju}</font>"))
+                }
                 tv_poesia_tag.text = it!!.tag
                 tv_poesia_content.clearFocus()
                 tv_poesia_content.setCustomActionMenuCallBack(CopyActionCallBack())
@@ -43,11 +52,9 @@ class PoesiaBrefFragment : BaseVMFragment<PoesiaDetialViewModel>() {
                 } else {
                     tv_shang.visibility = View.VISIBLE
                 }
-                TUtils.setBottomViewVisible(cv_poesia_bref,View.VISIBLE,null)
+                TUtils.setFromBottomViewVisible(cv_poesia_bref, View.VISIBLE, null)
             }
         })
-//        ActivityTransition.with(activity.intent).to(tv_poesia_content).start((_mActivity as PoesiaDetialActivity).savedInstanceState);
-
     }
 
     override fun getLayoutId() = R.layout.fragment_poesia_bref

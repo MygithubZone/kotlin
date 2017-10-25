@@ -11,9 +11,11 @@ import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.base.ERROR_MEG_DATANULL
 import com.raythinks.poesia.base.finishRefershOrLoadMore
+import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.net.ApiRefranesList
 import com.raythinks.poesia.ui.adapter.RefranesAdapter
 import com.raythinks.poesia.ui.adapter.MenuTypeAdapter
+import com.raythinks.poesia.utils.ActivityRouterUtils
 import com.raythinks.poesia.utils.AnimUtils
 import com.raythinks.poesia.utils.DialogUtils
 import com.raythinks.poesia.utils.TUtils
@@ -28,7 +30,11 @@ import java.util.ArrayList
  * 时间： 2017/9/20 0020<br>.
  * 版本：1.2.0
  */
-class RefranesFragment : BaseVMFragment<MainViewModel>(), MenuTypeAdapter.OnMenuItemClickListener {
+class RefranesFragment : BaseVMFragment<MainViewModel>(), MenuTypeAdapter.OnMenuItemClickListener, OnItemClickListener {
+    override fun onItemClick(position: Int, itemView: View) {
+        ActivityRouterUtils.startPoesiaDetailActivity(context = _mActivity, typeFrom = 2, id = adapter!!.data[position].id, nameStr = adapter!!.data[position]!!.shiName, author = adapter!!.data[position].author, mingju = adapter!!.data[position].nameStr)
+    }
+
     override fun onItemClick(ad: MenuTypeAdapter, selection: Int, position: Int, itemView: View) {
         var temp = ad!!.itemArray[selection][position]
         if (!TextUtils.equals(type, temp) || !TextUtils.equals(theme, temp)) {
@@ -63,7 +69,7 @@ class RefranesFragment : BaseVMFragment<MainViewModel>(), MenuTypeAdapter.OnMenu
         AnimUtils.loadAmin(_mActivity, cl_tab, R.anim.fade_scape01)
         recyclerview.setLayoutManager(LinearLayoutManager(_mActivity))
         recyclerview.setItemAnimator(DefaultItemAnimator())
-        adapter = RefranesAdapter(viewModel)
+        adapter = RefranesAdapter(viewModel, this)
         recyclerview.setAdapter(adapter)
         tv_refranes_theme.setOnClickListener {
             mSheetDialog = DialogUtils.initMenuDialog(_mActivity, "主题", 1, themeArray, this)

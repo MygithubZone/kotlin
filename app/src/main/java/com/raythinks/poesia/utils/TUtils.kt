@@ -149,6 +149,7 @@ object TUtils {
         view.visibility = visible
         if (listener != null)
             animFadeIn.setAnimationListener(listener)
+        view.startAnimation(animFadeIn)
     }
 
     fun setFromTopViewAnim(view: View, visible: Int, listener: Animation.AnimationListener?) {

@@ -20,7 +20,9 @@ const val ApiAuthorList = "/api/author/Default.aspx"
 const val ApiAuthorMore = "/api/author/author.aspx"
 const val ApiAuthorPoesia = "/api/author/authorsw.aspx"
 const val ApiSearchPoesia = "/api/ajaxSearch.aspx"
+const val ApiPoesiaDetailByJu = "/api/mingju/ju.aspx"
 const val ApiBaseGuShiWenURL = "http://app.gushiwen.org"
+
 interface PoesiaApiService {
     @GET(ApiRefranesList)
     fun getRefranesList(@Query("p") p: Int, @Query("c") c: String = "", @Query("t") t: String = "", @Query("pwd") pwd: String = "", @Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<RefranesListModel>
@@ -30,6 +32,9 @@ interface PoesiaApiService {
 
     @GET(ApiPoesiaDetail)
     fun getPoesiaDetail(@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<PoesiaDetailModel>
+
+    @GET(ApiPoesiaDetailByJu)
+    fun getPoesiaDetailByJu(@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<PoesiaDetailModel>
 
     @GET(ApiLibrosList)
     fun getLibrosList(@Query("p") p: Int, @Query("type") type: String = "", @Query("pwd") pwd: String = "", @Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<LibrosListModel>
@@ -45,10 +50,12 @@ interface PoesiaApiService {
 
     @GET(ApiAuthorPoesia)
     fun getAuthorPoesia(@Query("p") p: Int, @Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<AuthorPoesiaModel>
+
     @GET(ApiLibrosBookv)
-    fun getLibrosBookv (@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<LibrosReadModel>
+    fun getLibrosBookv(@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<LibrosReadModel>
+
     @GET(ApiSearchPoesia)
-    fun searchPoesia (@Query("valuekey") valuekey: String = "", @Query("token") token: String = "gswapi"): Observable<SearchModel>
+    fun searchPoesia(@Query("valuekey") valuekey: String = "", @Query("token") token: String = "gswapi"): Observable<SearchModel>
 
     companion object Factory {
         fun create() = RetrofitService().getApiService(ApiBaseGuShiWenURL, PoesiaApiService::class.java)

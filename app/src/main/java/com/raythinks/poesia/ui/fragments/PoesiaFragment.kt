@@ -80,7 +80,7 @@ class PoesiaFragment : BaseVMFragment<MainViewModel>(), OnItemClickListener, Men
     }
 
     override fun onItemClick(position: Int, itemView: View) {
-        ActivityRouterUtils.startPoesiaDetailActivity(_mActivity, adapter.data[position].id, adapter.data[position].nameStr, adapter.data[position].author)
+        ActivityRouterUtils.startPoesiaDetailActivity(context = _mActivity, typeFrom = 1, id = adapter.data[position].id, nameStr = adapter.data[position].nameStr, author = adapter.data[position].author)
     }
 
     lateinit var adapter: PoesiaAdapter

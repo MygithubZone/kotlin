@@ -49,16 +49,17 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 
             }
             "诗文" -> {
-                ActivityRouterUtils.startPoesiaDetailActivity(this, searchAdapter!!.data!!.gushiwens[position].id, searchAdapter!!.data!!.gushiwens[position]!!.nameStr, searchAdapter!!.data!!.gushiwens[position].author)
+                ActivityRouterUtils.startPoesiaDetailActivity(context = this, typeFrom = 1, id = searchAdapter!!.data!!.gushiwens[position].id, nameStr = searchAdapter!!.data!!.gushiwens[position]!!.nameStr, author = searchAdapter!!.data!!.gushiwens[position].author)
             }
             "古籍" -> {
-
+                ActivityRouterUtils.startLibrosDetailActivity(this, searchAdapter!!.data!!.books[position].id, searchAdapter!!.data!!.books[position].nameStr)
             }
             "类型" -> {
                 vp_maincontent.setCurrentItem(0)
                 viewModel.setSearchPoesiaType(searchAdapter!!.headerAarry.get(selection).get(position))
             }
             "名句" -> {
+                ActivityRouterUtils.startPoesiaDetailActivity(context = this, typeFrom = 2, id = searchAdapter!!.data!!.mingjus[position].id, nameStr = "", author = "", mingju = searchAdapter!!.data!!.mingjus[position]!!.nameStr)
             }
         }
         searchView.onActionViewCollapsed()

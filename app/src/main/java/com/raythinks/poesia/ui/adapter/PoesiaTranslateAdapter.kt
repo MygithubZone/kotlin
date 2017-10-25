@@ -51,11 +51,8 @@ class PoesiaTranslateAdapter(var viewHodler: PoesiaDetialViewModel) : RecyclerVi
 
     }
 
-    fun updateData(newData: ArrayList<FanyisItem>?) {
-        if (newData == null)
-            return
-        data.clear()
+    fun updateData(newData: ArrayList<FanyisItem>) {
         data.addAll(0, newData)
-        notifyItemInserted(0)
+        notifyItemRangeInserted(0, data.size)
     }
 }

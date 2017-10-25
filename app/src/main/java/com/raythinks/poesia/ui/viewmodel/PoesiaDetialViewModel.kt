@@ -7,6 +7,7 @@ import com.raythinks.poesia.base.ERROR_MEG_DATANULL
 import com.raythinks.poesia.base.ERROR_STATUS_DATANULL
 import com.raythinks.poesia.base.NetError
 import com.raythinks.poesia.net.ApiPoesiaDetail
+import com.raythinks.poesia.net.ApiPoesiaDetailByJu
 import com.raythinks.poesia.net.ApiRefranesList
 import com.raythinks.poesia.ui.model.PoesiaDetailModel
 import com.raythinks.poesia.ui.model.TbFanyis
@@ -42,6 +43,30 @@ class PoesiaDetialViewModel : BasePoesiaViewModel() {
 
                 }, { error ->
                     onError.value = NetError(fromApi = ApiPoesiaDetail, error = error)
+                    error.printStackTrace()
+
+                })
+    }
+
+    fun updatePoesiaDetialByJu(id: String) {
+        BaseViewModel.apiService.getPoesiaDetailByJu(id).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ result ->
+                    if (result != null) {
+                        result.tb_author.let {
+                            authorItem.value = it
+                        }
+                        result.tb_gushiwen.let { gushiwenItem.value = it }
+                        result.tb_fanyis.let { fanyiModel.value = it }
+                        result.tb_shangxis.let { shangxinModel.value = it }
+                    } else {
+
+                        onError.value = NetError(ERROR_STATUS_DATANULL, "诗文详情暂无数据哟，请重试", fromApi = ApiPoesiaDetailByJu, error = null)
+                    }
+                    return@subscribe
+
+                }, { error ->
+                    onError.value = NetError(fromApi = ApiPoesiaDetailByJu, error = error)
                     error.printStackTrace()
 
                 })

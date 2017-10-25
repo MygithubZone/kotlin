@@ -39,7 +39,7 @@ class SearchAdapter(var viewHodler: MainViewModel, var lis: OnSelectionItemClick
     }
 
     override fun onBindItemViewHolder(holder: ViewHolder?, section: Int, position: Int) {
-        holder!!.itemView.tv_search_result.text = Html.fromHtml(headerAarry[section]!![position].replace(valuekey, "<font color= '#5677fc'>${valuekey}</font>"))
+        holder!!.itemView.tv_search_result.text = Html.fromHtml(headerAarry[section]!![position].replace(valuekey, "<font color= '#C68350'>${valuekey}</font>"))
         holder!!.itemView.tv_search_result.setOnClickListener { onSelectLis.onItemClick(section, position, holder?.itemView) }
     }
 
