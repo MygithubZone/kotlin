@@ -62,8 +62,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
                 ActivityRouterUtils.startPoesiaDetailActivity(context = this, typeFrom = 2, id = searchAdapter!!.data!!.mingjus[position].id, nameStr = "", author = "", mingju = searchAdapter!!.data!!.mingjus[position]!!.nameStr)
             }
         }
-        searchView.onActionViewCollapsed()
-
+        searchItem.collapseActionView()
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -74,6 +73,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         if (TextUtils.isEmpty(newText)) {
             stl_search_result.showContent()
             searchAdapter?.clearData()
+
         } else {
             viewModel.searchPoesia(newText!!).observe(this, Observer {
 
@@ -89,6 +89,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
     override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
         searchAdapter?.clearData()
         TUtils.setBottomViewVisible(fl_search, View.VISIBLE, null)
+
         return true
     }
 
@@ -101,7 +102,6 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
     override fun onBackToFirstFragment() {
     }
 
-    lateinit var searchView: SearchView
     lateinit var typePoesiaId: Array<Int>;
     lateinit var typePoesia: Array<String>;
     override fun initView() {
@@ -136,11 +136,12 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         }
     }
 
+    lateinit var searchItem: MenuItem
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         //找到searchView
-        val searchItem = menu.findItem(R.id.action_search)
-        searchView = searchItem.getActionView() as SearchView
+        searchItem = menu.findItem(R.id.action_search)
+        var searchView = searchItem.getActionView() as SearchView
         searchItem.setOnActionExpandListener(this@MainActivity)
         initSearch(searchView);
         return super.onCreateOptionsMenu(menu)

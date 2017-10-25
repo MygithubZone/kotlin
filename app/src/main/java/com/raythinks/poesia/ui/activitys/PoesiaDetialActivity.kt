@@ -75,7 +75,7 @@ class PoesiaDetialActivity : BaseVMActivity<PoesiaDetialViewModel>(), ViewPager.
             }
         }
         viewModel.getGuShiWen().observe(this, Observer {
-            titleArray.set(0, "${it?.chaodai}.${intent.getStringExtra("author")}")
+            titleArray.set(0, "${it?.chaodai}.${it?.author}")
             if (currP == 0) {
                 onPageSelected(0)
             }

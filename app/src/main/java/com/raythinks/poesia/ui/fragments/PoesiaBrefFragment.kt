@@ -33,9 +33,9 @@ class PoesiaBrefFragment : BaseVMFragment<PoesiaDetialViewModel>() {
             if (it != null) {
                 if (TextUtils.isEmpty(mingju)) {
 
-                    tv_poesia_content.text = Html.fromHtml(it!!.cont)
+                    tv_poesia_content.text = Html.fromHtml(it!!.cont) as Editable
                 } else {
-                    tv_poesia_content.text = Html.fromHtml(it!!.cont.replace(mingju, "<font color= '#C68350'>${mingju}</font>"))
+                    tv_poesia_content.text = Html.fromHtml(it!!.cont.replace(mingju, "<font color= '#C68350'>${mingju}</font>"))  as Editable
                 }
                 tv_poesia_tag.text = it!!.tag
                 tv_poesia_content.clearFocus()
