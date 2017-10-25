@@ -88,8 +88,8 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 
     override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
         searchAdapter?.clearData()
-        TUtils.setBottomViewVisible(fl_search, View.VISIBLE, null)
 
+        TUtils.setBottomViewVisible(fl_search, View.VISIBLE, null)
         return true
     }
 
@@ -118,6 +118,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         vp_maincontent.addOnPageChangeListener(this)
         vp_maincontent.offscreenPageLimit = 4
         fab.setOnClickListener { }
+
         onNavigationItemSelected();
     }
 

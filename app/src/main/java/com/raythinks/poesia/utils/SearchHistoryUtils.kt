@@ -1,68 +1,60 @@
 package com.raythinks.poesia.utils
 
+import android.content.Context
+import android.text.TextUtils
+import java.util.*
+import kotlin.collections.ArrayList
+
 /**
  * 功能：<br>
  * 作者：赵海<br>
  * 时间： 2017/10/25 0025<br>.
  * 版本：1.2.0
  */
-object SearchHistoryUtils {
-    fun initData(){
-        String longHistory = (String) SPUtils.get(SEARCH_HISTORY, "");
-        String[] tmpHistory = longHistory.split(",");                            //split后长度为1有一个空串对象
-        historyList = new ArrayList<String>(Arrays.asList(tmpHistory));
-
-        if (historyList.size() == 1 && historyList.get(0).equals("")) {          //如果没有搜索记录，split之后第0位是个空串的情况下
+class SearchHistoryUtils {
+    fun initData(context: Context): ArrayList<String> {
+        var longHistory = SPUtils.get(context, "SEARCH_HISTORY", "") as String;
+        var tmpHistory = longHistory.split(",");                            //split后长度为1有一个空串对象
+        var historyList = ArrayList<String>(tmpHistory);
+        if (historyList.size == 1 && historyList.get(0).equals("")) {          //如果没有搜索记录，split之后第0位是个空串的情况下
             historyList.clear();                                                 //清空集合，这个很关键
         }
+        return historyList
     }
+
     /**
      * 保存搜索记录
      *
      * @param inputText 输入的历史记录
      */
-    private void saveSearchHistory(String inputText) {
+    fun saveSearchHistory(context: Context, inputText: String) {
 
         if (TextUtils.isEmpty(inputText)) {
             return;
         }
 
-        String longHistory = (String) SPUtils.get(SEARCH_HISTORY, "");        //获取之前保存的历史记录
-
-        String[] tmpHistory = longHistory.split(",");                            //逗号截取 保存在数组中
-
-        historyList = new ArrayList<String>(Arrays.asList(tmpHistory));          //将改数组转换成ArrayList
-
-        if (historyList.size() > 0) {
-            //移除之前重复添加的元素
-            for (int i = 0; i < historyList.size(); i++) {
-                if (inputText.equals(historyList.get(i))) {
-                    historyList.remove(i);
-                    break;
-                }
-            }
-
+        var longHistory = SPUtils.get(context, "SEARCH_HISTORY", "") as String;        //获取之前保存的历史记录
+        var tmpHistory = longHistory.split(",");                            //逗号截取 保存在数组中
+        var historyList = ArrayList<String>(tmpHistory) //数组转换成ArrayList
+        if (!historyList.isEmpty()) {
+            historyList = ArrayList<String>(historyList.filterNot { TextUtils.equals(it, inputText) })
             historyList.add(0, inputText);                           //将新输入的文字添加集合的第0位也就是最前面
 
-            if (historyList.size() > 10) {
-                historyList.remove(historyList.size() - 1);         //最多保存10条搜索记录 删除最早搜索的那一项
+            if (historyList.size > 20) {
+                historyList.removeAt(historyList.size - 1);         //最多保存10条搜索记录 删除最早搜索的那一项
             }
 
             //逗号拼接
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < historyList.size(); i++) {
-                sb.append(historyList.get(i) + ",");
-            }
+            var sb = historyList.joinToString(",")
             //保存到sp
-            SPUtils.put(SEARCH_HISTORY, sb.toString());
+            SPUtils.put(context, "SEARCH_HISTORY", sb.toString());
         } else {
             //之前未添加过
-            SPUtils.put(SEARCH_HISTORY, inputText + ",");
+            SPUtils.put(context, "SEARCH_HISTORY", inputText + ",");
         }
     }
-    fun clear(){
-        historyList.clear();                            //清空集合
-        SPUtils.remove(SEARCH_HISTORY);                 //清空sp
-        mHistorySearchAdapter.notifyDataChanged();      //刷新适配器
+
+    fun clear(context: Context) {
+        SPUtils.remove(context, "SEARCH_HISTORY");                 //清空sp
     }
 }
