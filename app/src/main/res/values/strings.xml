@@ -106,6 +106,8 @@
     <string name="str_author_detail_tab_sj">诗集</string>
     <string name="str_libros_detail_tab_gy">概要</string>
     <string name="str_libors_detail_tab_ml">目录</string>
+    <string name="str_cancel">取消</string>
+    <string name="str_sure">确定</string>
     <string-array name="array_author_detail_tab">
         <item>@string/str_author_detail_tab_jj</item>
         <item>@string/str_author_detail_tab_xq</item>

@@ -138,10 +138,10 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 //        vp_maincontent.setPageTransformer(true, ZoomOutPagerAnim())
         vp_maincontent.addOnPageChangeListener(this)
         vp_maincontent.offscreenPageLimit = 4
-        DialogUtils.showEidtDialog(this, true, "提示", "ss", "跳转", "取消", null)
-        fab.setOnClickListener {
-        }
         onNavigationItemSelected();
+        fab.setOnClickListener {
+            DialogUtils.showEidtDialog(this, true, "提示", "ss", "跳转", "取消", null)
+        }
     }
 
     override fun isSetStatusBar() = false

@@ -2,38 +2,89 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_window"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_margin="16dp"
+    android:padding="16dp" >
 
     <TextView
+        android:id="@+id/tv_dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:lineSpacingExtra="4dp"
-        android:text="您要跳转\\n到"
+        android:text="提示"
+        android:textColor="@color/black_high"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_dialog_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
         android:textColor="@color/black_mid"
         android:textSize="16sp" />
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/til_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:gravity="center"
-        android:paddingTop="8dp"
         android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:minHeight="60dp"
         app:hintTextAppearance="@style/TextInputLayout"
-        app:passwordToggleEnabled="true">
+       >
 
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/et_password"
+            android:id="@+id/et_dialog_content"
             style="@style/EditText"
             android:gravity="center"
-            android:hint="0-15的数字"
             android:imeOptions="actionDone"
-            android:inputType="none"
+            android:inputType="number"
             android:typeface="monospace" />
     </android.support.design.widget.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/tv_dialog_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:lines="1"
+            android:padding="6dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/str_cancel"
+            android:textColor="@color/black_min"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_dialog_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginLeft="16dp"
+            android:lines="1"
+            android:padding="6dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/str_sure"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:textColor="@color/colorPrimary"
+            android:textSize="14sp" />
+    </LinearLayout>
 </LinearLayout>
