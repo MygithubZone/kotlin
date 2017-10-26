@@ -27,9 +27,12 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.view.View
+import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.listener.OnSelectionItemClickListener
 import com.raythinks.poesia.ui.adapter.SearchAdapter
+import com.raythinks.poesia.ui.adapter.SearchHistoryAdapter
 import com.raythinks.poesia.utils.ActivityRouterUtils
+import com.raythinks.poesia.utils.SearchHistoryUtils
 import com.raythinks.poesia.utils.TUtils
 import kotlinx.android.synthetic.main.empty_view.view.*
 import kotlinx.android.synthetic.main.search_content.*
@@ -41,12 +44,15 @@ import kotlinx.android.synthetic.main.search_content.*
  *
  */
 @Route("poesia://activity/mainActivity")
-class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirstListener, ViewPager.OnPageChangeListener, MenuItem.OnActionExpandListener, SearchView.OnQueryTextListener, OnSelectionItemClickListener {
+class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirstListener, ViewPager.OnPageChangeListener, MenuItem.OnActionExpandListener, SearchView.OnQueryTextListener, OnSelectionItemClickListener, OnItemClickListener {
+    override fun onItemClick(position: Int, itemView: View) {
+        searchView?.setQuery(searchHistoryAdapter.data[position], false)
+    }
+
     override fun onItemClick(selection: Int, position: Int, itemView: View) {
         var type = searchAdapter!!.headerIndexs[selection]
         when (type) {
             "作者" -> {
-
             }
             "诗文" -> {
                 ActivityRouterUtils.startPoesiaDetailActivity(context = this, typeFrom = 1, id = searchAdapter!!.data!!.gushiwens[position].id, nameStr = searchAdapter!!.data!!.gushiwens[position]!!.nameStr, author = searchAdapter!!.data!!.gushiwens[position].author)
@@ -62,6 +68,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
                 ActivityRouterUtils.startPoesiaDetailActivity(context = this, typeFrom = 2, id = searchAdapter!!.data!!.mingjus[position].id, nameStr = "", author = "", mingju = searchAdapter!!.data!!.mingjus[position]!!.nameStr)
             }
         }
+        SearchHistoryUtils.saveSearchHistory(this, searchAdapter!!.headerAarry[selection][position])
         searchItem.collapseActionView()
     }
 
@@ -71,15 +78,17 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 
     override fun onQueryTextChange(newText: String?): Boolean {
         if (TextUtils.isEmpty(newText)) {
-            stl_search_result.showContent()
-            searchAdapter?.clearData()
-
+            showHistotryView()
         } else {
             viewModel.searchPoesia(newText!!).observe(this, Observer {
 
                 if (!(searchAdapter?.updateData(newText, it!!) ?: false)) {
                     stl_search_result.showEmpty("未搜索到您要的内容哟", { initData() })
                     stl_search_result.btn_empty_retry.visibility = View.GONE
+                } else {
+                    stl_search_result.showContent()
+                    stl_search_history.visibility = View.GONE
+                    stl_search_result.visibility = View.VISIBLE
                 }
             })
         }
@@ -87,10 +96,23 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
     }
 
     override fun onMenuItemActionExpand(p0: MenuItem?): Boolean {
-        searchAdapter?.clearData()
-
+        showHistotryView()
         TUtils.setBottomViewVisible(fl_search, View.VISIBLE, null)
         return true
+    }
+
+    fun showHistotryView() {
+        searchAdapter?.clearData()
+        stl_search_history.visibility = View.VISIBLE
+        stl_search_result.visibility = View.GONE
+        var list = SearchHistoryUtils.initData(this)
+        if (list.isEmpty()) {
+            stl_search_history.showEmpty("暂无历史搜索记录哟", { initData() })
+            stl_search_history.btn_empty_retry.visibility = View.GONE
+        } else {
+            stl_search_history.showContent()
+            searchHistoryAdapter.updateData(list)
+        }
     }
 
     override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
@@ -102,8 +124,9 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
     override fun onBackToFirstFragment() {
     }
 
-    lateinit var typePoesiaId: Array<Int>;
-    lateinit var typePoesia: Array<String>;
+    lateinit var searchHistoryAdapter: SearchHistoryAdapter
+    lateinit var typePoesiaId: Array<Int>
+    lateinit var typePoesia: Array<String>
     override fun initView() {
         setSupportActionBar(toolbar)
         typePoesia = resources.getStringArray(R.array.arrayt_type)
@@ -118,7 +141,6 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         vp_maincontent.addOnPageChangeListener(this)
         vp_maincontent.offscreenPageLimit = 4
         fab.setOnClickListener { }
-
         onNavigationItemSelected();
     }
 
@@ -137,12 +159,13 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         }
     }
 
+    lateinit var searchView: SearchView
     lateinit var searchItem: MenuItem
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         //找到searchView
         searchItem = menu.findItem(R.id.action_search)
-        var searchView = searchItem.getActionView() as SearchView
+        searchView = searchItem.getActionView() as SearchView
         searchItem.setOnActionExpandListener(this@MainActivity)
         initSearch(searchView);
         return super.onCreateOptionsMenu(menu)
@@ -156,6 +179,14 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         recyclerview_search_result.setItemAnimator(DefaultItemAnimator())
         searchAdapter = SearchAdapter(viewModel, this)
         recyclerview_search_result.setAdapter(searchAdapter)
+        searchHistoryAdapter = SearchHistoryAdapter(viewModel, this)
+        recyclerview_search_history.layoutManager = LinearLayoutManager(this)
+        recyclerview_search_history.setItemAnimator(DefaultItemAnimator())
+        recyclerview_search_history.adapter = searchHistoryAdapter
+        ll_clear_search.setOnClickListener {
+            SearchHistoryUtils.clear(this)
+            showHistotryView()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

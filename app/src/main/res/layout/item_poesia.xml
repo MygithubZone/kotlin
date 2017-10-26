@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:layout_marginBottom="0dp"
     android:background="@color/white"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:layout_marginBottom="0dp">
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,7 +30,6 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:lineSpacingExtra="8sp"
-                android:text="菩萨蛮菩萨蛮菩萨蛮"
                 android:textColor="@color/black_high"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,13 +61,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
+                    android:layout_marginLeft="6dp"
                     android:background="@drawable/draw_yizhu"
                     android:gravity="center"
                     android:lineSpacingExtra="4sp"
                     android:text="注"
                     android:textColor="@color/color_yizhu_selector"
                     android:textSize="10sp"
-                    android:layout_marginLeft="6dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="0dp" />
             </LinearLayout>
@@ -82,10 +81,9 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
-            android:text="唐代：陶渊明"
             android:textColor="@color/black_min" />
 
-        <com.raythinks.poesia.ui.widget.SelectableTextView
+        <TextView
             android:id="@+id/tv_poesia_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,13 +93,10 @@
             android:gravity="center_vertical|left"
             android:inputType="none"
             android:lineSpacingExtra="10sp"
-            android:text="遑遑三十载，书剑两无成。山水寻吴越，风尘厌洛京。扁舟泛湖海，长揖谢公卿。且乐杯中物，谁论世上名。遑遑三十载，书剑两无成。山水寻吴越，风尘厌洛京。扁舟泛湖海，长揖谢公卿。且乐杯中物，谁论世上名。遑遑三十载，书剑两无成。山水寻吴越，风尘厌洛京。扁舟泛湖海，长揖谢公卿。且乐杯中物，谁论世上名。"
             android:textColor="@color/black_mid"
             android:textCursorDrawable="@null"
             android:textIsSelectable="true"
-            android:textSize="14sp"
-            app:forbiddenActionMenu="false"
-            app:textJustify="true" />
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -140,7 +135,6 @@
             android:layout_marginBottom="16dp"
             android:layout_marginTop="8dp"
             android:lineSpacingExtra="4sp"
-            android:text="宋词三百首，豪放，爱国，壮志"
             android:textColor="@color/black_min"
             android:textSize="12sp" />
 

@@ -5,13 +5,8 @@ import android.text.Editable
 import android.text.Html
 import android.text.TextUtils
 import android.view.View
-import android.widget.Toast
-import com.kogitune.activity_transition.ActivityTransition
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
-import com.raythinks.poesia.listener.CopyActionCallBack
-import com.raythinks.poesia.ui.activitys.AuthorDetialActivity
-import com.raythinks.poesia.ui.activitys.PoesiaDetialActivity
 import com.raythinks.poesia.ui.viewmodel.PoesiaDetialViewModel
 import com.raythinks.poesia.utils.TUtils
 import kotlinx.android.synthetic.main.fragment_poesia_bref.*
@@ -35,11 +30,9 @@ class PoesiaBrefFragment : BaseVMFragment<PoesiaDetialViewModel>() {
 
                     tv_poesia_content.text = Html.fromHtml(it!!.cont) as Editable
                 } else {
-                    tv_poesia_content.text = Html.fromHtml(it!!.cont.replace(mingju, "<font color= '#C68350'>${mingju}</font>"))  as Editable
+                    tv_poesia_content.text = Html.fromHtml(it!!.cont.replace(mingju, "<font color= '#C68350'>${mingju}</font>")) as Editable
                 }
-                tv_poesia_tag.text = it!!.tag
-                tv_poesia_content.clearFocus()
-                tv_poesia_content.setCustomActionMenuCallBack(CopyActionCallBack())
+                TUtils.copyText(_mActivity, tv_poesia_content)
                 if (it!!.yizhuIspass) {
                     tv_yi.visibility = View.VISIBLE
                     tv_zhu.visibility = View.VISIBLE

@@ -1,1 +1,1 @@
-include   ':baselib', ':app' ,':transitioncontroller'
+include   ':baselib', ':app' ,':transitioncontroller',"selecttext_library"

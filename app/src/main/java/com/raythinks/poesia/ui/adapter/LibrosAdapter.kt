@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import com.raythinks.poesia.R
 import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.ui.model.BooksItem
+import com.raythinks.poesia.utils.TUtils
 import com.raythinks.shiwen.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.fragment_poesia_bref.*
 import kotlinx.android.synthetic.main.item_libros.view.*
 
 /**
@@ -27,6 +29,7 @@ class LibrosAdapter(var viewHodler: MainViewModel, var onItemClickListener: OnIt
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder!!.itemView.tv_libros_title.text = data[position].nameStr
         holder!!.itemView.tv_libros_brief.text = Html.fromHtml(data[position].cont)
+        TUtils.copyText( holder!!.itemView.context, holder!!.itemView.tv_libros_brief)
         holder!!.itemView.setOnClickListener { onItemClickListener.onItemClick(position, holder.itemView) }
     }
 

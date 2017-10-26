@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.FragmentActivity
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Gravity
@@ -13,6 +14,9 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
+import com.jaeger.library.OnSelectListener
+import com.jaeger.library.OnSelectTextCallBack
+import com.jaeger.library.SelectableTextHelper
 import com.raythinks.poesia.ApplicationImpl
 import com.raythinks.poesia.R
 import com.raythinks.poesia.ui.fragments.MainFragment
@@ -150,6 +154,15 @@ object TUtils {
         if (listener != null)
             animFadeIn.setAnimationListener(listener)
         view.startAnimation(animFadeIn)
+    }
+
+    fun copyText(context: Context, mTv: TextView) {
+        var mSelectableTextHelper = SelectableTextHelper.Builder(mTv)
+                .setSelectedColor(ContextCompat.getColor(context, R.color.selected_yellow))
+                .setCursorHandleSizeInDp(20f)
+                .setCursorHandleColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                .build()
+        mSelectableTextHelper.setSelectListener(OnSelectTextCallBack(context))
     }
 
     fun setFromTopViewAnim(view: View, visible: Int, listener: Animation.AnimationListener?) {

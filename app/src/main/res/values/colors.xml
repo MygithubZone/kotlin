@@ -13,4 +13,5 @@
     <color name="black_min">#999999</color>
     <color name="white">#ffffff</color>
     <color name="white70">#a3ffffff</color>
+    <color name="selected_yellow">#8fF5F593</color>
 </resources>

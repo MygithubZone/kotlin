@@ -11,14 +11,12 @@ import kotlin.collections.ArrayList
  * 时间： 2017/10/25 0025<br>.
  * 版本：1.2.0
  */
-class SearchHistoryUtils {
+object SearchHistoryUtils {
     fun initData(context: Context): ArrayList<String> {
         var longHistory = SPUtils.get(context, "SEARCH_HISTORY", "") as String;
         var tmpHistory = longHistory.split(",");                            //split后长度为1有一个空串对象
         var historyList = ArrayList<String>(tmpHistory);
-        if (historyList.size == 1 && historyList.get(0).equals("")) {          //如果没有搜索记录，split之后第0位是个空串的情况下
-            historyList.clear();                                                 //清空集合，这个很关键
-        }
+        historyList = ArrayList<String>(historyList.filterNot { TextUtils.isEmpty(it) })
         return historyList
     }
 
@@ -39,11 +37,9 @@ class SearchHistoryUtils {
         if (!historyList.isEmpty()) {
             historyList = ArrayList<String>(historyList.filterNot { TextUtils.equals(it, inputText) })
             historyList.add(0, inputText);                           //将新输入的文字添加集合的第0位也就是最前面
-
             if (historyList.size > 20) {
                 historyList.removeAt(historyList.size - 1);         //最多保存10条搜索记录 删除最早搜索的那一项
             }
-
             //逗号拼接
             var sb = historyList.joinToString(",")
             //保存到sp
