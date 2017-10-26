@@ -13,7 +13,6 @@
         android:layout_gravity="center_vertical"
         android:layout_marginRight="8dp"
         android:indeterminateDuration="1200" />
-
     <TextView
         android:id="@+id/tv_loading"
         android:layout_width="wrap_content"
@@ -21,5 +20,6 @@
         android:text="正在加载..."
         android:textColor="@color/black_mid"
         android:textSize="14sp" />
+
 
 </LinearLayout>

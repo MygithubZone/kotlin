@@ -10,7 +10,7 @@ import android.view.ViewGroup
  * Created by 赵海 on 2017/10/6.
  */
 class DialogListFragment : AppCompatDialogFragment() {
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater , container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 }

@@ -29,7 +29,7 @@ class LibrosReadItemFragment : BaseVMFragment<LibrosReadViewModel>() {
 
     override fun initData() {
         stl.showLoading()
-        id = arguments.getString("id");
+        id = arguments?.getString("id")?:"0";
         oldType== viewModel.getShowType().value
         viewModel.updateLiborsItem(id).observe(this, Observer {
             if (TextUtils.equals(id, "${it?.tb_bookview?.id}")) {

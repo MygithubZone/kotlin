@@ -3,6 +3,10 @@ package com.raythinks.poesia.ui.widget;
 
 import java.util.ArrayList;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -19,12 +23,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
-
-import com.nineoldandroids.animation.Animator;
-import com.nineoldandroids.animation.Animator.AnimatorListener;
-import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.animation.ValueAnimator;
-import com.nineoldandroids.animation.ValueAnimator.AnimatorUpdateListener;
 import com.raythinks.poesia.R;
 
 /**
@@ -263,7 +261,7 @@ public class BezierLinearPointsView extends View {
             });
             va.setDuration((long) getDuration());
             va.setInterpolator(new AccelerateDecelerateInterpolator());
-            va.addListener(new AnimatorListener() {
+            va.addListener(new Animator.AnimatorListener() {
                 public void onAnimationStart(Animator arg0) {
                 }
 

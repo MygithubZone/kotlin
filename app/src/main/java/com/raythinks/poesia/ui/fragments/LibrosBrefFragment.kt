@@ -24,7 +24,7 @@ class LibrosBrefFragment : BaseVMFragment<LibrosDetailViewModel>() {
         viewModel.getBooks().observe(this, Observer {
             it.let {
                 tv_libros_content.text = Html.fromHtml(it!!.cont) as Editable
-                TUtils.copyText(context, tv_libros_content)
+                TUtils.copyText(context!!, tv_libros_content)
                 TUtils.setFromBottomViewVisible(cv_libros_bref, View.VISIBLE, null)
             }
         })

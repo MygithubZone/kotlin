@@ -57,7 +57,7 @@ class MainFragment : SupportFragment() {
         return true
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater!!.inflate(R.layout.fragment_main, container, false)
         return view
     }
@@ -65,7 +65,7 @@ class MainFragment : SupportFragment() {
     override fun onLazyInitView(savedInstanceState: Bundle?) {
         super.onLazyInitView(savedInstanceState)
         if (savedInstanceState == null) {
-            var type = arguments.getInt("type", 0)
+            var type = arguments?.getInt("type", 0)
             when (type) {
                 0 -> {
                     mainFrag = PoesiaFragment()

@@ -1,15 +1,7 @@
 package com.raythinks.poesia.ui.activitys
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.support.v4.view.ViewPager
-import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
-import com.mrzk.transitioncontroller.controller.animationUtils.TransitionController
-import com.mrzk.transitioncontroller.controller.animationUtils.ViewAnimationCompatUtils
-import com.mrzk.transitioncontroller.controller.listener.TransitionCustomListener
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMActivity
 import com.raythinks.poesia.ui.adapter.AuthorDetailAdapter
