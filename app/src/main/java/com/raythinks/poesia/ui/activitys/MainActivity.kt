@@ -31,9 +31,7 @@ import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.listener.OnSelectionItemClickListener
 import com.raythinks.poesia.ui.adapter.SearchAdapter
 import com.raythinks.poesia.ui.adapter.SearchHistoryAdapter
-import com.raythinks.poesia.utils.ActivityRouterUtils
-import com.raythinks.poesia.utils.SearchHistoryUtils
-import com.raythinks.poesia.utils.TUtils
+import com.raythinks.poesia.utils.*
 import kotlinx.android.synthetic.main.empty_view.view.*
 import kotlinx.android.synthetic.main.search_content.*
 
@@ -140,7 +138,9 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 //        vp_maincontent.setPageTransformer(true, ZoomOutPagerAnim())
         vp_maincontent.addOnPageChangeListener(this)
         vp_maincontent.offscreenPageLimit = 4
-        fab.setOnClickListener { }
+        DialogUtils.showEidtDialog(this, true, "提示", "ss", "跳转", "取消", null)
+        fab.setOnClickListener {
+        }
         onNavigationItemSelected();
     }
 
