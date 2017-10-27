@@ -156,13 +156,14 @@ object TUtils {
         view.startAnimation(animFadeIn)
     }
 
-    fun copyText(context: Context, mTv: TextView) {
+    fun copyText(context: Context, mTv: TextView): SelectableTextHelper{
         var mSelectableTextHelper = SelectableTextHelper.Builder(mTv)
                 .setSelectedColor(ContextCompat.getColor(context, R.color.selected_yellow))
                 .setCursorHandleSizeInDp(20f)
                 .setCursorHandleColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .build()
         mSelectableTextHelper.setSelectListener(OnSelectTextCallBack(context))
+        return mSelectableTextHelper
     }
 
     fun setFromTopViewAnim(view: View, visible: Int, listener: Animation.AnimationListener?) {

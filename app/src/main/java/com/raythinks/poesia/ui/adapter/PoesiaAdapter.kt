@@ -29,9 +29,16 @@ class PoesiaAdapter(var viewHodler: BasePoesiaViewModel, var onItemClickListener
         holder!!.itemView.tv_poesia_title.text = data[position].nameStr
         holder!!.itemView.tv_poesia_author.text = "${data[position].chaodai}.${data[position].author}"
         holder!!.itemView.tv_poesia_content.text = Html.fromHtml(data[position].cont)
-        TUtils.copyText(holder!!.itemView.context, holder!!.itemView.tv_poesia_content)
+        var selectHelper = TUtils.copyText(holder!!.itemView.context, holder!!.itemView.tv_poesia_content)
         holder.itemView.setOnClickListener {
             onItemClickListener.onItemClick(position, holder.itemView)
+        }
+        holder.itemView.tv_poesia_content.setOnClickListener {
+            if (selectHelper.isShowPopMenu) {
+                selectHelper.closeMenu()
+            } else {
+                onItemClickListener.onItemClick(position, holder.itemView)
+            }
         }
         if (data[position].yizhuIspass) {
             holder!!.itemView.ll_yizhu.visibility = View.VISIBLE

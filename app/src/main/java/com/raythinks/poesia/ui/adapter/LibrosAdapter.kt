@@ -29,8 +29,15 @@ class LibrosAdapter(var viewHodler: MainViewModel, var onItemClickListener: OnIt
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder!!.itemView.tv_libros_title.text = data[position].nameStr
         holder!!.itemView.tv_libros_brief.text = Html.fromHtml(data[position].cont)
-        TUtils.copyText( holder!!.itemView.context, holder!!.itemView.tv_libros_brief)
+        var selecthelper = TUtils.copyText(holder!!.itemView.context, holder!!.itemView.tv_libros_brief)
         holder!!.itemView.setOnClickListener { onItemClickListener.onItemClick(position, holder.itemView) }
+        holder!!.itemView.tv_libros_brief.setOnClickListener {
+            if (selecthelper.isShowPopMenu) {
+                selecthelper.closeMenu()
+            } else {
+                onItemClickListener.onItemClick(position, holder.itemView)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): LibrosAdapter.ViewHolder {

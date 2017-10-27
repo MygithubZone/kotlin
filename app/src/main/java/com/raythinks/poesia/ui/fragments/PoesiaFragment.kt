@@ -145,6 +145,9 @@ class PoesiaFragment : BaseVMFragment<MainViewModel>(), OnItemClickListener, Men
             var gushiwens = it?.gushiwens
             currentP = it?.currentPage ?: 1
             sumP = it?.sumPage ?: 1
+            if (sumP>500){
+                sumP=500
+            }
             if (gushiwens == null || gushiwens.size == 0) {//返回列表为空
                 if (it?.currentPage == 1) {//返回列表为空,且第一页
                     stl.showEmpty(ERROR_MEG_DATANULL, { initData() })

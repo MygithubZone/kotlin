@@ -172,6 +172,13 @@ public class SelectableTextHelper {
             mOperateWindow.dismiss();
         }
     }
+    public boolean isShowPopMenu(){
+        return  (mOperateWindow != null&&mOperateWindow.isShowing());
+    }
+    public void closeMenu() {
+        hideSelectView();
+        resetSelectionInfo();
+    }
 
     private void resetSelectionInfo() {
         mSelectionInfo.mSelectionContent = null;
