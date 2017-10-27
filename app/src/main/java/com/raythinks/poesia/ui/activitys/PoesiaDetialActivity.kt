@@ -1,6 +1,7 @@
 package com.raythinks.poesia.ui.activitys
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.view.View
@@ -56,6 +57,12 @@ class PoesiaDetialActivity : BaseVMActivity<PoesiaDetialViewModel>(), ViewPager.
         vp_posia_detail.adapter = poesiaAdapter
         vp_posia_detail.setPageTransformer(true, ZoomOutPagerAnim())
         vp_posia_detail.offscreenPageLimit = 4
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        initData()
     }
 
     override fun initData() {

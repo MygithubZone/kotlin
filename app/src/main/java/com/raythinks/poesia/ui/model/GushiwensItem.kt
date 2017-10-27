@@ -22,7 +22,8 @@ data class GushiwensItem(val langsongAuthor: String = "",
                          val id: Int = 0,
                          val tag: String = "",
                          val cont: String = "",
-                         val shangIspass: Boolean = false) : Parcelable {
+                         val shangIspass: Boolean = false, var yizhuCont: PoesiaYiZhuCont? = null,
+                         var showType: String = "cont") : Parcelable {
     constructor(source: Parcel) : this(
             source.readString(),
             source.readString(),
@@ -43,7 +44,9 @@ data class GushiwensItem(val langsongAuthor: String = "",
             source.readInt(),
             source.readString(),
             source.readString(),
-            1 == source.readInt()
+            1 == source.readInt(),
+            source.readParcelable<PoesiaYiZhuCont>(PoesiaYiZhuCont::class.java.classLoader),
+            source.readString()
     )
 
     override fun describeContents() = 0
@@ -69,6 +72,8 @@ data class GushiwensItem(val langsongAuthor: String = "",
         writeString(tag)
         writeString(cont)
         writeInt((if (shangIspass) 1 else 0))
+        writeParcelable(yizhuCont, 0)
+        writeString(showType)
     }
 
     companion object {

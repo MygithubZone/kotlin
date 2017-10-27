@@ -1,4 +1,5 @@
 package com.raythinks.poesia.ui.model
+
 import android.os.Parcel
 import android.os.Parcelable
 
@@ -10,7 +11,7 @@ data class FanyisItem(val cankao: String = "",
                       val id: Int = 0,
                       val ok: Int = 0,
                       val cont: String = "",
-                      val noOk: Int = 0) : Parcelable {
+                      val noOk: Int = 0, var showType: Int = 0) : Parcelable {
     constructor(source: Parcel) : this(
             source.readString(),
             source.readString(),
@@ -20,6 +21,7 @@ data class FanyisItem(val cankao: String = "",
             source.readInt(),
             source.readInt(),
             source.readString(),
+            source.readInt(),
             source.readInt()
     )
 
@@ -35,6 +37,7 @@ data class FanyisItem(val cankao: String = "",
         writeInt(ok)
         writeString(cont)
         writeInt(noOk)
+        writeInt(showType)
     }
 
     companion object {

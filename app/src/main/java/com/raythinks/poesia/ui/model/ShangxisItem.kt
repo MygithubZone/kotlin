@@ -10,7 +10,7 @@ data class ShangxisItem(val cankao: String = "",
                         val id: Int = 0,
                         val ok: Int = 0,
                         val cont: String = "",
-                        val noOk: Int = 0) : Parcelable {
+                        val noOk: Int = 0, var showType: Int) : Parcelable {
     constructor(source: Parcel) : this(
             source.readString(),
             source.readString(),
@@ -20,6 +20,7 @@ data class ShangxisItem(val cankao: String = "",
             source.readInt(),
             source.readInt(),
             source.readString(),
+            source.readInt(),
             source.readInt()
     )
 
@@ -35,6 +36,7 @@ data class ShangxisItem(val cankao: String = "",
         writeInt(ok)
         writeString(cont)
         writeInt(noOk)
+        writeInt(showType)
     }
 
     companion object {

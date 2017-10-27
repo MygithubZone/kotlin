@@ -156,7 +156,14 @@ object TUtils {
         view.startAnimation(animFadeIn)
     }
 
-    fun copyText(context: Context, mTv: TextView): SelectableTextHelper{
+    fun convertPoesia(poesiaStr: String): String {
+        var yiPoesia= poesiaStr.replace("<span style=\"color:#993300;\">", "<font color= '#F5A05F'>")
+        var zhuPoesia= yiPoesia.replace("<span style=\"color:#006600;\">", "<font color= '#3995FF'>")
+
+        return zhuPoesia.replace("</span>","</font>")
+    }
+
+    fun copyText(context: Context, mTv: TextView): SelectableTextHelper {
         var mSelectableTextHelper = SelectableTextHelper.Builder(mTv)
                 .setSelectedColor(ContextCompat.getColor(context, R.color.selected_yellow))
                 .setCursorHandleSizeInDp(20f)

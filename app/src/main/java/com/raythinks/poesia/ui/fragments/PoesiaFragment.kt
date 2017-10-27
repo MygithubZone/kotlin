@@ -15,6 +15,7 @@ import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.base.ERROR_MEG_DATANULL
 import com.raythinks.poesia.base.finishRefershOrLoadMore
 import com.raythinks.poesia.listener.OnItemClickListener
+import com.raythinks.poesia.net.ApiPoesiaContent
 import com.raythinks.poesia.net.ApiPoesiaList
 import com.raythinks.poesia.ui.activitys.PoesiaDetialActivity
 import com.raythinks.poesia.ui.adapter.MenuTypeAdapter
@@ -93,7 +94,7 @@ class PoesiaFragment : BaseVMFragment<MainViewModel>(), OnItemClickListener, Men
         AnimUtils.loadAmin(_mActivity, cl_tab, R.anim.fade_scape01)
         recyclerview.setLayoutManager(LinearLayoutManager(_mActivity))
         recyclerview.setItemAnimator(DefaultItemAnimator())
-        adapter = PoesiaAdapter(viewModel, this)
+        adapter = PoesiaAdapter(this,viewModel, this)
         recyclerview.setAdapter(adapter)
         refreshLayout.setOnRefreshListener {
             isInitRefresh = true
@@ -171,6 +172,9 @@ class PoesiaFragment : BaseVMFragment<MainViewModel>(), OnItemClickListener, Men
                     }
                     refreshLayout.finishRefershOrLoadMore(currentP == 1)
                     return@Observer
+                }
+                ApiPoesiaContent -> {
+                    TUtils.showToast(it?.msg?:"")
                 }
             }
         })

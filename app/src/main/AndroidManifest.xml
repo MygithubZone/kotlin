@@ -27,16 +27,17 @@
         <!--诗歌详情-->
         <activity
             android:name=".ui.activitys.PoesiaDetialActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
         <!--古文详情-->
         <activity
             android:name=".ui.activitys.LibrosDetialActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
         <!--古文阅读-->
         <activity
             android:name=".ui.activitys.LibrosReadActivity"
-            android:configChanges="orientation|keyboardHidden">
-        </activity>
+            android:configChanges="orientation|keyboardHidden"></activity>
         <!--欢迎界面-->
         <activity
             android:name=".ui.activitys.WelcomeActivity"

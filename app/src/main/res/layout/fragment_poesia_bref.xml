@@ -36,11 +36,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
                     android:background="@drawable/draw_yizhu"
+                    android:clickable="true"
                     android:gravity="center"
                     android:lineSpacingExtra="4sp"
                     android:text="译"
                     android:textColor="@color/color_yizhu_selector"
                     android:textSize="10sp" />
+
 
                 <TextView
                     android:id="@+id/tv_zhu"
@@ -49,22 +51,10 @@
                     android:layout_gravity="left"
                     android:layout_marginLeft="6dp"
                     android:background="@drawable/draw_yizhu"
+                    android:clickable="true"
                     android:gravity="center"
                     android:lineSpacingExtra="4sp"
                     android:text="注"
-                    android:textColor="@color/color_yizhu_selector"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/tv_shang"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="6dp"
-                    android:background="@drawable/draw_yizhu"
-                    android:gravity="center"
-                    android:lineSpacingExtra="4sp"
-                    android:text="赏"
                     android:textColor="@color/color_yizhu_selector"
                     android:textSize="10sp" />
             </LinearLayout>

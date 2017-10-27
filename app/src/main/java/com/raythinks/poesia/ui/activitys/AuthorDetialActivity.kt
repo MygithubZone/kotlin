@@ -1,5 +1,6 @@
 package com.raythinks.poesia.ui.activitys
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import com.raythinks.poesia.R
@@ -59,6 +60,12 @@ class AuthorDetialActivity : BaseVMActivity<AuthorDetialViewModel>(), ViewPager.
         setTitle(authorItem.nameStr)
         AnimUtils.loadAmin(mContext, toolbar, R.anim.fade_scape01)
         viewModel.updateAuthorMore("${authorItem.id}")
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        initData()
     }
 
     override fun getLayoutId(): Int = R.layout.activity_author_detail

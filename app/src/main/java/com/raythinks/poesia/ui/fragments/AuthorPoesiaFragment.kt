@@ -8,11 +8,16 @@ import android.view.View
 import android.widget.Toast
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
+import com.raythinks.poesia.base.finishRefershOrLoadMore
 import com.raythinks.poesia.listener.OnItemClickListener
+import com.raythinks.poesia.net.ApiPoesiaContent
+import com.raythinks.poesia.net.ApiPoesiaList
 import com.raythinks.poesia.ui.activitys.PoesiaDetialActivity
 import com.raythinks.poesia.ui.adapter.PoesiaAdapter
 import com.raythinks.poesia.ui.model.AuthorsItem
 import com.raythinks.poesia.ui.viewmodel.AuthorDetialViewModel
+import com.raythinks.poesia.utils.ActivityRouterUtils
+import com.raythinks.poesia.utils.TUtils
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
@@ -24,10 +29,9 @@ import kotlinx.android.synthetic.main.fragment_author_poesia.*
  * 时间： 2017/9/20 0020<br>.
  * 版本：1.2.0
  */
-class AuthorPoesiaFragment : BaseVMFragment<AuthorDetialViewModel>(), OnRefreshListener, OnLoadmoreListener,OnItemClickListener {
+class AuthorPoesiaFragment : BaseVMFragment<AuthorDetialViewModel>(), OnRefreshListener, OnLoadmoreListener, OnItemClickListener {
     override fun onItemClick(position: Int, itemView: View) {
-        var intent = Intent(_mActivity, PoesiaDetialActivity::class.java)
-        startActivity(intent)
+        ActivityRouterUtils.startPoesiaDetailActivity(context = _mActivity, typeFrom = 1, id = adapter.data[position].id, nameStr = adapter.data[position].nameStr, author = adapter.data[position].author)
     }
 
     lateinit var adapter: PoesiaAdapter
@@ -40,7 +44,7 @@ class AuthorPoesiaFragment : BaseVMFragment<AuthorDetialViewModel>(), OnRefreshL
     override fun initView() {
         recyclerview.setLayoutManager(LinearLayoutManager(_mActivity))
         recyclerview.setItemAnimator(DefaultItemAnimator())
-        adapter = PoesiaAdapter(viewModel,this)
+        adapter = PoesiaAdapter(this, viewModel, this)
         recyclerview.setAdapter(adapter)
     }
 
@@ -50,6 +54,13 @@ class AuthorPoesiaFragment : BaseVMFragment<AuthorDetialViewModel>(), OnRefreshL
         viewModel.updateAuthorPoeisa(1, _mActivity.intent.getParcelableExtra<AuthorsItem>("author").id).observe(this, Observer {
             it?.let {
                 adapter.updateData(currentP == 1, it!!.tb_gushiwens!!)
+            }
+        })
+        viewModel.onFinishError().observe(this, Observer {
+            when (it?.fromApi) {
+                ApiPoesiaContent -> {
+                    TUtils.showToast(it?.msg ?: "")
+                }
             }
         })
     }

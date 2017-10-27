@@ -21,8 +21,8 @@ const val ApiAuthorMore = "/api/author/author.aspx"
 const val ApiAuthorPoesia = "/api/author/authorsw.aspx"
 const val ApiSearchPoesia = "/api/ajaxSearch.aspx"
 const val ApiPoesiaDetailByJu = "/api/mingju/ju.aspx"
+const val ApiPoesiaContent = "/api/shiwen/ajaxshiwencont.aspx"
 const val ApiBaseGuShiWenURL = "http://app.gushiwen.org"
-
 interface PoesiaApiService {
     @GET(ApiRefranesList)
     fun getRefranesList(@Query("p") p: Int, @Query("c") c: String = "", @Query("t") t: String = "", @Query("pwd") pwd: String = "", @Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<RefranesListModel>
@@ -32,7 +32,8 @@ interface PoesiaApiService {
 
     @GET(ApiPoesiaDetail)
     fun getPoesiaDetail(@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<PoesiaDetailModel>
-
+    @GET(ApiPoesiaContent)
+    fun getPoesiaContent(@Query("id") id: String = "0",@Query("value") value: String = "cont", @Query("token") token: String = "gswapi"): Observable<PoesiaYiZhuCont>
     @GET(ApiPoesiaDetailByJu)
     fun getPoesiaDetailByJu(@Query("id") id: String = "0", @Query("token") token: String = "gswapi"): Observable<PoesiaDetailModel>
 
