@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion //android{}节点
-     buildToolsVersion rootProject.ext.buildToolsVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion 15
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
-        vectorDrawables.useSupportLibrary = true
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
     buildTypes {
         release {
@@ -20,7 +19,7 @@ android {
 }
 
 dependencies {
-    api fileTree(dir: 'libs', include: ['*.jar'])
-    //kotlin
-    api "com.android.support:design:$surpport_version"
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$surpport_version"
+    testCompile 'junit:junit:4.12'
 }

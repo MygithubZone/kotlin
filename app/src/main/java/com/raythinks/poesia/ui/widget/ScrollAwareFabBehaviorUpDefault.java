@@ -8,11 +8,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
-
-import com.raythinks.poesia.utils.TUtils;
 
 /**
  * 功能：<br>
@@ -21,9 +17,9 @@ import com.raythinks.poesia.utils.TUtils;
  * 版本：1.2.0
  */
 
-public class ScrollAwareFabBehaviorDefault extends FloatingActionButton.Behavior {
+public class ScrollAwareFabBehaviorUpDefault extends FloatingActionButton.Behavior {
 
-    public ScrollAwareFabBehaviorDefault(Context context, AttributeSet attrs) {
+    public ScrollAwareFabBehaviorUpDefault(Context context, AttributeSet attrs) {
         super();
     }
 
@@ -41,10 +37,11 @@ public class ScrollAwareFabBehaviorDefault extends FloatingActionButton.Behavior
     @Override
     public void onNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull FloatingActionButton child, @NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type) {
 
-        if ((dyConsumed > 0 || dyUnconsumed > 0) && child.getVisibility() != View.VISIBLE) {//往下滑
-            scaleShow(child);
-        } else if ((dyConsumed < 0 || dyUnconsumed < 0) && !isAnimatingOut && child.getVisibility() == View.VISIBLE) {
+        if ((dyConsumed > 0 || dyUnconsumed > 0) && !isAnimatingOut && child.getVisibility() == View.VISIBLE) {//往下滑
             scaleHide(child);
+        } else if ((dyConsumed < 0 || dyUnconsumed < 0) && child.getVisibility() != View.VISIBLE) {
+            scaleShow(child);
+
         }
     }
 

@@ -28,6 +28,19 @@
         layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:scaleType="center"
+        android:src="@mipmap/ic_arrow_up"
+        app:fabSize="mini"
+        android:layout_gravity="right|bottom"
+        app:layout_behavior="com.raythinks.poesia.ui.widget.ScrollAwareFabBehaviorUpDefault"
+        app:layout_scrollFlags="scroll|enterAlways|snap" />
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

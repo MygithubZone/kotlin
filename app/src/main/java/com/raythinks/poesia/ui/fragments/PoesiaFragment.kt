@@ -25,7 +25,6 @@ import com.raythinks.poesia.utils.DialogUtils
 import com.raythinks.poesia.utils.TUtils
 import com.raythinks.shiwen.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_poesia.*
-import kotlinx.android.synthetic.main.item_poesia.view.*
 
 /**
  * 功能：<br>
@@ -37,6 +36,11 @@ class PoesiaFragment : BaseVMFragment<MainViewModel>(), OnItemClickListener, Men
     override fun onItemClick(ad: MenuTypeAdapter, selection: Int, position: Int, itemView: View) {
         updateData(ad!!.itemArray[selection][position], ad!!.selectType)
         mSheetDialog?.dismiss()
+    }
+
+    override fun onSupportVisible() {
+        super.onSupportVisible()
+        viewModel.updatePage(0, currentP, sumP, 0, type)
     }
 
     /**
@@ -115,6 +119,18 @@ class PoesiaFragment : BaseVMFragment<MainViewModel>(), OnItemClickListener, Men
         viewModel.updateSearchPoesia().observe(this, Observer {
             updateData(it?.type ?: "", it?.slectType ?: 0)
         })
+        viewModel.getSkip().observe(this, Observer {
+            if (it?.fromPage == 0) {
+
+                if (it?.skipPageNum == -1) {
+                    if (!refreshLayout.isRefreshing&&!refreshLayout.isLoading)
+                    recyclerview.smoothScrollToPosition(0);
+                } else {
+                    isInitRefresh = true
+                    viewModel.updatePoesiaList(it?.skipPageNum, chao, type, xing)
+                }
+            }
+        })
     }
 
     var mSheetDialog: BottomSheetDialog? = null
@@ -140,6 +156,8 @@ class PoesiaFragment : BaseVMFragment<MainViewModel>(), OnItemClickListener, Men
                 refreshLayout.setEnableLoadmore(currentP < sumP)
                 adapter.updateData(isInitRefresh, gushiwens)
             }
+            if (isVisible)
+                viewModel.updatePage(0, currentP, sumP, 0, type)
             refreshLayout.finishRefershOrLoadMore(currentP == 1)
         })
         viewModel.onFinishError().observe(this, Observer {

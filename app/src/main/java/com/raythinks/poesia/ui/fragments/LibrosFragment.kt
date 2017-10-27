@@ -1,28 +1,25 @@
 package com.raythinks.poesia.ui.fragments
 
 import android.arch.lifecycle.Observer
-import android.content.Intent
 import android.support.design.widget.TabLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.kogitune.activity_transition.ActivityTransitionLauncher
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.base.ERROR_MEG_DATANULL
 import com.raythinks.poesia.base.finishRefershOrLoadMore
 import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.net.ApiLibrosList
-import com.raythinks.poesia.ui.activitys.LibrosDetialActivity
 import com.raythinks.poesia.ui.adapter.LibrosAdapter
 import com.raythinks.poesia.utils.AnimUtils
 import com.raythinks.poesia.utils.TUtils
 import kotlinx.android.synthetic.main.fragment_libros.*
-import kotlinx.android.synthetic.main.item_libros.view.*
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.CoordinatorLayout
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.Gravity
 import android.widget.FrameLayout
@@ -67,7 +64,21 @@ class LibrosFragment : BaseVMFragment<MainViewModel>(), TabLayout.OnTabSelectedL
             }
             resetTypeUpdateData()
         }
+        updatePage()
 
+    }
+
+    override fun onSupportVisible() {
+        super.onSupportVisible()
+        updatePage()
+    }
+
+    private fun updatePage() {
+        var tempType = ""
+        if (!libros_type_Strs.contains(type)) {
+            tempType = type
+        }
+        viewModel.updatePage(3, currentP, sumP, 0, tempType)
     }
 
     private fun resetTypeUpdateData() {
@@ -102,6 +113,17 @@ class LibrosFragment : BaseVMFragment<MainViewModel>(), TabLayout.OnTabSelectedL
             mBottomSheetDialog?.show()
         }
         initMenu()
+        viewModel.getSkip().observe(this, Observer {
+            if (it?.fromPage==3){
+                if(it?.skipPageNum==-1){
+                    if (!refreshLayout.isRefreshing&&!refreshLayout.isLoading)
+                    recyclerview.smoothScrollToPosition(0);
+                }else{
+                isInitRefresh=true
+                viewModel.updateLibrosList(it?.skipPageNum,  type)
+                }
+            }
+        })
     }
 
     var type = ""
@@ -150,18 +172,21 @@ class LibrosFragment : BaseVMFragment<MainViewModel>(), TabLayout.OnTabSelectedL
                 refreshLayout.setEnableLoadmore(currentP < sumP)
                 adapter.updateData(isInitRefresh, books)
             }
+            if (isVisible)
+            updatePage()
             refreshLayout.finishRefershOrLoadMore(currentP == 1)
         })
         viewModel.onFinishError().observe(this, Observer {
             when (it?.fromApi) {
                 ApiLibrosList -> {
-                    TUtils.showToast(it?.msg ?: "aaaa")
+                    updatePage()
                     if (currentP == 1) {
                         stl.showError(it.msg, { initData() })
                     }
                     refreshLayout.finishRefershOrLoadMore(currentP == 1)
                     return@Observer
                 }
+
             }
         })
     }

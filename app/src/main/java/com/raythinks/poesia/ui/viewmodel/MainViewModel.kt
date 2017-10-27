@@ -21,6 +21,19 @@ import rx.schedulers.Schedulers
  */
 
 open class MainViewModel : BasePoesiaViewModel() {
+    var pageModel: MutableLiveData<PageModel> = MutableLiveData();
+    fun updatePage(fromPage: Int = 0, currP: Int = 0, sumP: Int = 0, sumCount: Int = 0, typeKey: String = "") {
+        var page = PageModel(fromPage, currP, sumP, sumCount, typeKey)
+        pageModel.value = page
+    }
+
+    var skipModel: MutableLiveData<SkipPageModel> = MutableLiveData();
+    fun skipPage(pageNum: Int, type: Int) {
+        skipModel.value = SkipPageModel(type, pageNum)
+    }
+
+    fun getSkip() = skipModel
+    fun getCurrentPage() = pageModel
     var searchModel: MutableLiveData<SearchModel> = MutableLiveData();//搜索model
     /**
      * 调用搜索

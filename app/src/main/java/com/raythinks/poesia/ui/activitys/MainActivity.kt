@@ -25,12 +25,16 @@ import android.widget.Toast
 import android.support.v4.view.MenuItemCompat.setOnActionExpandListener
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
 import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.listener.OnSelectionItemClickListener
 import com.raythinks.poesia.ui.adapter.SearchAdapter
 import com.raythinks.poesia.ui.adapter.SearchHistoryAdapter
+import com.raythinks.poesia.ui.model.PageModel
+import com.raythinks.poesia.ui.widget.EditDialog
 import com.raythinks.poesia.utils.*
 import kotlinx.android.synthetic.main.empty_view.view.*
 import kotlinx.android.synthetic.main.search_content.*
@@ -42,7 +46,19 @@ import kotlinx.android.synthetic.main.search_content.*
  *
  */
 @Route("poesia://activity/mainActivity")
-class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirstListener, ViewPager.OnPageChangeListener, MenuItem.OnActionExpandListener, SearchView.OnQueryTextListener, OnSelectionItemClickListener, OnItemClickListener {
+class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirstListener, ViewPager.OnPageChangeListener, MenuItem.OnActionExpandListener, SearchView.OnQueryTextListener, OnSelectionItemClickListener, OnItemClickListener, EditDialog.onDlialogClickLisenter {
+
+    override fun onClickEidtDialog(dialog: EditDialog, type: Int, content: String) {
+        if (type == 1) {
+            if (!TextUtils.isEmpty(content) && (content.toInt() <= pageModel?.sumP ?: 100000 && content.toInt() >=1)) {
+                viewModel.skipPage(content.toInt(), pageModel?.fromPage ?: 0)
+                dialog.dismiss()
+            }
+        } else {
+            dialog.dismiss()
+        }
+    }
+
     override fun onItemClick(position: Int, itemView: View) {
         searchView?.setQuery(searchHistoryAdapter.data[position], false)
     }
@@ -115,7 +131,6 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
 
     override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
         TUtils.setBottomViewVisible(fl_search, View.GONE, null)
-
         return true
     }
 
@@ -125,6 +140,7 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
     lateinit var searchHistoryAdapter: SearchHistoryAdapter
     lateinit var typePoesiaId: Array<Int>
     lateinit var typePoesia: Array<String>
+    var editDialog: EditDialog? = null
     override fun initView() {
         setSupportActionBar(toolbar)
         typePoesia = resources.getStringArray(R.array.arrayt_type)
@@ -140,12 +156,57 @@ class MainActivity : BaseVMActivity<MainViewModel>(), MainFragment.OnBackToFirst
         vp_maincontent.offscreenPageLimit = 4
         onNavigationItemSelected();
         fab.setOnClickListener {
-            DialogUtils.showEidtDialog(this, true, "提示", "ss", "跳转", "取消", null)
+            if (pageModel?.currP != 0 && pageModel?.sumP != 0) {
+                editDialog = DialogUtils.showEidtDialog(this, false, "提示", "您要跳转到", "${pageModel?.currP}/共${pageModel?.sumP}页", "跳转", "取消", this, inputTextLis())
+            } else {
+                TUtils.showToast("请刷新界面数据再跳转")
+            }
+        }
+        fab_up.setOnClickListener {
+            viewModel.skipPage(-1, pageModel?.fromPage ?: 0)
         }
     }
 
+    inner class inputTextLis : TextWatcher {
+        override fun afterTextChanged(p0: Editable?) {
+        }
+
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            if (TextUtils.isEmpty(p0)) {
+                editDialog?.til_dialog_content?.setError("")
+//                editDialog?.til_dialog_content?.isErrorEnabled=false
+            } else {
+                if (p0.toString().toInt() > pageModel?.sumP ?: 0 || p0.toString().toInt() < 1) {
+//                    editDialog?.til_dialog_content?.isErrorEnabled=true
+                    editDialog?.til_dialog_content?.setError("您输入的页码不符合规范")
+                } else {
+                    editDialog?.til_dialog_content?.setError("")
+//                    editDialog?.til_dialog_content?.isErrorEnabled=false
+                }
+            }
+
+
+        }
+
+    }
+
     override fun isSetStatusBar() = false
+    var pageModel: PageModel? = null
     override fun initData() {
+        viewModel.getCurrentPage().observe(this, Observer {
+            pageModel = it!!
+            if (pageModel?.fromPage == 3) {
+                if (!TextUtils.isEmpty(pageModel?.typeKey)) {
+                    typePoesia[3] = typePoesia[3].split("(")[0] + "(${pageModel?.typeKey})"
+                } else {
+                    typePoesia[3] = typePoesia[3].split("(")[0]
+                }
+                setTitle(typePoesia[3])
+            }
+        })
         selectCurrentItem(0)
     }
 

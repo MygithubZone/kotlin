@@ -34,7 +34,10 @@ class RefranesFragment : BaseVMFragment<MainViewModel>(), MenuTypeAdapter.OnMenu
     override fun onItemClick(position: Int, itemView: View) {
         ActivityRouterUtils.startPoesiaDetailActivity(context = _mActivity, typeFrom = 2, id = adapter!!.data[position].id, nameStr = adapter!!.data[position]!!.shiName, author = adapter!!.data[position].author, mingju = adapter!!.data[position].nameStr)
     }
-
+    override fun onSupportVisible() {
+        super.onSupportVisible()
+        viewModel.updatePage(1,currentP,sumP,0,type)
+    }
     override fun onItemClick(ad: MenuTypeAdapter, selection: Int, position: Int, itemView: View) {
         var temp = ad!!.itemArray[selection][position]
         if (!TextUtils.equals(type, temp) || !TextUtils.equals(theme, temp)) {
@@ -90,6 +93,17 @@ class RefranesFragment : BaseVMFragment<MainViewModel>(), MenuTypeAdapter.OnMenu
             viewModel.updateRefranesList(currentP + 1, theme, type)
 
         }
+        viewModel.getSkip().observe(this, Observer {
+            if (it?.fromPage==1){
+                if(it?.skipPageNum==-1){
+                    if (!refreshLayout.isRefreshing&&!refreshLayout.isLoading)
+                    recyclerview.smoothScrollToPosition(0);
+                }else{
+                isInitRefresh=true
+                viewModel.updateRefranesList(it?.skipPageNum,  theme,type)
+                }
+            }
+        })
     }
 
     var theme = ""
@@ -113,6 +127,8 @@ class RefranesFragment : BaseVMFragment<MainViewModel>(), MenuTypeAdapter.OnMenu
                 refreshLayout.setEnableLoadmore(currentP < sumP)
                 adapter.updateData(isInitRefresh, mingjus)
             }
+            if (isVisible)
+                viewModel.updatePage(1,currentP,sumP,0,type)
             refreshLayout.finishRefershOrLoadMore(currentP == 1)
         })
         viewModel.onFinishError().observe(this, Observer {

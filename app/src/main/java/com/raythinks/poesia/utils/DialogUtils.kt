@@ -24,6 +24,7 @@ import com.flyco.dialog.widget.NormalListDialog
 import com.flyco.dialog.entity.DialogMenuItem
 import com.flyco.dialog.listener.OnBtnClickL
 import android.text.TextUtils
+import android.text.TextWatcher
 import com.flyco.dialog.widget.ActionSheetDialog
 import com.raythinks.poesia.ui.widget.EditDialog
 
@@ -171,12 +172,19 @@ object DialogUtils {
         return oneDialog
     }
 
-    fun showEidtDialog(context: Context, cancelAble: Boolean, title: String, msg: String, sureBtn: String?, cancelBtn: String?, vararg onClickListener: OnBtnClickL?): EditDialog {
+    fun showEidtDialog(context: Context, cancelAble: Boolean, title: String, msg: String = "", hint: String = "", sureBtn: String = "确定", cancelBtn: String = "取消", onClickListener: EditDialog.onDlialogClickLisenter, textWacher: TextWatcher): EditDialog {
         val oneDialog = EditDialog(context)
         oneDialog.setCancelable(cancelAble)
         oneDialog.setCanceledOnTouchOutside(cancelAble)
         val mBasIn = ZoomInEnter()
         val mBasOut = ZoomOutExit()
+        oneDialog.titleText = title
+        oneDialog.msg = msg
+        oneDialog.hint = hint
+        oneDialog.sureBtnText = sureBtn
+        oneDialog.cancelBtnText = cancelBtn
+        oneDialog.click = onClickListener
+        oneDialog.inputLis = textWacher
         oneDialog
                 .showAnim(mBasIn)//
                 .dismissAnim(mBasOut)//

@@ -36,6 +36,11 @@ class AuthorListFragment : BaseVMFragment<MainViewModel>(), TabLayout.OnTabSelec
         ActivityTransitionLauncher.with(_mActivity).from(itemView.civ_author_header).launch(intent);
     }
 
+    override fun onSupportVisible() {
+        super.onSupportVisible()
+        viewModel.updatePage(2, currentP, sumP, 0, c)
+    }
+
     override fun onTabReselected(tab: TabLayout.Tab?) {
     }
 
@@ -68,6 +73,17 @@ class AuthorListFragment : BaseVMFragment<MainViewModel>(), TabLayout.OnTabSelec
             isInitRefresh = false
             viewModel.updateAuthorList(currentP + 1, c)
         }
+        viewModel.getSkip().observe(this, Observer {
+            if (it?.fromPage == 2) {
+                if (it?.skipPageNum == -1) {
+                    if (!refreshLayout.isRefreshing && !refreshLayout.isLoading)
+                        recyclerview.smoothScrollToPosition(0);
+                } else {
+                    isInitRefresh = true
+                    viewModel.updateAuthorList(it?.skipPageNum, c)
+                }
+            }
+        })
     }
 
     fun initTab(ll_tab: View, tbs_author_borntimes: TabLayout) {
@@ -97,12 +113,13 @@ class AuthorListFragment : BaseVMFragment<MainViewModel>(), TabLayout.OnTabSelec
                 refreshLayout.setEnableLoadmore(currentP < sumP)
                 authorAdapter.updateData(isInitRefresh, authors)
             }
+            if (isVisible)
+                viewModel.updatePage(2, currentP, sumP, 0, c)
             refreshLayout.finishRefershOrLoadMore(currentP == 1)
         })
         viewModel.onFinishError().observe(this, Observer {
             when (it?.fromApi) {
                 ApiAuthorList -> {
-                    TUtils.showToast(it?.msg ?: "aaaa")
                     if (currentP == 1) {
                         stl.showError(it.msg, { initData() })
                     }
