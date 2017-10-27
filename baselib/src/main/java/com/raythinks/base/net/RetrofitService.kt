@@ -14,7 +14,7 @@ import java.security.cert.X509Certificate
 
 /**
  * 功能：<br>
- * 作者：赵海<br>
+ * 作者：zh<br>
  * 时间： 2017/9/19 0019<br>.
  * 版本：1.2.0
  */

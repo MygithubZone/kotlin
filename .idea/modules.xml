@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/baselib/baselib.iml" filepath="$PROJECT_DIR$/baselib/baselib.iml" />
       <module fileurl="file://$PROJECT_DIR$/kotlin.iml" filepath="$PROJECT_DIR$/kotlin.iml" />
       <module fileurl="file://$PROJECT_DIR$/selecttext_library/selecttext_library.iml" filepath="$PROJECT_DIR$/selecttext_library/selecttext_library.iml" />
-      <module fileurl="file://D:\Android\studioSpace\poesia\kotlin\selecttext_library\selecttext_library.iml" filepath="D:\Android\studioSpace\poesia\kotlin\selecttext_library\selecttext_library.iml" />
     </modules>
   </component>
 </project>

@@ -6,7 +6,7 @@ import android.arch.lifecycle.ViewModel
 import com.raythinks.poesia.net.PoesiaApiService
 
 /**
- * Created by 赵海 on 2017/8/20.
+ * Created by zh on 2017/8/20.
  */
 abstract class BaseViewModel : ViewModel() {
     companion object {

@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_libros_detail.*
 
 /**
  * 功能：古文详情<br>
- * 作者：赵海<br>
+ * 作者：zh<br>
  * 时间： 2017/9/26 0026<br>.
  * 版本：1.2.0
  */

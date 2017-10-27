@@ -13,7 +13,7 @@ import rx.schedulers.Schedulers
 
 /**
  * 功能：作者列表<br></br>
- * 作者：赵海<br></br>
+ * 作者：zh<br></br>
  * 时间： 2017/8/21 0021<br></br>.
  * 版本：1.2.0
  */

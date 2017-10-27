@@ -8,7 +8,7 @@ import retrofit2.http.Query
 import rx.Observable
 
 /**
- * Created by 赵海 on 2017/10/6.
+ * Created by zh on 2017/10/6.
  */
 const val ApiRefranesList = "/api/mingju/Default.aspx"
 const val ApiPoesiaList = "/api/shiwen/type.aspx"

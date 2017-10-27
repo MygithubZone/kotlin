@@ -30,7 +30,7 @@ import com.raythinks.poesia.ui.widget.EditDialog
 
 
 /**
- * Created by 赵海 on 2017/10/6.
+ * Created by zh on 2017/10/6.
  */
 object DialogUtils {
     fun initMenuDialog(context: Activity, theme: String, selectType: Int, array: Array<String>, lis: MenuTypeAdapter.OnMenuItemClickListener): BottomSheetDialog {

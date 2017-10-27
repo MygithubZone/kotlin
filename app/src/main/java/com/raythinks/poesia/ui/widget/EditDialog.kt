@@ -1,20 +1,15 @@
 package com.raythinks.poesia.ui.widget
 
 import android.content.Context
-import android.support.design.widget.TextInputEditText
 import android.support.design.widget.TextInputLayout
 import android.text.TextWatcher
-import android.util.AttributeSet
 import android.view.View
-import android.widget.TextView
-import com.flyco.dialog.widget.MaterialDialog
-import com.flyco.dialog.widget.base.BaseDialog
-import com.flyco.animation.Attention.Swing
+import android.view.WindowManager
 import com.flyco.animation.ZoomEnter.ZoomInEnter
 import com.flyco.animation.ZoomExit.ZoomOutExit
+import com.flyco.dialog.widget.base.BaseDialog
 import com.raythinks.poesia.R
 import kotlinx.android.synthetic.main.dialog_edit_style1.view.*
-import android.view.WindowManager
 
 
 /**

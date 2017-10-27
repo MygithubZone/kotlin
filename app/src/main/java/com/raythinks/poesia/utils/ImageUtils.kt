@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.raythinks.poesia.R
 
 /**
- * Created by 赵海 on 2017/10/7.
+ * Created by zh on 2017/10/7.
  */
 object ImageUtils {
     fun loadPic(context: Context, url: String, imageView: ImageView) {

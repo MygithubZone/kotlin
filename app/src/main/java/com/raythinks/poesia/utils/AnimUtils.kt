@@ -7,7 +7,7 @@ import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
 
 /**
- * Created by 赵海 on 2017/10/7.
+ * Created by zh on 2017/10/7.
  */
 object AnimUtils {
     fun loadAmin(context: Context, view: View, animResId: Int, animationListener: Animation.AnimationListener? = null) {

@@ -11,7 +11,7 @@ import com.raythinks.poesia.ui.viewmodel.AuthorDetialViewModel
 import kotlinx.android.synthetic.main.fragment_libros.*
 
 /**
- * Created by 赵海 on 2017/10/7.
+ * Created by zh on 2017/10/7.
  */
 class AuthorMoreInfoFragment : BaseVMFragment<AuthorDetialViewModel>() {
     lateinit var adapter: AuthorMoreAdapter

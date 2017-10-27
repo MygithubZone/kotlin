@@ -1,7 +1,7 @@
 package com.raythinks.poesia.ui.model
 
 /**
- * Created by 赵海 on 2017/10/9.
+ * Created by zh on 2017/10/9.
  */
 
 data class AuthorPoesiaModel(var sumCount: Int = 0,
