@@ -2,6 +2,7 @@ package com.raythinks.poesia.ui.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.text.Html
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,38 @@ class AuthorMoreAdapter(var viewHodler: AuthorDetialViewModel) : RecyclerView.Ad
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder!!.itemView.tv_author_content.text = Html.fromHtml(data[position].cont)
         holder!!.itemView.tv_author_title.text = data[position].nameStr
+        holder!!.itemView.tv_more.visibility = View.VISIBLE
+        if (data[position].showType == 0) {
+            holder!!.itemView.tv_more.text = "阅读全部"
+            holder!!.itemView.tv_cankao.visibility = View.GONE
+            holder!!.itemView.tv_author_content.setEllipsize(TextUtils.TruncateAt.END); // 展开
+        } else {
+            holder!!.itemView.tv_author_content.setEllipsize(null); // 展开
+            holder!!.itemView.tv_author_content.setSingleLine(false);
+            holder!!.itemView.tv_more.text = "收起全部"
+            var cankao = data[position].cankao
+            if (!TextUtils.isEmpty(cankao)) {
+                var cankaoArray = cankao.split("&")
+                var index = 1;
+                var cankaoFinalStr = "<B>参考</B><br/>"
+                for (str in cankaoArray) {
+                    cankaoFinalStr = cankaoFinalStr + "${index}.${str}<br/>"
+                    index++
+                }
+                holder!!.itemView.tv_cankao.visibility = View.VISIBLE
+                holder!!.itemView.tv_cankao.text = Html.fromHtml(cankaoFinalStr)
+            } else {
+                holder!!.itemView.tv_cankao.visibility = View.GONE
+            }
+        }
+        holder!!.itemView.tv_more.setOnClickListener {
+            if (data[position].showType == 0) {
+                data[position].showType = 1
+            } else {
+                data[position].showType = 0
+            }
+            notifyItemChanged(position)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AuthorMoreAdapter.ViewHolder {

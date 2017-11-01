@@ -10,4 +10,4 @@ val authorID: Int = 0,
 val ok: Int = 0,
 val cont: String = "",
 val isPass: Boolean = false,
-val noOk: Int = 0)
+val noOk: Int = 0,var showType: Int = 0)

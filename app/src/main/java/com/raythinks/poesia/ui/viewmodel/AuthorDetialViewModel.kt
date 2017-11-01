@@ -4,6 +4,11 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import com.raythinks.poesia.base.BaseViewModel
+import com.raythinks.poesia.base.ERROR_MEG_DATANULL
+import com.raythinks.poesia.base.ERROR_STATUS_DATANULL
+import com.raythinks.poesia.base.NetError
+import com.raythinks.poesia.net.ApiAuthorPoesia
+import com.raythinks.poesia.net.ApiLibrosBookv
 import com.raythinks.poesia.ui.model.AuthorListMoel
 import com.raythinks.poesia.ui.model.AuthorMoreInfoMoel
 import com.raythinks.poesia.ui.model.AuthorsItem
@@ -46,14 +51,19 @@ class AuthorDetialViewModel : BasePoesiaViewModel() {
         BaseViewModel.apiService.getAuthorPoesia(p, "${id}").observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ result ->
-                    result?.let {
+                    if (result != null) {
                         authorPoeisaModel.value = result
-                        return@subscribe
+                    } else {
+                        onError.value = NetError(ERROR_STATUS_DATANULL, "暂无添加该诗人作品饿", fromApi = ApiAuthorPoesia, error = null)
                     }
+                    return@subscribe
 
-                }, { error ->
-                    error.printStackTrace()
-                })
+                },
+                        { error ->
+                            onError.value = NetError(fromApi = ApiAuthorPoesia, error = error)
+                            error.printStackTrace()
+
+                        })
         return authorPoeisaModel
     }
 

@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.scwang.smartrefresh.layout.SmartRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.raythinks.poesia.ui.widget.StatusLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/refreshLayout"
+    android:id="@+id/stl"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:srlEnableHeaderTranslationContent="false"
-    android:background="@color/colorBackground"
-    app:srlEnableLoadmore="false">
-
-    <com.scwang.smartrefresh.header.MaterialHeader
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:overScrollMode="never" />
-</com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</com.raythinks.poesia.ui.widget.StatusLayout>

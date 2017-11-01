@@ -3,12 +3,13 @@ package com.raythinks.poesia.ui.fragments
 import android.arch.lifecycle.Observer
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
 import com.raythinks.poesia.ui.adapter.AuthorMoreAdapter
-import com.raythinks.poesia.ui.adapter.LibrosAdapter
 import com.raythinks.poesia.ui.viewmodel.AuthorDetialViewModel
-import kotlinx.android.synthetic.main.fragment_libros.*
+import kotlinx.android.synthetic.main.empty_view.view.*
+import kotlinx.android.synthetic.main.fragment_author_poesia.*
 
 /**
  * Created by zh on 2017/10/7.
@@ -24,10 +25,13 @@ class AuthorMoreInfoFragment : BaseVMFragment<AuthorDetialViewModel>() {
 
     override fun initData() {
         viewModel.getAuthorMore().observe(this, Observer {
-            it.let {
-                it!!.tb_ziliaos.let {
-                    adapter.updateData(it!!.ziliaos)
-                }
+            var zhiliaos = it?.tb_ziliaos?.ziliaos
+            if (zhiliaos != null && zhiliaos.size > 0) {
+                stl.showContent()
+                adapter.updateData(zhiliaos)
+            } else {
+                stl.showEmpty("暂时未添加该诗人任何信息哟", { initData() })
+                stl.btn_empty_retry.visibility = View.GONE
             }
 
         })

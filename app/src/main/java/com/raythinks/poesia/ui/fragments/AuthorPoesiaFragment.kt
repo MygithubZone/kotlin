@@ -1,23 +1,19 @@
 package com.raythinks.poesia.ui.fragments
 
 import android.arch.lifecycle.Observer
-import android.content.Intent
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import android.widget.Toast
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
+import com.raythinks.poesia.base.ERROR_MEG_DATANULL
 import com.raythinks.poesia.base.finishRefershOrLoadMore
 import com.raythinks.poesia.listener.OnItemClickListener
-import com.raythinks.poesia.net.ApiPoesiaContent
-import com.raythinks.poesia.net.ApiPoesiaList
-import com.raythinks.poesia.ui.activitys.PoesiaDetialActivity
+import com.raythinks.poesia.net.ApiAuthorPoesia
 import com.raythinks.poesia.ui.adapter.PoesiaAdapter
 import com.raythinks.poesia.ui.model.AuthorsItem
 import com.raythinks.poesia.ui.viewmodel.AuthorDetialViewModel
 import com.raythinks.poesia.utils.ActivityRouterUtils
-import com.raythinks.poesia.utils.TUtils
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener
@@ -42,24 +38,54 @@ class AuthorPoesiaFragment : BaseVMFragment<AuthorDetialViewModel>(), OnRefreshL
     }
 
     override fun initView() {
+        authorId = _mActivity.intent.getParcelableExtra<AuthorsItem>("author").id
         recyclerview.setLayoutManager(LinearLayoutManager(_mActivity))
         recyclerview.setItemAnimator(DefaultItemAnimator())
         adapter = PoesiaAdapter(this, viewModel, this)
         recyclerview.setAdapter(adapter)
+        refreshLayout.setOnRefreshListener {
+            isInitRefresh = true
+            viewModel.updateAuthorPoeisa(1, authorId)
+        }
+        refreshLayout.setOnLoadmoreListener {
+            isInitRefresh = false
+            viewModel.updateAuthorPoeisa(currentP + 1, authorId)
+        }
     }
 
-    val currentP: Int = 1
-
+    var authorId: Int = 0//作者id
+    var currentP: Int = 1
+    var sumP: Int = 1
     override fun initData() {
-        viewModel.updateAuthorPoeisa(1, _mActivity.intent.getParcelableExtra<AuthorsItem>("author").id).observe(this, Observer {
-            it?.let {
-                adapter.updateData(currentP == 1, it!!.tb_gushiwens!!)
+        stl.showLoading()
+        viewModel.updateAuthorPoeisa(1, authorId).observe(this, Observer {
+            var gushiwens = it?.tb_gushiwens
+            currentP = it?.currentPage ?: 1
+            sumP = it?.sumPage ?: 1
+            if (sumP > 500) {
+                sumP = 500
             }
+            if (gushiwens == null || gushiwens.size == 0) {//返回列表为空
+                if (it?.currentPage == 1) {//返回列表为空,且第一页
+                    stl.showEmpty(ERROR_MEG_DATANULL, { initData() })
+                }
+            } else {//返回列表不为空
+                if (it?.currentPage == 1) {//第一页
+                    stl.showContent()
+                }
+                refreshLayout.setEnableLoadmore(currentP < sumP)
+                adapter.updateData(isInitRefresh, gushiwens)
+            }
+            refreshLayout.finishRefershOrLoadMore(currentP == 1)
         })
         viewModel.onFinishError().observe(this, Observer {
             when (it?.fromApi) {
-                ApiPoesiaContent -> {
-                    TUtils.showToast(it?.msg ?: "")
+                ApiAuthorPoesia -> {
+                    if (currentP == 1) {
+                        stl.showError(it.msg, { initData() })
+                    }
+                    refreshLayout.finishRefershOrLoadMore(currentP == 1)
+                    return@Observer
                 }
             }
         })

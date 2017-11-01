@@ -24,9 +24,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left|top"
             android:layout_marginTop="16dp"
-            android:text="李白"
-            android:textColor="@color/black_high"
-            android:textSize="18sp" />
+            android:textColor="@color/black_mid"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_author_content"
@@ -36,9 +35,38 @@
             android:ellipsize="end"
             android:gravity="top|left"
             android:lineSpacingExtra="8sp"
+            android:lines="8"
             android:paddingEnd="16dp"
             android:paddingStart="16dp"
-            android:maxLines="8"
             android:textSize="14sp" />
+        <TextView
+            android:id="@+id/tv_cankao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="4sp"
+            android:text=""
+            android:textColor="@color/black_min"
+            android:textSize="12sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/draw_corner_primary_bg"
+            android:drawablePadding="6dp"
+            android:drawableRight="@mipmap/ic_read_more"
+            android:lineSpacingExtra="4sp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="6dp"
+            android:text="阅读全部"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp" />
     </LinearLayout>
 </android.support.v7.widget.CardView>
