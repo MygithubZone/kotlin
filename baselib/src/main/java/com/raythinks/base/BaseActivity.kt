@@ -8,7 +8,7 @@ import me.yokeyword.fragmentation.SupportActivity
 /**
  * Activity基类：
  *
- * Created by Herri on 2017/8/20.
+ * Created by zh on 2017/8/20.
  */
 
 abstract class BaseActivity  : SupportActivity(), LifecycleOwner {

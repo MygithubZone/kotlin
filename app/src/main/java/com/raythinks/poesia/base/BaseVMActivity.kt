@@ -15,7 +15,9 @@ import qiu.niorgai.StatusBarCompat
  *
  * Created by Herri on 2017/8/20.
  */
-
+/**
+ * 扩展函数。主要用于SmartRefreshLayout 下拉刷新和上啦加载关闭刷新加载状态。
+ */
 fun SmartRefreshLayout.finishRefershOrLoadMore(isRefresh: Boolean) {
     if (isRefresh) {
         if (this.isRefreshing) this.finishRefresh()
@@ -23,6 +25,10 @@ fun SmartRefreshLayout.finishRefershOrLoadMore(isRefresh: Boolean) {
         if (this.isLoading) this.finishLoadmore()
     }
 }
+
+/**
+ * Activity基类。
+ */
 abstract class BaseVMActivity<VM : ViewModel> : BaseActivity() {
     lateinit var viewModel: VM
 
@@ -30,18 +36,22 @@ abstract class BaseVMActivity<VM : ViewModel> : BaseActivity() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(TUtils.getTClass(this))//ViewModel对象
         setContentView(getLayoutId())
-//        StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.colorPrimaryDark))
         if (isSetStatusBar())
             StatusBarCompat.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimaryDark), 0)
         initView()
         initData()
     }
 
+    //是否设置状态栏颜色。
     open fun isSetStatusBar(): Boolean = true
+
+    //初始化view
     abstract fun initView()
 
+    //初始化数据
     abstract fun initData()
 
+    //布局文件xml
     abstract fun getLayoutId(): Int
 
 }
