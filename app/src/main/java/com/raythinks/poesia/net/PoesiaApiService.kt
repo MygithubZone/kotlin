@@ -9,18 +9,18 @@ import rx.Observable
 /**
  * Created by zh on 2017/10/6.
  */
-const val ApiRefranesList = "/api/mingju/Default.aspx"
-const val ApiPoesiaList = "/api/shiwen/type.aspx"
-const val ApiPoesiaDetail = "/api/shiwen/view.aspx"
-const val ApiLibrosList = "/api/guwen/Default.aspx"
-const val ApiLibrosDetial = "/api/guwen/book.aspx"
-const val ApiLibrosBookv = "api/guwen/bookv.aspx"
-const val ApiAuthorList = "/api/author/Default.aspx"
-const val ApiAuthorMore = "/api/author/author.aspx"
-const val ApiAuthorPoesia = "/api/author/authorsw.aspx"
-const val ApiSearchPoesia = "/api/ajaxSearch.aspx"
-const val ApiPoesiaDetailByJu = "/api/mingju/ju.aspx"
-const val ApiPoesiaContent = "/api/shiwen/ajaxshiwencont.aspx"
+const val ApiRefranesList = "/api/mingju/Default.aspx"//名句列表接口
+const val ApiPoesiaList = "/api/shiwen/type.aspx"//诗文列表接口
+const val ApiPoesiaDetail = "/api/shiwen/view.aspx"//诗文详情接口
+const val ApiLibrosList = "/api/guwen/Default.aspx"//古籍列表接口
+const val ApiLibrosDetial = "/api/guwen/book.aspx"//古籍详情
+const val ApiLibrosBookv = "api/guwen/bookv.aspx"//古籍篇章分类。
+const val ApiAuthorList = "/api/author/Default.aspx"//作者列表
+const val ApiAuthorMore = "/api/author/author.aspx"//作者详情
+const val ApiAuthorPoesia = "/api/author/authorsw.aspx"//作者诗文。
+const val ApiSearchPoesia = "/api/ajaxSearch.aspx"//搜索接口
+const val ApiPoesiaDetailByJu = "/api/mingju/ju.aspx"//通过名句获取诗文详情
+const val ApiPoesiaContent = "/api/shiwen/ajaxshiwencont.aspx"//诗文译注接口
 const val ApiBaseGuShiWenURL = "http://app.gushiwen.org"
 interface PoesiaApiService {
     @POST(ApiRefranesList)

@@ -3,9 +3,9 @@ package com.raythinks.poesia.ui.viewmodel
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import com.raythinks.poesia.base.BaseViewModel
-import com.raythinks.poesia.base.ERROR_MEG_NET
-import com.raythinks.poesia.base.ERROR_STATUS_DATANULL
-import com.raythinks.poesia.base.NetError
+import com.raythinks.poesia.net.ERROR_MEG_NET
+import com.raythinks.poesia.net.ERROR_STATUS_DATANULL
+import com.raythinks.poesia.net.NetError
 import com.raythinks.poesia.net.ApiSearchPoesia
 import com.raythinks.poesia.ui.model.*
 import rx.android.schedulers.AndroidSchedulers

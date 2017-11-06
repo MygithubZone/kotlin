@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.raythinks.poesia.R
-import com.raythinks.poesia.base.ERROR_MEG_DATANULL
-import com.raythinks.poesia.base.ERROR_MEG_NET
+import com.raythinks.poesia.net.ERROR_MEG_DATANULL
+import com.raythinks.poesia.net.ERROR_MEG_NET
 import kotlinx.android.synthetic.main.empty_view.view.*
 import kotlinx.android.synthetic.main.error_view.view.*
 

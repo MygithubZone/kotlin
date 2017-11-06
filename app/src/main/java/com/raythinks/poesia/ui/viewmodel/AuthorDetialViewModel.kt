@@ -2,16 +2,11 @@ package com.raythinks.poesia.ui.viewmodel
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.Transformations
 import com.raythinks.poesia.base.BaseViewModel
-import com.raythinks.poesia.base.ERROR_MEG_DATANULL
-import com.raythinks.poesia.base.ERROR_STATUS_DATANULL
-import com.raythinks.poesia.base.NetError
+import com.raythinks.poesia.net.ERROR_STATUS_DATANULL
+import com.raythinks.poesia.net.NetError
 import com.raythinks.poesia.net.ApiAuthorPoesia
-import com.raythinks.poesia.net.ApiLibrosBookv
-import com.raythinks.poesia.ui.model.AuthorListMoel
 import com.raythinks.poesia.ui.model.AuthorMoreInfoMoel
-import com.raythinks.poesia.ui.model.AuthorsItem
 import com.raythinks.poesia.ui.model.AuthorPoesiaModel
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers

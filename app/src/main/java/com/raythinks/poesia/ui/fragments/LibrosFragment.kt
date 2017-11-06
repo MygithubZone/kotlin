@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
-import com.raythinks.poesia.base.ERROR_MEG_DATANULL
+import com.raythinks.poesia.net.ERROR_MEG_DATANULL
 import com.raythinks.poesia.base.finishRefershOrLoadMore
 import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.net.ApiLibrosList
@@ -19,7 +19,6 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.CoordinatorLayout
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.Gravity
 import android.widget.FrameLayout

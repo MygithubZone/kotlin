@@ -3,6 +3,7 @@ package com.raythinks.poesia.base
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.raythinks.poesia.net.NetError
 import com.raythinks.poesia.net.PoesiaApiService
 
 /**

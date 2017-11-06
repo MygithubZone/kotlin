@@ -8,8 +8,7 @@ import android.text.TextUtils
 import android.view.View
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
-import com.raythinks.poesia.base.ERROR_MEG_DATANULL
-import com.raythinks.poesia.base.ERROR_MEG_NET
+import com.raythinks.poesia.net.ERROR_MEG_DATANULL
 import com.raythinks.poesia.net.ApiLibrosBookv
 import com.raythinks.poesia.ui.viewmodel.LibrosReadViewModel
 import kotlinx.android.synthetic.main.fragment_libors_readitem.*

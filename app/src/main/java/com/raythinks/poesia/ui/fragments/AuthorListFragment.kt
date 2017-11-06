@@ -9,7 +9,7 @@ import android.view.View
 import com.kogitune.activity_transition.ActivityTransitionLauncher
 import com.raythinks.poesia.R
 import com.raythinks.poesia.base.BaseVMFragment
-import com.raythinks.poesia.base.ERROR_MEG_DATANULL
+import com.raythinks.poesia.net.ERROR_MEG_DATANULL
 import com.raythinks.poesia.base.finishRefershOrLoadMore
 import com.raythinks.poesia.listener.OnItemClickListener
 import com.raythinks.poesia.net.ApiAuthorList
