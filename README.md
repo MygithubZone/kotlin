@@ -28,5 +28,5 @@
  ### 10.屏幕适配:http://www.jianshu.com/p/ec5a1a30694b
  ### 11.改变主题：https://github.com/hehonghui/Colorful
  ### 12:http://www.jianshu.com/p/38f7994faa6b
- ### 13.http://www.jianshu.com/p/841f7b95ca77  转场动画  https://jaeger.itscoder.com/android/2016/11/21/selectable-text-helper.html  文字复制。
+ ### 13.http://www.jianshu.com/p/841f7b95ca77  转场动画  https://jaeger.itscoder.com/android/2016/11/21/selectable-text-helper.html  文字选择复制。
  ### 14：https://github.com/lavor-zl/UILibs UI工具  http://www.jianshu.com/p/3baddcf948af/  http://www.jianshu.com/p/06c0ae8d9a96  http://www.cnblogs.com/lovelyYakir/p/5831864.html
